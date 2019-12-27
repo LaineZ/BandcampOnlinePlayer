@@ -10,7 +10,10 @@ A simple client for bandcamp.com that's allows listing albums from main tag page
 * Album explorer: allows to explore albums in specified tag
 * Album artwork viewer and downloader
 * AND MUCH MORE
+* Stream mode - adds all tracks in tag category and plays them
 ## Screenshots
 ![Screenshot1](https://i.imgur.com/Kx2Etvm.png)
+![Screenshot2](https://i.imgur.com/ssbaywa.png)
+
 ## Building
-Clone repository and open .sln file in Visual Studio
+Clone repository and open .sln file in Visual Studio with .NET Workload
