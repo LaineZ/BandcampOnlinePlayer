@@ -73,7 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Artworks.cs" />
     <Compile Include="AudioPlayer.cs" />
     <Compile Include="Controls.cs">
       <SubType>Form</SubType>
@@ -184,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ic_clear_black_18dp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

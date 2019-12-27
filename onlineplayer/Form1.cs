@@ -423,5 +423,15 @@ namespace onlineplayer
         {
             BlockArtist();
         }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            var res = MessageBox.Show("Clear queue items completely?", "Queue manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                queueList.Clear();
+            }
+
+        }
     }
 }

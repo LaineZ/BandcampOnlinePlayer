@@ -41,30 +41,31 @@
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAlbumTracksInQueueifAvailbleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openAlbumWebpageInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openAlbumWebpageInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blockSelectedArtiststreamingModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -83,7 +84,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.12F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 82.88F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 248F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 0);
@@ -100,10 +101,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(587, 3);
+            this.queueList.Location = new System.Drawing.Point(585, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(243, 435);
+            this.queueList.Size = new System.Drawing.Size(245, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
@@ -118,7 +119,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(3, 3);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(94, 431);
+            this.listBox1.Size = new System.Drawing.Size(93, 431);
             this.listBox1.TabIndex = 0;
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_Click);
             // 
@@ -128,10 +129,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(103, 3);
+            this.listView1.Location = new System.Drawing.Point(102, 3);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(478, 435);
+            this.listView1.Size = new System.Drawing.Size(477, 435);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Tile;
@@ -161,10 +162,11 @@
             // 
             // trackBar1
             // 
+            this.trackBar1.AllowDrop = true;
             this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar1.Location = new System.Drawing.Point(4, 475);
-            this.trackBar1.Maximum = 1000;
+            this.trackBar1.Maximum = 0;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(915, 45);
             this.trackBar1.TabIndex = 7;
@@ -219,7 +221,8 @@
             this.toolStripLabel1,
             this.toolStripSeparator3,
             this.toolStripButton7,
-            this.toolStripButton8});
+            this.toolStripButton8,
+            this.toolStripButton9});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1082, 25);
@@ -227,73 +230,10 @@
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.Image = global::onlineplayer.Properties.Resources.baseline_loop_black_18dp;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(66, 22);
-            this.toolStripButton1.Text = "Refresh";
-            this.toolStripButton1.ToolTipText = "Press here to refresh all!";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolStripButton6
-            // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::onlineplayer.Properties.Resources.ic_settings_18pt;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "toolStripButton6";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::onlineplayer.Properties.Resources.baseline_skip_previous_black_18dp;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "toolStripButton2";
-            this.toolStripButton2.ToolTipText = "Prev";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.ToolTipText = "Play/Pause";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton4";
-            this.toolStripButton4.ToolTipText = "Next";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(136, 22);
-            this.toolStripButton5.Text = "Play as stream mode";
-            this.toolStripButton5.ToolTipText = "Play as stream mode - automatically builds a playlist";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click_1);
             // 
             // toolStripSeparator1
             // 
@@ -311,27 +251,6 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = global::onlineplayer.Properties.Resources.baseline_not_interested_black_18dp;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton7.Text = "toolStripButton7";
-            this.toolStripButton7.ToolTipText = "Block selected artist (Not interested)";
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
-            // 
-            // toolStripButton8
-            // 
-            this.toolStripButton8.CheckOnClick = true;
-            this.toolStripButton8.Image = global::onlineplayer.Properties.Resources.baseline_shuffle_black_18dp;
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton8.ToolTipText = "Shuffle";
-            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
-            // 
             // timer1
             // 
             this.timer1.Interval = 500;
@@ -345,14 +264,6 @@
             this.openInBrowserToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(278, 70);
-            // 
-            // playToolStripMenuItem
-            // 
-            this.playToolStripMenuItem.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
-            this.playToolStripMenuItem.Name = "playToolStripMenuItem";
-            this.playToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.playToolStripMenuItem.Text = "Play";
-            this.playToolStripMenuItem.Click += new System.EventHandler(this.playToolStripMenuItem_Click);
             // 
             // addAlbumTracksInQueueifAvailbleToolStripMenuItem
             // 
@@ -389,6 +300,126 @@
             this.contextMenuStrip2.Name = "contextMenuStrip2";
             this.contextMenuStrip2.Size = new System.Drawing.Size(277, 92);
             // 
+            // openAlbumWebpageInBrowserToolStripMenuItem
+            // 
+            this.openAlbumWebpageInBrowserToolStripMenuItem.Name = "openAlbumWebpageInBrowserToolStripMenuItem";
+            this.openAlbumWebpageInBrowserToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
+            this.openAlbumWebpageInBrowserToolStripMenuItem.Text = "Open album webpage in browser";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = global::onlineplayer.Properties.Resources.baseline_loop_black_18dp;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(66, 22);
+            this.toolStripButton1.Text = "Refresh";
+            this.toolStripButton1.ToolTipText = "Press here to fetch all tags";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton6
+            // 
+            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton6.Image = global::onlineplayer.Properties.Resources.ic_settings_18pt;
+            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton6.Name = "toolStripButton6";
+            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton6.Text = "Settings";
+            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::onlineplayer.Properties.Resources.baseline_skip_previous_black_18dp;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "Prev";
+            this.toolStripButton2.ToolTipText = "Prev";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "Play/Pause";
+            this.toolStripButton3.ToolTipText = "Play/Pause";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "Next";
+            this.toolStripButton4.ToolTipText = "Next";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(136, 22);
+            this.toolStripButton5.Text = "Play as stream mode";
+            this.toolStripButton5.ToolTipText = "Play as stream mode - automatically builds a playlist";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click_1);
+            // 
+            // toolStripButton7
+            // 
+            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton7.Image = global::onlineplayer.Properties.Resources.baseline_not_interested_black_18dp;
+            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton7.Name = "toolStripButton7";
+            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton7.Text = "toolStripButton7";
+            this.toolStripButton7.ToolTipText = "Block selected artist (Not interested)";
+            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            // 
+            // toolStripButton8
+            // 
+            this.toolStripButton8.CheckOnClick = true;
+            this.toolStripButton8.Image = global::onlineplayer.Properties.Resources.baseline_shuffle_black_18dp;
+            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton8.Name = "toolStripButton8";
+            this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton8.ToolTipText = "Shuffle";
+            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
+            // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton9.Image = global::onlineplayer.Properties.Resources.ic_clear_black_18dp;
+            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton9.Text = "toolStripButton9";
+            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Location = new System.Drawing.Point(840, 31);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(230, 216);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // playToolStripMenuItem
+            // 
+            this.playToolStripMenuItem.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
+            this.playToolStripMenuItem.Name = "playToolStripMenuItem";
+            this.playToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.playToolStripMenuItem.Text = "Play";
+            this.playToolStripMenuItem.Click += new System.EventHandler(this.playToolStripMenuItem_Click);
+            // 
             // playToolStripMenuItem1
             // 
             this.playToolStripMenuItem1.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
@@ -404,12 +435,6 @@
             this.removeFromQueueToolStripMenuItem.Text = "Remove from queue";
             this.removeFromQueueToolStripMenuItem.Click += new System.EventHandler(this.removeFromQueueToolStripMenuItem_Click);
             // 
-            // openAlbumWebpageInBrowserToolStripMenuItem
-            // 
-            this.openAlbumWebpageInBrowserToolStripMenuItem.Name = "openAlbumWebpageInBrowserToolStripMenuItem";
-            this.openAlbumWebpageInBrowserToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
-            this.openAlbumWebpageInBrowserToolStripMenuItem.Text = "Open album webpage in browser";
-            // 
             // blockSelectedArtiststreamingModeToolStripMenuItem
             // 
             this.blockSelectedArtiststreamingModeToolStripMenuItem.Image = global::onlineplayer.Properties.Resources.baseline_not_interested_black_18dp;
@@ -417,18 +442,6 @@
             this.blockSelectedArtiststreamingModeToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.blockSelectedArtiststreamingModeToolStripMenuItem.Text = "Block selected artist (streaming mode)";
             this.blockSelectedArtiststreamingModeToolStripMenuItem.Click += new System.EventHandler(this.blockSelectedArtiststreamingModeToolStripMenuItem_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(840, 31);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(230, 216);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // Form1
             // 
@@ -497,6 +510,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripMenuItem blockSelectedArtiststreamingModeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton toolStripButton9;
     }
 }
 
