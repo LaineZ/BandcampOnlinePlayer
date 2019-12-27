@@ -30,7 +30,7 @@ namespace onlineplayer
             try
             {
                 label1.Text = queueTracks[offset].Title;
-                label2.Text = queueTracks[offset].Album.Artist + "\n" + queueTracks[offset].Album + "\n" + queueTracks[offset].Album.ReleaseDate + "\nTrack number " + offset;
+                label2.Text = queueTracks[offset].Album.Artist + "\n" + queueTracks[offset].Album.Title + "\n" + queueTracks[offset].Album.ReleaseDate + "\nTrack number " + offset;
             }
             catch (ArgumentOutOfRangeException)
             {
