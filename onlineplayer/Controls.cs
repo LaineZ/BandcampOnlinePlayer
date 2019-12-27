@@ -15,7 +15,6 @@ namespace onlineplayer
                 toolStripLabel1.Text = "Loading artwork...";
                 pictureBox1.LoadAsync("https://f4.bcbits.com/img/a" + itemsList[listView1.FocusedItem.Index].art_id + "_2.jpg");
                 toolStripLabel1.Text = "Done!";
-                label1.Text = listView1.FocusedItem.Text;
                 UpdateInfo();
             }
             catch (NullReferenceException)
@@ -28,7 +27,16 @@ namespace onlineplayer
 
         private void UpdateInfo()
         {
-            label2.Text = "Track Number:" + offset;
+            try
+            {
+                label1.Text = queueTracks[offset].Title;
+                label2.Text = queueTracks[offset].Album.Artist + "\n" + queueTracks[offset].Album + "\n" + queueTracks[offset].Album.ReleaseDate + "\nTrack number " + offset;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                label1.Text = itemsList[listView1.FocusedItem.Index].title;
+                label2.Text = itemsList[listView1.FocusedItem.Index].artist + "\n" + itemsList[listView1.FocusedItem.Index].genre + "\nComments:" + itemsList[listView1.FocusedItem.Index].num_comments;
+            }
             timer1.Enabled = true;
             trackBar1.Maximum = (int)player.audioFile.TotalTime.TotalSeconds;
         }
@@ -41,7 +49,6 @@ namespace onlineplayer
             toolStripLabel1.Text = "Loading artwork";
             pictureBox1.LoadAsync("https://f4.bcbits.com/img/a" + queueTracks[offset].Album.ArtworkId + "_2.jpg");
             toolStripLabel1.Text = "Done!";
-            label1.Text = queueList.Items[offset].Text;
             queueList.Items[offset].Selected = true;
             UpdateInfo();
         }
