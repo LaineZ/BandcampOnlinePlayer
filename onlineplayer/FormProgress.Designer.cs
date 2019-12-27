@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProgress));
             this.labelProcessing = new System.Windows.Forms.Label();
             this.labelCurrentAction = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -58,8 +59,9 @@
             this.ClientSize = new System.Drawing.Size(506, 90);
             this.Controls.Add(this.labelCurrentAction);
             this.Controls.Add(this.labelProcessing);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormProgress";
-            this.Text = "FormProgress";
+            this.Text = "Progress";
             this.ResumeLayout(false);
             this.PerformLayout();
 
