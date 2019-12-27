@@ -44,13 +44,20 @@ namespace onlineplayer
 
         private void PlayOffset()
         {
-            toolStripLabel1.Text = "Loading track:" + offset;
-            player.Play(queueTracks[offset].Mp3Url);
-            toolStripLabel1.Text = "Loading artwork";
-            pictureBox1.LoadAsync("https://f4.bcbits.com/img/a" + queueTracks[offset].Album.ArtworkId + "_2.jpg");
-            toolStripLabel1.Text = "Done!";
-            queueList.Items[offset].Selected = true;
-            UpdateInfo();
+            if (queueTracks.Count > offset)
+            {
+                toolStripLabel1.Text = "Loading track:" + offset;
+                player.Play(queueTracks[offset].Mp3Url);
+                toolStripLabel1.Text = "Loading artwork";
+                pictureBox1.LoadAsync("https://f4.bcbits.com/img/a" + queueTracks[offset].Album.ArtworkId + "_2.jpg");
+                toolStripLabel1.Text = "Done!";
+                queueList.Items[offset].Selected = true;
+                UpdateInfo();
+            }
+            else
+            {
+                player.Close();
+            }
         }
 
         private void CleanUp()
