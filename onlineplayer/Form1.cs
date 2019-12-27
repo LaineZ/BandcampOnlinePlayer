@@ -368,10 +368,8 @@ namespace onlineplayer
                 List<string> blocked = viewBlocked();
                 foreach (Item item in itemsList)
                 {
-                    foreach (var url in item.tralbum_url)
-                    {
                         if (!streamMode) { break; }
-                        String response = await httpTools.MakeRequestAsync(url.ToString());
+                        String response = await httpTools.MakeRequestAsync(item.tralbum_url);
                         Album album = httpTools.GetAlbum(response);
                         if (!blocked.Contains(album.Artist))
                         {
@@ -389,7 +387,6 @@ namespace onlineplayer
                                 toolStripButton5.Enabled = true;
                             }
                         }
-                    }
                 }
                 toolStripLabel1.Text = "Done!";
             }
