@@ -1,5 +1,5 @@
 # Bandcamp Online Player
-[Download](https://github.com/LaineZ/BandcampOnlinePlayer/releases/download/alpha-0.1/BandcampOnlinePlayer.zip)
+[Download](https://github.com/LaineZ/BandcampOnlinePlayer/releases/download/alpha-0.2/Player.zip)
 A simple client for bandcamp.com that's allows listing albums from main tag page much easier and provides features like play queue, shuffle mode, low memory usage rather than browser, etc.
 
 **WARNING:** This a alpha version, breakable changes are **inevitable**
