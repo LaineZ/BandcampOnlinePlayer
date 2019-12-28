@@ -1,7 +1,7 @@
 ﻿namespace onlineplayer
 {
 
-    internal class Track
+    public class Track
     {
 
         /// <summary>

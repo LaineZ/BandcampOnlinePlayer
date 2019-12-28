@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace onlineplayer
 {
 
-    internal class Album
+    public class Album
     {
 
         /// <summary>

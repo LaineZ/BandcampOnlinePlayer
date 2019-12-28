@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace onlineplayer.Models
+namespace onlineplayer
 {
-    internal class Json
+    public static class Json
     {
         public class DiscoverSpec
         {

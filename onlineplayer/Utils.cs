@@ -68,7 +68,7 @@ namespace onlineplayer
         {
             using (StreamWriter sw = File.AppendText("blocked.txt"))
             {
-                sw.WriteLine(artist);
+                sw.WriteLine(artist + "\n");
             }
 
         }

@@ -7,8 +7,8 @@ using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Windows.Forms;
-using static onlineplayer.Models.Json;
 using static onlineplayer.Utils;
+using static onlineplayer.Json;
 
 namespace onlineplayer
 {
@@ -429,6 +429,12 @@ namespace onlineplayer
                 queueList.Clear();
             }
 
+        }
+
+        private void toolStripButton10_Click(object sender, EventArgs e)
+        {
+            Form albList = new AlbumList(itemsList, queueTracks, player);
+            albList.Show();
         }
     }
 }
