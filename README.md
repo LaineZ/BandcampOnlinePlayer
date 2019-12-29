@@ -25,8 +25,9 @@ In this moment linux version is very limited and **cannot** play audio
 
 1. Install Mono and MonoDevelop and open .sln file in MonoDevelop
 2. To fix all errors go in all errored .resx files and remove icons. Icons looks like this:
-```  <data name="$this.Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\$this.Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
+``` 
+<data name="$this.Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+	<value>Resources\$this.Icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+</data>
 ```
 3. Click run button
