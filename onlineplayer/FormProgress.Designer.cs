@@ -56,12 +56,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(506, 90);
+            this.ClientSize = new System.Drawing.Size(579, 71);
             this.Controls.Add(this.labelCurrentAction);
             this.Controls.Add(this.labelProcessing);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormProgress";
+            this.ShowInTaskbar = false;
             this.Text = "Progress";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

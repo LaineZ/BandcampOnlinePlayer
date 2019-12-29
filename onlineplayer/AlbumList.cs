@@ -54,20 +54,28 @@ namespace onlineplayer
         private void AlbumList_Shown(object sender, EventArgs e)
         {
             RebuildImages();
+            if (albms.Count > 0)
+            {
+                toolStripTextBox1.Enabled = true;
+            }
+            else
+            {
+                toolStripTextBox1.Enabled = false;
+            }
         }
 
         private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
         {
             itemsList.Items.Clear();
-            albms.Clear();
+            itemsList.LargeImageList.Images.Clear();
             foreach (var alb in albms)
             {
                 toolStripLabel2.Text = "Looking: " + alb.title;
-                if (alb.title.Contains(toolStrip1.Text) || alb.artist.Contains(toolStrip1.Text) || toolStrip1.Text.Length <= 0)
+                if (alb.title.ToLower().Contains(toolStripTextBox1.Text.ToLower()) || alb.artist.ToLower().Contains(toolStripTextBox1.Text.ToLower()) || toolStripTextBox1.Text.Length <= 0)
                 {
                     ListViewItem lst = new ListViewItem(new string[] { alb.title, alb.artist });
                     itemsList.Items.Add(lst);
-                    albms.Add(alb);
+                    //albms.Add(alb);
                 }
             }
             RebuildImages();

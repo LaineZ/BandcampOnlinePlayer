@@ -192,6 +192,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ic_skip_next_black_18dp.png" />
+    <None Include="Resources\%24this.Icon.ico" />
     <None Include="Resources\ic_search_18pt.png" />
     <None Include="Resources\ic_album_black_18dp.png" />
     <None Include="Resources\ic_clear_black_18dp.png" />

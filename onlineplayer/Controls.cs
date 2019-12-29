@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using static onlineplayer.Utils;
 namespace onlineplayer
@@ -80,6 +82,32 @@ namespace onlineplayer
             {
                 c.Enabled = !c.Enabled;
             }
+        }
+
+        private async void DownloadFromBandcamp()
+        {
+            ToogleAllContorls();
+            Form loader = new FormProgress("Fetching tags from bandcamp.com", "Retriving data from bandcamp.com please wait...");
+            loader.Show();
+            listBox1.Items.Clear();
+            listView1.Items.Clear();
+            HttpTools httpTools = new HttpTools();
+            String response = await httpTools.MakeRequestAsync("https://bandcamp.com/tags");
+            HtmlAgilityPack.HtmlDocument htmlSnippet = new HtmlAgilityPack.HtmlDocument();
+            htmlSnippet.LoadHtml(response);
+
+            List<string> hrefTags = new List<string>();
+            foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//a[@href]"))
+            {
+                HtmlAttribute att = link.Attributes["href"];
+                if (att.Value.StartsWith("/tag/"))
+                {
+                    listBox1.Items.Add(att.Value.Replace("/tag/", ""));
+                }
+            }
+
+            loader.Close();
+            ToogleAllContorls();
         }
 
         private void BlockArtist()

@@ -63,28 +63,7 @@ namespace onlineplayer
 
         private async void toolStripButton1_Click(object sender, EventArgs e)
         {
-            ToogleAllContorls();
-            Form loader = new FormProgress("Fetching tags from bandcamp.com", "Retriving data from bandcamp.com please wait...");
-            loader.Show();
-            listBox1.Items.Clear();
-            listView1.Items.Clear();
-            HttpTools httpTools = new HttpTools();
-            String response = await httpTools.MakeRequestAsync("https://bandcamp.com/tags");
-            HtmlAgilityPack.HtmlDocument htmlSnippet = new HtmlAgilityPack.HtmlDocument();
-            htmlSnippet.LoadHtml(response);
 
-            List<string> hrefTags = new List<string>();
-            foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//a[@href]"))
-            {
-                HtmlAttribute att = link.Attributes["href"];
-                if (att.Value.StartsWith("/tag/"))
-                {
-                    listBox1.Items.Add(att.Value.Replace("/tag/", ""));
-                }
-            }
-
-            loader.Close();
-            ToogleAllContorls();
         }
 
         private async void listBox1_Click(object sender, EventArgs e)
@@ -435,6 +414,32 @@ namespace onlineplayer
         {
             Form albList = new AlbumList(itemsList, queueTracks, player);
             albList.Show();
+        }
+
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            ToogleAllContorls();
+            Form loader = new FormProgress("Fetching tags from bandcamp.com", "Retriving data from bandcamp.com please wait...");
+            loader.Show();
+            listBox1.Items.Clear();
+            listView1.Items.Clear();
+            HttpTools httpTools = new HttpTools();
+            String response = await httpTools.MakeRequestAsync("https://bandcamp.com/tags");
+            HtmlAgilityPack.HtmlDocument htmlSnippet = new HtmlAgilityPack.HtmlDocument();
+            htmlSnippet.LoadHtml(response);
+
+            List<string> hrefTags = new List<string>();
+            foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//a[@href]"))
+            {
+                HtmlAttribute att = link.Attributes["href"];
+                if (att.Value.StartsWith("/tag/"))
+                {
+                    listBox1.Items.Add(att.Value.Replace("/tag/", ""));
+                }
+            }
+
+            loader.Close();
+            ToogleAllContorls();
         }
     }
 }
