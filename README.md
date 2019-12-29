@@ -15,7 +15,7 @@ A simple client for bandcamp.com that's allows listing albums from main tag page
 ![Screenshot1](https://i.imgur.com/Kx2Etvm.png)
 ![Screenshot2](https://i.imgur.com/ssbaywa.png)
 ## Screenshots (current state on Linux)
-![ScreenshotFail]https://i.imgur.com/ryOIVdO.png
+![ScreenshotFail](https://i.imgur.com/ryOIVdO.png)
 
 ## Building (Windows)
 Clone repository and open .sln file in Visual Studio with .NET Workload
