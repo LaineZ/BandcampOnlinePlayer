@@ -3,6 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using static onlineplayer.Utils;
+using static onlineplayer.Json;
+using System.Net.Http;
+using System.IO;
+using System.Text;
+using Newtonsoft.Json;
+
 namespace onlineplayer
 {
     public partial class Form1
@@ -26,6 +32,74 @@ namespace onlineplayer
             }
         }
 
+        private async void UpdateAlbumsImages()
+        {
+            ImageList il = new ImageList();
+            int count = 0;
+            il.ImageSize = new System.Drawing.Size(imgSize, imgSize);
+            if (downloadImgs)
+            {
+                foreach (ListViewItem listItem in listView1.Items)
+                {
+                    toolStripLabel1.Text = "Loading ablum images...";
+                    il.ColorDepth = ColorDepth.Depth32Bit;
+                    listView1.LargeImageList = il;
+                    il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + itemsList[count].art_id + "_8.jpg"));
+                    listItem.ImageIndex = count++;
+                }
+            }
+
+            toolStripTextBox1.Enabled = true;
+            toolStripLabel1.Text = "Done!";
+        }
+
+        private async void UpdateAlbums()
+        {
+            // {"filters":{ "format":"all","location":0,"sort":"pop","tags":["experimental"] },"page":2}
+            HttpClient client = new HttpClient();
+            toolStripButton5.Enabled = true;
+            for (int i = 1; i < 100; i++)
+            {
+                toolStripLabel1.Text = "Loading ablums tag data: " + i + "/" + "100";
+                string responseString = "none";
+                if (!File.Exists("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json"))
+                {
+                    string content = "{\"filters\":{ \"format\":\"all\",\"location\":0,\"sort\":\"pop\",\"tags\":[\"" + listBox1.SelectedItem + "\"] },\"page\":" + i + "}";
+                    HttpContent c = new StringContent(content, Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync("https://bandcamp.com/api/hub/2/dig_deeper", c);
+                    responseString = await response.Content.ReadAsStringAsync();
+                    File.WriteAllText("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json", responseString);
+                }
+                else
+                {
+                    responseString = File.ReadAllText("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json");
+                }
+                //Console.WriteLine(responseString);
+                try
+                {
+                    RootObject items = JsonConvert.DeserializeObject<RootObject>(responseString);
+                    foreach (var item in items.items)
+                    {
+                        // title, artist, mp3_url, url, artworkid
+                        ListViewItem lst = new ListViewItem(new string[] { item.title, item.artist });
+                        listView1.Items.Add(lst);
+                        itemsList.Add(item);
+                    }
+                }
+                catch (Exception ekj)
+                {
+                    if (ekj is NullReferenceException)
+                    {
+                        MessageBox.Show("Albums not recived", "Error getting data...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                    //MessageBox.Show("Error occured:" + ekj.Message, "пиздец", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                toolStripLabel1.Text = "Done!";
+            }
+
+            UpdateAlbumsImages();
+        }
 
         private void UpdateInfo()
         {
@@ -83,6 +157,8 @@ namespace onlineplayer
                 c.Enabled = !c.Enabled;
             }
         }
+
+       
 
         private async void DownloadFromBandcamp()
         {

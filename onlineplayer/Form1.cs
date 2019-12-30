@@ -14,7 +14,6 @@ namespace onlineplayer
 {
     public partial class Form1 : Form
     {
-
         List<Item> itemsList = new List<Item>();
         List<Track> queueTracks = new List<Track>();
 
@@ -42,7 +41,7 @@ namespace onlineplayer
             queueList.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
             queueList.TileSize = new Size(256, 64);
             Directory.CreateDirectory("artwork_cache");
-
+    
             toolStripButton5.Enabled = false;
             listView1.MouseUp += (s, args) =>
             {
@@ -59,67 +58,18 @@ namespace onlineplayer
                     contextMenuStrip2.Show(Cursor.Position);
                 }
             };
+
+            toolStripTextBox1.Enabled = false;
         }
 
         private async void toolStripButton1_Click(object sender, EventArgs e)
         {
-
+            DownloadFromBandcamp();
         }
 
         private async void listBox1_Click(object sender, EventArgs e)
         {
-            // {"filters":{ "format":"all","location":0,"sort":"pop","tags":["experimental"] },"page":2}
-            HttpClient client = new HttpClient();
-            ImageList il = new ImageList();
-            il.ImageSize = new Size(imgSize, imgSize);
-            int count = 0;
-            toolStripButton5.Enabled = true;
-            for (int i = 1; i < 100; i++)
-            {
-                toolStripLabel1.Text = "Loading ablums tag data: " + i + "/" + "100";
-                string responseString = "none";
-                if (!File.Exists("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json"))
-                {
-                    string content = "{\"filters\":{ \"format\":\"all\",\"location\":0,\"sort\":\"pop\",\"tags\":[\"" + listBox1.SelectedItem + "\"] },\"page\":" + i + "}";
-                    HttpContent c = new StringContent(content, Encoding.UTF8, "application/json");
-                    var response = await client.PostAsync("https://bandcamp.com/api/hub/2/dig_deeper", c);
-                    responseString = await response.Content.ReadAsStringAsync();
-                    File.WriteAllText("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json", responseString);
-                }
-                else
-                {
-                    responseString = File.ReadAllText("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json");
-                }
-                //Console.WriteLine(responseString);
-                try
-                {
-                    RootObject items = JsonConvert.DeserializeObject<RootObject>(responseString);
-                    foreach (var item in items.items)
-                    {
-                        // title, artist, mp3_url, url, artworkid
-                        ListViewItem lst = new ListViewItem(new string[] { item.title, item.artist });
-                        listView1.Items.Add(lst);
-                        itemsList.Add(item);
-                    }
-                }
-                catch (Exception ekj)
-                {
-                    //MessageBox.Show("Error occured:" + ekj.Message, "пиздец", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                toolStripLabel1.Text = "Done!";
-            }
-            if (downloadImgs)
-            {
-                foreach (ListViewItem listItem in listView1.Items)
-                {
-                    toolStripLabel1.Text = "Loading ablum images...";
-                    il.ColorDepth = ColorDepth.Depth32Bit;
-                    listView1.LargeImageList = il;
-                    il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + itemsList[count].art_id + "_8.jpg"));
-                    listItem.ImageIndex = count++;
-                }
-            }
-            toolStripLabel1.Text = "Done!";
+            UpdateAlbums();
         }
 
         AudioPlayer player = new AudioPlayer();
@@ -198,8 +148,9 @@ namespace onlineplayer
 
         private async void addAlbumTracksInQueueifAvailbleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            toolStripLabel1.Text = "Loading tracks metadata... " + itemsList[listView1.FocusedItem.Index].tralbum_url;
-            String response = await httpTools.MakeRequestAsync(itemsList[listView1.FocusedItem.Index].tralbum_url);
+            Item selectedAlbum = itemsList.Find(item => item.artist.Equals(listView1.FocusedItem.SubItems[1].Text) && item.title.Equals(listView1.FocusedItem.SubItems[0].Text));
+            toolStripLabel1.Text = "Loading tracks metadata... " + selectedAlbum.tralbum_url;
+            String response = await httpTools.MakeRequestAsync(selectedAlbum.tralbum_url);
             Album album = httpTools.GetAlbum(response);
             foreach (Track trk in album.Tracks)
             {
@@ -410,36 +361,40 @@ namespace onlineplayer
 
         }
 
-        private void toolStripButton10_Click(object sender, EventArgs e)
-        {
-            Form albList = new AlbumList(itemsList, queueTracks, player);
-            albList.Show();
-        }
-
         private async void Form1_Load(object sender, EventArgs e)
         {
-            ToogleAllContorls();
-            Form loader = new FormProgress("Fetching tags from bandcamp.com", "Retriving data from bandcamp.com please wait...");
-            loader.Show();
-            listBox1.Items.Clear();
-            listView1.Items.Clear();
-            HttpTools httpTools = new HttpTools();
-            String response = await httpTools.MakeRequestAsync("https://bandcamp.com/tags");
-            HtmlAgilityPack.HtmlDocument htmlSnippet = new HtmlAgilityPack.HtmlDocument();
-            htmlSnippet.LoadHtml(response);
+            DownloadFromBandcamp();
+        }
 
-            List<string> hrefTags = new List<string>();
-            foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//a[@href]"))
+        private async void toolStripTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            foreach (var alb in itemsList)
             {
-                HtmlAttribute att = link.Attributes["href"];
-                if (att.Value.StartsWith("/tag/"))
+                if (alb.title.ToLower().Contains(toolStripTextBox1.Text.ToLower()) || alb.artist.ToLower().Contains(toolStripTextBox1.Text.ToLower()))
                 {
-                    listBox1.Items.Add(att.Value.Replace("/tag/", ""));
+                    ListViewItem lst = new ListViewItem(new string[] { alb.title, alb.artist });
+                    listView1.Items.Add(lst);
                 }
             }
+            if (toolStripTextBox1.Text.Length == 0)
+            {
+                listView1.Items.Clear();
+                foreach (var item in itemsList)
+                {
+                    // title, artist, mp3_url, url, artworkid
+                    ListViewItem lst = new ListViewItem(new string[] { item.title, item.artist });
+                    listView1.Items.Add(lst);
+                }
 
-            loader.Close();
-            ToogleAllContorls();
+                int count = 0;
+                toolStripLabel1.Text = "Loading ablum images...";
+                foreach (ListViewItem listItem in listView1.Items)
+                {
+                    listItem.ImageIndex = count++;
+                }
+                toolStripLabel1.Text = "Done...";
+            }
         }
     }
 }

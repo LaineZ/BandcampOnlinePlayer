@@ -73,12 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlbumList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AlbumList.Designer.cs">
-      <DependentUpon>AlbumList.cs</DependentUpon>
-    </Compile>
+    <Compile Include="async.cs" />
     <Compile Include="AudioPlayer.cs" />
     <Compile Include="Controls.cs">
       <SubType>Form</SubType>
@@ -121,9 +116,6 @@
       <DependentUpon>ViewArtwork.cs</DependentUpon>
     </Compile>
     <Compile Include="WaveStreamExtensions.cs" />
-    <EmbeddedResource Include="AlbumList.resx">
-      <DependentUpon>AlbumList.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
