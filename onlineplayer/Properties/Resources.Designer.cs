@@ -143,6 +143,16 @@ namespace onlineplayer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_add_18pt {
+            get {
+                object obj = ResourceManager.GetObject("ic_add_18pt", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_album_black_18dp {
             get {
                 object obj = ResourceManager.GetObject("ic_album_black_18dp", resourceCulture);

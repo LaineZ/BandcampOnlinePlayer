@@ -28,10 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Playback: Play/Pause",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Playback: Stop",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Playback: Next",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Playback: Prev",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Playback: Volume up",
+            ""}, -1);
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Playback: Volume down",
+            ""}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pagesLoad = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,18 +72,27 @@
             this.albumView = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.Action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AssignControll = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxMidiInDevices = new System.Windows.Forms.ComboBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
-            this.toolStripButton2});
+            this.toolStripButton2,
+            this.toolStripButton3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(366, 25);
@@ -89,6 +118,15 @@
             this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton2.Text = "toolStripButton2";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = global::onlineplayer.Properties.Resources.ic_add_18pt;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "Assign MIDI Control";
             // 
             // tabPage1
             // 
@@ -210,6 +248,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Location = new System.Drawing.Point(2, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -299,6 +338,72 @@
             this.listBox1.Size = new System.Drawing.Size(344, 225);
             this.listBox1.TabIndex = 0;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.listView1);
+            this.tabPage4.Controls.Add(this.label4);
+            this.tabPage4.Controls.Add(this.comboBoxMidiInDevices);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(356, 236);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "MIDI Controllers";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Action,
+            this.AssignControll});
+            this.listView1.HideSelection = false;
+            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4,
+            listViewItem5,
+            listViewItem6});
+            this.listView1.Location = new System.Drawing.Point(6, 33);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(342, 197);
+            this.listView1.TabIndex = 2;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.EnabledChanged += new System.EventHandler(this.listView1_EnabledChanged);
+            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
+            // 
+            // Action
+            // 
+            this.Action.Text = "Action";
+            this.Action.Width = 125;
+            // 
+            // AssignControll
+            // 
+            this.AssignControll.Text = "Assiggn control";
+            this.AssignControll.Width = 193;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "MIDI Device:";
+            // 
+            // comboBoxMidiInDevices
+            // 
+            this.comboBoxMidiInDevices.FormattingEnabled = true;
+            this.comboBoxMidiInDevices.Location = new System.Drawing.Point(79, 6);
+            this.comboBoxMidiInDevices.Name = "comboBoxMidiInDevices";
+            this.comboBoxMidiInDevices.Size = new System.Drawing.Size(269, 21);
+            this.comboBoxMidiInDevices.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,6 +419,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
+            this.Load += new System.EventHandler(this.FormSettings_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -322,6 +428,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,5 +460,13 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBoxMidiInDevices;
+        private System.Windows.Forms.ColumnHeader Action;
+        private System.Windows.Forms.ColumnHeader AssignControll;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using static onlineplayer.Utils;
 using static onlineplayer.Json;
+using System.Windows.Forms.VisualStyles;
 
 namespace onlineplayer
 {
@@ -149,7 +150,7 @@ namespace onlineplayer
         private async void addAlbumTracksInQueueifAvailbleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Item selectedAlbum = itemsList.Find(item => item.artist.Equals(listView1.FocusedItem.SubItems[1].Text) && item.title.Equals(listView1.FocusedItem.SubItems[0].Text));
-            toolStripLabel1.Text = "Loading tracks metadata... " + selectedAlbum.tralbum_url;
+            labelStatus.Text = "Loading tracks metadata... " + selectedAlbum.tralbum_url;
             String response = await httpTools.MakeRequestAsync(selectedAlbum.tralbum_url);
             Album album = httpTools.GetAlbum(response);
             foreach (Track trk in album.Tracks)
@@ -166,20 +167,20 @@ namespace onlineplayer
 
             foreach (ListViewItem listItem in queueList.Items)
             {
-                toolStripLabel1.Text = "Loading ablum tracks images...";
+                labelStatus.Text = "Loading ablum tracks images...";
                 il.ColorDepth = ColorDepth.Depth32Bit;
                 queueList.LargeImageList = il;
                 il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + queueTracks[count].Album.ArtworkId + "_8.jpg"));
                 listItem.ImageIndex = count++;
             }
-            toolStripLabel1.Text = "Done!";
+            labelStatus.Text = "Done!";
         }
 
         private void queueList_DoubleClick(object sender, EventArgs e)
         {
             offset = queueList.FocusedItem.Index;
             PlayOffset();
-            toolStripLabel1.Text = "Done!";
+            labelStatus.Text = "Done!";
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
@@ -202,11 +203,11 @@ namespace onlineplayer
                 if (queueList.Items.Count > 0)
                 {
                     offset = queueList.FocusedItem.Index;
-                    toolStripLabel1.Text = "End of queue list!";
+                    labelStatus.Text = "End of queue list!";
                 }
                 else
                 {
-                    toolStripLabel1.Text = "Queue is empty!";
+                    labelStatus.Text = "Queue is empty!";
                 }
             }
         }
@@ -222,14 +223,14 @@ namespace onlineplayer
                 }
                 else
                 {
-                    toolStripLabel1.Text = "Queue is empty!";
+                    labelStatus.Text = "Queue is empty!";
                 }
             }
             catch (ArgumentOutOfRangeException)
             {
                 offset = 0;
                 PlayOffset();
-                toolStripLabel1.Text = "This a first track in queue list!";
+                labelStatus.Text = "This a first track in queue list!";
             }
         }
 
@@ -253,7 +254,7 @@ namespace onlineplayer
             }
             catch (NullReferenceException)
             {
-                toolStripLabel1.Text = "All items has been removed!";
+                labelStatus.Text = "All items has been removed!";
             }
         }
 
@@ -281,7 +282,7 @@ namespace onlineplayer
             catch (NullReferenceException)
             {
                 trackBar1.Value = 0;
-                toolStripLabel1.Text = "Cannot seek: Audio file not loaded!";
+                labelStatus.Text = "Cannot seek: Audio file not loaded!";
             }
         }
 
@@ -294,7 +295,7 @@ namespace onlineplayer
                 bool firstSong = false;
                 CleanUp();
                 toolStripButton5.Text = "Stop stream mode";
-                toolStripLabel1.Text = "Loading tracks metadata...";
+                labelStatus.Text = "Loading tracks metadata...";
                 List<string> blocked = viewBlocked();
                 foreach (Item item in itemsList)
                 {
@@ -318,7 +319,7 @@ namespace onlineplayer
                             }
                         }
                 }
-                toolStripLabel1.Text = "Done!";
+                labelStatus.Text = "Done!";
             }
             else
             {
@@ -356,6 +357,8 @@ namespace onlineplayer
             var res = MessageBox.Show("Clear queue items completely?", "Queue manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (res == DialogResult.Yes)
             {
+                queueTracks.Clear();
+                queueList.LargeImageList.Images.Clear();
                 queueList.Clear();
             }
 
@@ -388,13 +391,13 @@ namespace onlineplayer
                 }
 
                 int count = 0;
-                toolStripLabel1.Text = "Loading ablum images...";
+                labelStatus.Text = "Loading ablum images...";
                 foreach (ListViewItem listItem in listView1.Items)
                 {
                     listItem.ImageIndex = count++;
                 }
-                toolStripLabel1.Text = "Done...";
+                labelStatus.Text = "Done...";
             }
-        }
+        } 
     }
 }

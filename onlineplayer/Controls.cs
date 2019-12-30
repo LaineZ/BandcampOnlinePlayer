@@ -18,17 +18,17 @@ namespace onlineplayer
             try
             {
                 string url = itemsList[listView1.FocusedItem.Index].audio_url.mp3;
-                toolStripLabel1.Text = "Loading file...";
+                labelStatus.Text = "Loading file...";
                 player.Play(url);
-                toolStripLabel1.Text = "Loading artwork...";
+                labelStatus.Text = "Loading artwork...";
                 pictureBox1.LoadAsync("https://f4.bcbits.com/img/a" + itemsList[listView1.FocusedItem.Index].art_id + "_2.jpg");
-                toolStripLabel1.Text = "Done!";
+                labelStatus.Text = "Done!";
                 UpdateInfo();
             }
             catch (NullReferenceException)
             {
                 timer1.Stop();
-                MessageBox.Show("Cannot start playing due to unknown reasons...", "Opening failed...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Cannot start plaback. Try to clean metadata cache and rescan", "Opening failed...", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -41,7 +41,7 @@ namespace onlineplayer
             {
                 foreach (ListViewItem listItem in listView1.Items)
                 {
-                    toolStripLabel1.Text = "Loading ablum images...";
+                    labelStatus.Text = "Loading ablum images...";
                     il.ColorDepth = ColorDepth.Depth32Bit;
                     listView1.LargeImageList = il;
                     il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + itemsList[count].art_id + "_8.jpg"));
@@ -50,7 +50,7 @@ namespace onlineplayer
             }
 
             toolStripTextBox1.Enabled = true;
-            toolStripLabel1.Text = "Done!";
+            labelStatus.Text = "Done!";
         }
 
         private async void UpdateAlbums()
@@ -60,7 +60,7 @@ namespace onlineplayer
             toolStripButton5.Enabled = true;
             for (int i = 1; i < 100; i++)
             {
-                toolStripLabel1.Text = "Loading ablums tag data: " + i + "/" + "100";
+                labelStatus.Text = "Loading ablums tag data: " + i + "/" + "100";
                 string responseString = "none";
                 if (!File.Exists("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json"))
                 {
@@ -95,7 +95,7 @@ namespace onlineplayer
                     }
                     //MessageBox.Show("Error occured:" + ekj.Message, "пиздец", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                toolStripLabel1.Text = "Done!";
+                labelStatus.Text = "Done!";
             }
 
             UpdateAlbumsImages();
@@ -122,11 +122,11 @@ namespace onlineplayer
         {
             if (queueTracks.Count > offset)
             {
-                toolStripLabel1.Text = "Loading track:" + offset;
+                labelStatus.Text = "Loading track:" + offset;
                 player.Play(queueTracks[offset].Mp3Url);
-                toolStripLabel1.Text = "Loading artwork";
+                labelStatus.Text = "Loading artwork";
                 pictureBox1.LoadAsync("https://f4.bcbits.com/img/a" + queueTracks[offset].Album.ArtworkId + "_2.jpg");
-                toolStripLabel1.Text = "Done!";
+                labelStatus.Text = "Done!";
                 queueList.Items[offset].Selected = true;
                 UpdateInfo();
             }

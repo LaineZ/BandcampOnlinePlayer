@@ -52,7 +52,7 @@ namespace onlineplayer
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Unable to start playback:\nClean metadata cache and rescan can help fix that problem...\n\n" + e.ToString(), "Audio output error:" + url, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Unable to start playback:\n" + e.ToString(), "Audio output error:" + url, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

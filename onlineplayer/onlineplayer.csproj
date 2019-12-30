@@ -73,7 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="async.cs" />
     <Compile Include="AudioPlayer.cs" />
     <Compile Include="Controls.cs">
       <SubType>Form</SubType>
@@ -97,6 +96,7 @@
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="HttpTools.cs" />
+    <Compile Include="MidiActionsBindings.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Json.cs" />
@@ -105,6 +105,7 @@
     <Compile Include="Models\JSON\JsonMp3File.cs" />
     <Compile Include="Models\JSON\JsonTrack.cs" />
     <Compile Include="Models\Track.cs" />
+    <Compile Include="Models\MidiActions.cs" />
     <Compile Include="Models\TrackFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -184,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ic_add_18pt.png" />
     <None Include="Resources\ic_skip_next_black_18dp.png" />
     <None Include="Resources\%24this.Icon.ico" />
     <None Include="Resources\ic_search_18pt.png" />

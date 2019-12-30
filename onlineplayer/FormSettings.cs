@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NAudio.Midi;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -12,6 +13,8 @@ namespace onlineplayer
     public partial class FormSettings : Form
     {
         XmlDocument doc = new XmlDocument();
+        bool assignMode = false;
+        int selectedIndex = 0;
 
         public void recomputeSize()
         {
@@ -68,7 +71,52 @@ namespace onlineplayer
                     listBox1.Items.Add(block);
                 }
             }
+
+            for (int device = 0; device < MidiIn.NumberOfDevices; device++)
+            {
+                comboBoxMidiInDevices.Items.Add(MidiIn.DeviceInfo(device).ProductName);
+            }
+            if (comboBoxMidiInDevices.Items.Count > 0)
+            {
+                comboBoxMidiInDevices.SelectedIndex = 0;
+            }
+
+            var midiIn = new MidiIn(comboBoxMidiInDevices.SelectedIndex);
+            midiIn.MessageReceived += midiIn_MessageReceived;
+            midiIn.ErrorReceived += midiIn_ErrorReceived;
+            midiIn.Start();
+
+            int count = 0;
+
+            foreach (MidiAction action in MidiActionsBindings.actionsMidi)
+            {
+                listView1.Items[count].SubItems[1].Text = action.MidiEv.ToString();
+                count++;
+            }
+
             recomputeSize();
+        }
+
+        void midiIn_ErrorReceived(object sender, MidiInMessageEventArgs e)
+        {
+            MessageBox.Show("Midi recive error:" + e.RawMessage, e.MidiEvent.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        void midiIn_MessageReceived(object sender, MidiInMessageEventArgs e)
+        {
+            if (assignMode)
+            {
+                try
+                {
+                    MidiActionsBindings.actionsMidi[selectedIndex].MidiEv = e.MidiEvent;
+                    assignMode = false;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    MidiActionsBindings.actionsMidi.Add(new MidiAction(e.MidiEvent));
+                    assignMode = false;
+                }
+            }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -117,6 +165,12 @@ namespace onlineplayer
                 }
             });
             recomputeSize();
+
+            foreach (MidiAction midiItem in MidiActionsBindings.actionsMidi)
+            {
+                ListViewItem lst = new ListViewItem(new string[] { midiItem.ActionName, midiItem.MidiEv.ToString() });
+                listView1.Items.Add(lst);
+            }
         }
 
         private async void button2_Click(object sender, EventArgs e)
@@ -156,6 +210,43 @@ namespace onlineplayer
             catch (ArgumentOutOfRangeException)
             {
                 MessageBox.Show("you haven’t blocked anyone yet", "you are not misha", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void FormSettings_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            assignMode = !assignMode;
+            timer1.Enabled = assignMode;
+        }
+
+        private void listView1_EnabledChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (assignMode)
+            {
+                listView1.FocusedItem.SubItems[1].Text = "Move controller TO ASSIGN!";
+                listView1.Enabled = !assignMode;
+                selectedIndex = listView1.FocusedItem.Index;
+            }
+            else
+            {
+                try
+                {
+                    listView1.FocusedItem.SubItems[1].Text = MidiActionsBindings.actionsMidi[listView1.FocusedItem.Index].MidiEv.ToString();
+                    listView1.Enabled = !assignMode;
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                
+                }
             }
         }
     }

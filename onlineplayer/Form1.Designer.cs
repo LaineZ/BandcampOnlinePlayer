@@ -49,8 +49,6 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
@@ -67,6 +65,7 @@
             this.openAlbumWebpageInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blockSelectedArtiststreamingModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelStatus = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
@@ -85,7 +84,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 262F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 266F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 0);
@@ -102,10 +101,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(398, 3);
+            this.queueList.Location = new System.Drawing.Point(394, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(257, 435);
+            this.queueList.Size = new System.Drawing.Size(261, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
@@ -116,11 +115,11 @@
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(3, 3);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(98, 431);
+            this.listBox1.Size = new System.Drawing.Size(97, 433);
             this.listBox1.TabIndex = 0;
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_Click);
             // 
@@ -130,10 +129,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(107, 3);
+            this.listView1.Location = new System.Drawing.Point(106, 3);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(285, 435);
+            this.listView1.Size = new System.Drawing.Size(282, 435);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Tile;
@@ -166,10 +165,10 @@
             this.trackBar1.AllowDrop = true;
             this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar1.Location = new System.Drawing.Point(4, 475);
+            this.trackBar1.Location = new System.Drawing.Point(0, 470);
             this.trackBar1.Maximum = 0;
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(738, 45);
+            this.trackBar1.Size = new System.Drawing.Size(761, 45);
             this.trackBar1.TabIndex = 7;
             this.trackBar1.TickFrequency = 0;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
@@ -181,17 +180,17 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 493);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "--:--:--";
+            this.label3.Text = "00:00:00";
             // 
             // trackBar2
             // 
             this.trackBar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar2.Location = new System.Drawing.Point(737, 475);
+            this.trackBar2.Location = new System.Drawing.Point(756, 470);
             this.trackBar2.Maximum = 100;
             this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(158, 45);
+            this.trackBar2.Size = new System.Drawing.Size(151, 45);
             this.trackBar2.TabIndex = 9;
             this.trackBar2.TickFrequency = 5;
             this.trackBar2.Value = 100;
@@ -201,7 +200,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(657, 493);
+            this.label4.Location = new System.Drawing.Point(676, 493);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 10;
@@ -219,8 +218,6 @@
             this.toolStripButton4,
             this.toolStripButton5,
             this.toolStripSeparator1,
-            this.toolStripLabel1,
-            this.toolStripSeparator3,
             this.toolStripButton7,
             this.toolStripButton8,
             this.toolStripButton9,
@@ -305,16 +302,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(0, 22);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripButton7
             // 
             this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -348,6 +335,7 @@
             // 
             // toolStripTextBox1
             // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(200, 25);
             this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
@@ -393,7 +381,7 @@
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(79, 493);
+            this.label5.Location = new System.Drawing.Point(67, 493);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 13);
             this.label5.TabIndex = 12;
@@ -450,21 +438,33 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // labelStatus
+            // 
+            this.labelStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(127, 493);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(33, 13);
+            this.labelStatus.TabIndex = 13;
+            this.labelStatus.Text = "Done";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(907, 515);
+            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.trackBar1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Bandcamp online player";
@@ -499,7 +499,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ListView listView1;
@@ -515,12 +514,12 @@
         private System.Windows.Forms.ToolStripMenuItem openAlbumWebpageInBrowserToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripMenuItem blockSelectedArtiststreamingModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.Label labelStatus;
     }
 }
 
