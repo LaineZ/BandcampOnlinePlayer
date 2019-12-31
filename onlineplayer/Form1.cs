@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using static onlineplayer.Utils;
 using static onlineplayer.Json;
 using System.Windows.Forms.VisualStyles;
+using NAudio.Midi;
 
 namespace onlineplayer
 {
@@ -61,6 +62,82 @@ namespace onlineplayer
             };
 
             toolStripTextBox1.Enabled = false;
+            try
+            {
+                var midiIn = new MidiIn(int.Parse(getSettingsAttr("settings.xml", "midiDevice")));
+                midiIn.MessageReceived += midiIn_MessageReceived;
+                midiIn.ErrorReceived += midiIn_ErrorReceived;
+                midiIn.Start();
+                labelStatus.Text = "MIDI Device opened:" + midiIn.ToString();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Error:" + e.Message, "There error starting MIDI-Devices", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        void midiIn_ErrorReceived(object sender, MidiInMessageEventArgs e)
+        {
+            MessageBox.Show("Midi receive error:" + e.RawMessage, e.MidiEvent.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        void midiIn_MessageReceived(object sender, MidiInMessageEventArgs e)
+        {
+            int count = 0;
+            foreach (MidiAction ma in MidiActionsBindings.actionsMidi)
+            {
+                if (ma.MidiEv == e.MidiEvent)
+                {
+                    switch (count)
+                    {
+                        case 0:
+                            player.PlayPause();
+                            break;
+                        case 1:
+                            player.Close();
+                            break;
+                        case 2:
+                            try
+                            {
+                                if (!toolStripButton8.Checked)
+                                {
+                                    offset++;
+                                }
+                                else
+                                {
+                                    Random rand = new Random();
+                                    offset = rand.Next(0, queueTracks.Count - 1);
+                                }
+                                PlayOffset();
+                            }
+                            catch (Exception)
+                            {
+                                if (queueList.Items.Count > 0)
+                                {
+                                    offset = queueList.FocusedItem.Index;
+                                    labelStatus.Text = "End of queue list!";
+                                }
+                                else
+                                {
+                                    labelStatus.Text = "Queue is empty!";
+                                }
+                            }
+                            break;
+                        case 3:
+                            if (queueList.Items.Count > 0)
+                            {
+                                offset--;
+                                PlayOffset();
+                            }
+                            break;
+                    }
+                    count++;
+                }
+                else
+                {
+                    labelStatus.Text = "Unrecogonized command:" + e.MidiEvent.ToString();
+                }
+            }
         }
 
         private async void toolStripButton1_Click(object sender, EventArgs e)

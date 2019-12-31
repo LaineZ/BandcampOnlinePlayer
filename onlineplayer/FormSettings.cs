@@ -6,6 +6,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Serialization;
 using static onlineplayer.Utils;
 
 namespace onlineplayer
@@ -15,7 +16,7 @@ namespace onlineplayer
         XmlDocument doc = new XmlDocument();
         bool assignMode = false;
         int selectedIndex = 0;
-
+        MidiIn midiIn;
         public void recomputeSize()
         {
             int jsonSize = (int)GetDirectorySize("artwork_cache", "json") / 1024 / 1024;
@@ -81,7 +82,7 @@ namespace onlineplayer
                 comboBoxMidiInDevices.SelectedIndex = 0;
             }
 
-            var midiIn = new MidiIn(comboBoxMidiInDevices.SelectedIndex);
+            midiIn = new MidiIn(comboBoxMidiInDevices.SelectedIndex);
             midiIn.MessageReceived += midiIn_MessageReceived;
             midiIn.ErrorReceived += midiIn_ErrorReceived;
             midiIn.Start();
@@ -113,7 +114,9 @@ namespace onlineplayer
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    MidiActionsBindings.actionsMidi.Add(new MidiAction(e.MidiEvent));
+                    MidiAction act = new MidiAction();
+                    act.MidiEv = e.MidiEvent;
+                    MidiActionsBindings.actionsMidi.Add(act);
                     assignMode = false;
                 }
             }
@@ -147,6 +150,10 @@ namespace onlineplayer
 
             xmlWriter.WriteStartElement("setting");
             xmlWriter.WriteAttributeString("loadPages", pagesLoad.Text);
+            xmlWriter.WriteEndElement();
+
+            xmlWriter.WriteStartElement("setting");
+            xmlWriter.WriteAttributeString("midiDevice", comboBoxMidiInDevices.SelectedIndex.ToString());
             xmlWriter.WriteEndElement();
 
             xmlWriter.WriteEndDocument();
@@ -248,6 +255,12 @@ namespace onlineplayer
                 
                 }
             }
+        }
+
+        private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            midiIn.Dispose();
+            midiIn.Close();
         }
     }
 }
