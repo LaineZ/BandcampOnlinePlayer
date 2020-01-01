@@ -11,7 +11,7 @@ jobs:
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
     - name: Restore packages
-      run: nuget restore onlineplayer
+      run: nuget restore onlineplayer -SolutionDirectory $Env:GITHUB_WORKSPACE\onlineplayer
     - name: Setup MSBuild.exe
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build with MSBuild
