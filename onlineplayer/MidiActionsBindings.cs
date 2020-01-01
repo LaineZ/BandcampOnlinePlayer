@@ -10,7 +10,6 @@ namespace onlineplayer
 {
     public static class MidiActionsBindings
     {
-        [XmlElement("ActionsBinding")]
         internal static List<MidiAction> actionsMidi = new List<MidiAction>();
     }
 }

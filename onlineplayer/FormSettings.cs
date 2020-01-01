@@ -82,11 +82,6 @@ namespace onlineplayer
                 comboBoxMidiInDevices.SelectedIndex = 0;
             }
 
-            midiIn = new MidiIn(comboBoxMidiInDevices.SelectedIndex);
-            midiIn.MessageReceived += midiIn_MessageReceived;
-            midiIn.ErrorReceived += midiIn_ErrorReceived;
-            midiIn.Start();
-
             int count = 0;
 
             foreach (MidiAction action in MidiActionsBindings.actionsMidi)
@@ -94,6 +89,11 @@ namespace onlineplayer
                 listView1.Items[count].SubItems[1].Text = action.MidiEv.ToString();
                 count++;
             }
+
+            midiIn = new MidiIn(comboBoxMidiInDevices.SelectedIndex);
+            midiIn.MessageReceived += midiIn_MessageReceived;
+            midiIn.ErrorReceived += midiIn_ErrorReceived;
+            midiIn.Start();
 
             recomputeSize();
         }
@@ -116,6 +116,8 @@ namespace onlineplayer
                 {
                     MidiAction act = new MidiAction();
                     act.MidiEv = e.MidiEvent;
+                    act.ControlData = e.MidiEvent as ControlChangeEvent;
+                    act.NoteEvent = e.MidiEvent as NoteEvent;
                     MidiActionsBindings.actionsMidi.Add(act);
                     assignMode = false;
                 }
@@ -175,7 +177,7 @@ namespace onlineplayer
 
             foreach (MidiAction midiItem in MidiActionsBindings.actionsMidi)
             {
-                ListViewItem lst = new ListViewItem(new string[] { midiItem.ActionName, midiItem.MidiEv.ToString() });
+                ListViewItem lst = new ListViewItem(new string[] { midiItem.MidiEv.ToString() });
                 listView1.Items.Add(lst);
             }
         }
@@ -259,7 +261,6 @@ namespace onlineplayer
 
         private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
-            midiIn.Dispose();
             midiIn.Close();
         }
     }

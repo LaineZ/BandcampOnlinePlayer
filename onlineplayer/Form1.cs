@@ -22,6 +22,8 @@ namespace onlineplayer
         int offset = 0;
         bool streamMode = false;
 
+        MidiIn midiIn = new MidiIn(int.Parse(getSettingsAttr("settings.xml", "midiDevice")));
+
         int imgSize = int.Parse(getSettingsAttr("settings.xml", "albumViewSize"));
         bool downloadImgs = getSettingsAttrBool("settings.xml", "saveArtworks");
         string viewStyle = getSettingsAttr("settings.xml", "albumViewType");
@@ -62,18 +64,6 @@ namespace onlineplayer
             };
 
             toolStripTextBox1.Enabled = false;
-            try
-            {
-                var midiIn = new MidiIn(int.Parse(getSettingsAttr("settings.xml", "midiDevice")));
-                midiIn.MessageReceived += midiIn_MessageReceived;
-                midiIn.ErrorReceived += midiIn_ErrorReceived;
-                midiIn.Start();
-                labelStatus.Text = "MIDI Device opened:" + midiIn.ToString();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("Error:" + e.Message, "There error starting MIDI-Devices", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         void midiIn_ErrorReceived(object sender, MidiInMessageEventArgs e)
@@ -83,60 +73,30 @@ namespace onlineplayer
 
         void midiIn_MessageReceived(object sender, MidiInMessageEventArgs e)
         {
-            int count = 0;
-            foreach (MidiAction ma in MidiActionsBindings.actionsMidi)
+
+            ControlChangeEvent cce = e.MidiEvent as ControlChangeEvent;
+            NoteEvent note = e.MidiEvent as NoteEvent;
+
+
+            if (MidiActionsBindings.actionsMidi[0].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[0].ControlData.ControllerValue == cce.ControllerValue)
             {
-                if (ma.MidiEv == e.MidiEvent)
-                {
-                    switch (count)
-                    {
-                        case 0:
-                            player.PlayPause();
-                            break;
-                        case 1:
-                            player.Close();
-                            break;
-                        case 2:
-                            try
-                            {
-                                if (!toolStripButton8.Checked)
-                                {
-                                    offset++;
-                                }
-                                else
-                                {
-                                    Random rand = new Random();
-                                    offset = rand.Next(0, queueTracks.Count - 1);
-                                }
-                                PlayOffset();
-                            }
-                            catch (Exception)
-                            {
-                                if (queueList.Items.Count > 0)
-                                {
-                                    offset = queueList.FocusedItem.Index;
-                                    labelStatus.Text = "End of queue list!";
-                                }
-                                else
-                                {
-                                    labelStatus.Text = "Queue is empty!";
-                                }
-                            }
-                            break;
-                        case 3:
-                            if (queueList.Items.Count > 0)
-                            {
-                                offset--;
-                                PlayOffset();
-                            }
-                            break;
-                    }
-                    count++;
-                }
-                else
-                {
-                    labelStatus.Text = "Unrecogonized command:" + e.MidiEvent.ToString();
-                }
+                player.PlayPause();
+                return;       
+            }
+
+            if (MidiActionsBindings.actionsMidi[1].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[1].ControlData.ControllerValue == cce.ControllerValue)
+            {
+                return;
+            }
+
+            if (MidiActionsBindings.actionsMidi[2].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[2].ControlData.ControllerValue == cce.ControllerValue)
+            {
+                return;
+            }
+
+            if (MidiActionsBindings.actionsMidi[3].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[3].ControlData.ControllerValue == cce.ControllerValue)
+            {
+                return;
             }
         }
 
@@ -230,6 +190,7 @@ namespace onlineplayer
             labelStatus.Text = "Loading tracks metadata... " + selectedAlbum.tralbum_url;
             String response = await httpTools.MakeRequestAsync(selectedAlbum.tralbum_url);
             Album album = httpTools.GetAlbum(response);
+            List<ListViewItem> listItems = new List<ListViewItem>();
             foreach (Track trk in album.Tracks)
             {
                 ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
@@ -262,53 +223,12 @@ namespace onlineplayer
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (!toolStripButton8.Checked)
-                {
-                    offset++;
-                }
-                else
-                {
-                    Random rand = new Random();
-                    offset = rand.Next(0, queueTracks.Count - 1);
-                }
-                PlayOffset();
-            }
-            catch (Exception)
-            {
-                if (queueList.Items.Count > 0)
-                {
-                    offset = queueList.FocusedItem.Index;
-                    labelStatus.Text = "End of queue list!";
-                }
-                else
-                {
-                    labelStatus.Text = "Queue is empty!";
-                }
-            }
+            PlayNext();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (queueList.Items.Count > 0)
-                {
-                    offset--;
-                    PlayOffset();
-                }
-                else
-                {
-                    labelStatus.Text = "Queue is empty!";
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                offset = 0;
-                PlayOffset();
-                labelStatus.Text = "This a first track in queue list!";
-            }
+            PlayPrev();
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -410,6 +330,7 @@ namespace onlineplayer
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
+            midiIn.Close();
             Form settings = new FormSettings();
             settings.Show();
         }
@@ -475,6 +396,29 @@ namespace onlineplayer
                 }
                 labelStatus.Text = "Done...";
             }
-        } 
+        }
+
+        private void toolStripButton10_Click(object sender, EventArgs e)
+        {
+            midiIn.Close();
+            labelStatus.Text = "MIDI Device closed:" + MidiIn.DeviceInfo(int.Parse(getSettingsAttr("settings.xml", "midiDevice"))).ProductName;
+
+        }
+
+        private void toolStripButton11_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                midiIn = new MidiIn(int.Parse(getSettingsAttr("settings.xml", "midiDevice")));
+                midiIn.Start();
+                midiIn.MessageReceived += midiIn_MessageReceived;
+                midiIn.ErrorReceived += midiIn_ErrorReceived;
+                labelStatus.Text = "MIDI Device opened:" + MidiIn.DeviceInfo(int.Parse(getSettingsAttr("settings.xml", "midiDevice"))).ProductName;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error:" + ex.Message, "There error starting MIDI-Devices", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

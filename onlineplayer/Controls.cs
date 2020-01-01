@@ -53,6 +53,57 @@ namespace onlineplayer
             labelStatus.Text = "Done!";
         }
 
+        private void PlayNext()
+        {
+            try
+            {
+                if (!toolStripButton8.Checked)
+                {
+                    offset++;
+                }
+                else
+                {
+                    Random rand = new Random();
+                    offset = rand.Next(0, queueTracks.Count - 1);
+                }
+                PlayOffset();
+            }
+            catch (Exception)
+            {
+                if (queueList.Items.Count > 0)
+                {
+                    offset = queueList.FocusedItem.Index;
+                    labelStatus.Text = "End of queue list!";
+                }
+                else
+                {
+                    labelStatus.Text = "Queue is empty!";
+                }
+            }
+        }
+
+        private void PlayPrev()
+        {
+            try
+            {
+                if (queueList.Items.Count > 0)
+                {
+                    offset--;
+                    PlayOffset();
+                }
+                else
+                {
+                    labelStatus.Text = "Queue is empty!";
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                offset = 0;
+                PlayOffset();
+                labelStatus.Text = "This a first track in queue list!";
+            }
+        }
+
         private async void UpdateAlbums()
         {
             // {"filters":{ "format":"all","location":0,"sort":"pop","tags":["experimental"] },"page":2}
