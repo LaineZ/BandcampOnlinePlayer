@@ -76,27 +76,36 @@ namespace onlineplayer
 
             ControlChangeEvent cce = e.MidiEvent as ControlChangeEvent;
             NoteEvent note = e.MidiEvent as NoteEvent;
-
-
-            if (MidiActionsBindings.actionsMidi[0].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[0].ControlData.ControllerValue == cce.ControllerValue)
+            try
             {
-                player.PlayPause();
-                return;       
+                // playpause
+                if (MidiActionsBindings.actionsMidi[0].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[0].ControlData.ControllerValue == cce.ControllerValue)
+                {
+                    player.PlayPause();
+                    return;
+                }
+
+                if (MidiActionsBindings.actionsMidi[2].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[1].ControlData.ControllerValue == cce.ControllerValue)
+                {
+                    if (player.outputDevice.Volume <= 1.0)
+                    {
+                        player.outputDevice.Volume += 0.1F;
+                    }
+                    return;
+                }
+
+                if (MidiActionsBindings.actionsMidi[3].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[1].ControlData.ControllerValue == cce.ControllerValue)
+                {
+                    if (player.outputDevice.Volume >= 0)
+                    {
+                        player.outputDevice.Volume -= 0.1F;
+                    }
+                    return;
+                }
             }
-
-            if (MidiActionsBindings.actionsMidi[1].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[1].ControlData.ControllerValue == cce.ControllerValue)
+            catch (NullReferenceException)
             {
-                return;
-            }
-
-            if (MidiActionsBindings.actionsMidi[2].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[2].ControlData.ControllerValue == cce.ControllerValue)
-            {
-                return;
-            }
-
-            if (MidiActionsBindings.actionsMidi[3].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[3].ControlData.ControllerValue == cce.ControllerValue)
-            {
-                return;
+                
             }
         }
 
@@ -119,10 +128,19 @@ namespace onlineplayer
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            trackBar1.Value = (int)player.audioFile.CurrentTime.TotalSeconds;
-            TimeSpan time = TimeSpan.FromSeconds(player.audioFile.CurrentTime.TotalSeconds);
-            label3.Text = time.ToString(@"hh\:mm\:ss");
-            label5.Text = player.outputDevice.PlaybackState.ToString();
+            try
+            {
+                trackBar1.Value = (int)player.audioFile.CurrentTime.TotalSeconds;
+                TimeSpan time = TimeSpan.FromSeconds(player.audioFile.CurrentTime.TotalSeconds);
+                label3.Text = time.ToString(@"hh\:mm\:ss");
+                label5.Text = player.outputDevice.PlaybackState.ToString();
+            }
+            catch (NullReferenceException)
+            {
+                trackBar1.Value = 0;
+                label3.Text = "00:00:00";
+                label5.Text = "Stopped";
+            }
 
             if (Math.Abs(player.audioFile.TotalTime.TotalSeconds - player.audioFile.CurrentTime.TotalSeconds) < 0.1)
             {

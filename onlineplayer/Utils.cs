@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace onlineplayer
 {
@@ -30,25 +31,40 @@ namespace onlineplayer
 
         public static string getSettingsAttr(string filename, string attrb)
         {
-            XmlDocument doc = new XmlDocument();
-
-            doc.Load(filename);
-            XmlElement xRoot = doc.DocumentElement;
-            XmlNode attr;
-            string value = "unknown key" + attrb;
-
-            foreach (XmlNode xnode in xRoot)
+            try
             {
-                if (xnode.Attributes.Count > 0)
+                XmlDocument doc = new XmlDocument();
+
+                doc.Load(filename);
+                XmlElement xRoot = doc.DocumentElement;
+                XmlNode attr;
+                string value = "unknown key" + attrb;
+
+                foreach (XmlNode xnode in xRoot)
                 {
-                    attr = xnode.Attributes.GetNamedItem(attrb);
-                    if (attr != null)
+                    if (xnode.Attributes.Count > 0)
                     {
-                        value = attr.Value;
+                        attr = xnode.Attributes.GetNamedItem(attrb);
+                        if (attr != null)
+                        {
+                            value = attr.Value;
+                        }
                     }
                 }
+                return value;
             }
-            return value;
+            catch (Exception)
+            {
+                DialogResult res = MessageBox.Show("Settings file is missing or corrupted...\nIf you have changed settings.xml independently it is necessary fix their errors\nIf not - this looks like a program bug - good to report this at GitHub =)\nIf you click YES - program will reset all settings", "Settings file corruption detected!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                if (res == DialogResult.Yes)
+                {
+                    File.Delete("settings.xml");
+                    MessageBox.Show("Settings file sucessfully removed! Please launch program again to apply changes", "Full reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                Environment.Exit(1);
+                return "error"; // i dont know - this code is not reachable.....
+            }
         }
 
         public static bool getSettingsAttrBool(string filename, string attrib)

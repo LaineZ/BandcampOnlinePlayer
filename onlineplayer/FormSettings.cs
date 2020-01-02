@@ -126,6 +126,8 @@ namespace onlineplayer
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            albumSize.BackColor = Color.FromArgb(255, 255, 255);
+            pagesLoad.BackColor = Color.FromArgb(255, 255, 255);
             XmlWriter xmlWriter = XmlWriter.Create("settings.xml");
 
             xmlWriter.WriteStartDocument();
@@ -143,16 +145,29 @@ namespace onlineplayer
             }
             else
             {
+                xmlWriter.WriteStartElement("setting");
+                xmlWriter.WriteAttributeString("albumViewSize", "124");
+                xmlWriter.WriteEndElement();
                 albumSize.BackColor = Color.FromArgb(255, 0, 0);
             }
 
             xmlWriter.WriteStartElement("setting");
             xmlWriter.WriteAttributeString("saveArtworks", checkArtwork.Checked.ToString());
             xmlWriter.WriteEndElement();
-
-            xmlWriter.WriteStartElement("setting");
-            xmlWriter.WriteAttributeString("loadPages", pagesLoad.Text);
-            xmlWriter.WriteEndElement();
+            int idk = 0;
+            if (int.TryParse(pagesLoad.Text, out idk))
+            {
+                xmlWriter.WriteStartElement("setting");
+                xmlWriter.WriteAttributeString("loadPages", pagesLoad.Text);
+                xmlWriter.WriteEndElement();
+            }
+            else
+            {
+                xmlWriter.WriteStartElement("setting");
+                xmlWriter.WriteAttributeString("loadPages", "100");
+                xmlWriter.WriteEndElement();
+                pagesLoad.BackColor = Color.FromArgb(255, 0, 0);
+            }
 
             xmlWriter.WriteStartElement("setting");
             xmlWriter.WriteAttributeString("midiDevice", comboBoxMidiInDevices.SelectedIndex.ToString());
@@ -262,6 +277,16 @@ namespace onlineplayer
         private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
             midiIn.Close();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            DialogResult res = MessageBox.Show("Reset all settings?", "NO UNDO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (res == DialogResult.Yes)
+            {
+                File.Delete("settings.xml");
+                MessageBox.Show("All settings has been reset, restart the program to take effect!", "There is no turning back", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
     }
 }

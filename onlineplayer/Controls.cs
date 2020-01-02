@@ -109,7 +109,7 @@ namespace onlineplayer
             // {"filters":{ "format":"all","location":0,"sort":"pop","tags":["experimental"] },"page":2}
             HttpClient client = new HttpClient();
             toolStripButton5.Enabled = true;
-            for (int i = 1; i < 100; i++)
+            for (int i = 1; i < int.Parse(getSettingsAttr("settings.xml", "loadPages")); i++)
             {
                 labelStatus.Text = "Loading ablums tag data: " + i + "/" + "100";
                 string responseString = "none";
