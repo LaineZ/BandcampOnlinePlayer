@@ -42,6 +42,11 @@ namespace onlineplayer
                 xmlWriter.WriteAttributeString("midiDevice", "0");
                 xmlWriter.WriteEndElement();
 
+
+                xmlWriter.WriteStartElement("setting");
+                xmlWriter.WriteAttributeString("useMidi", "False");
+                xmlWriter.WriteEndElement();
+
                 xmlWriter.WriteEndDocument();
                 xmlWriter.Close();
             }
