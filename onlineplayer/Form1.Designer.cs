@@ -86,7 +86,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 270F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 272F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 0);
@@ -103,10 +103,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(390, 3);
+            this.queueList.Location = new System.Drawing.Point(388, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(265, 435);
+            this.queueList.Size = new System.Drawing.Size(267, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
@@ -121,7 +121,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(3, 3);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(96, 433);
+            this.listBox1.Size = new System.Drawing.Size(95, 433);
             this.listBox1.TabIndex = 0;
             this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_Click);
             // 
@@ -131,10 +131,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(105, 3);
+            this.listView1.Location = new System.Drawing.Point(104, 3);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(279, 435);
+            this.listView1.Size = new System.Drawing.Size(278, 435);
             this.listView1.TabIndex = 3;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Tile;

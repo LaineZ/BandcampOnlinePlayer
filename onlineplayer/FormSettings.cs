@@ -81,6 +81,12 @@ namespace onlineplayer
             {
                 comboBoxMidiInDevices.SelectedIndex = 0;
             }
+            else
+            {
+                comboBoxMidiInDevices.Enabled = false;
+                listView1.Enabled = false;
+                midiControl.Enabled = false;
+            }
 
             int count = 0;
 
@@ -90,10 +96,13 @@ namespace onlineplayer
                 count++;
             }
 
-            midiIn = new MidiIn(comboBoxMidiInDevices.SelectedIndex);
-            midiIn.MessageReceived += midiIn_MessageReceived;
-            midiIn.ErrorReceived += midiIn_ErrorReceived;
-            midiIn.Start();
+            if (getSettingsAttrBool("settings.xml", "useMidi"))
+            {
+                midiIn = new MidiIn(comboBoxMidiInDevices.SelectedIndex);
+                midiIn.MessageReceived += midiIn_MessageReceived;
+                midiIn.ErrorReceived += midiIn_ErrorReceived;
+                midiIn.Start();
+            }
 
             recomputeSize();
         }
@@ -171,6 +180,10 @@ namespace onlineplayer
 
             xmlWriter.WriteStartElement("setting");
             xmlWriter.WriteAttributeString("midiDevice", comboBoxMidiInDevices.SelectedIndex.ToString());
+            xmlWriter.WriteEndElement();
+
+            xmlWriter.WriteStartElement("setting");
+            xmlWriter.WriteAttributeString("useMidi", midiControl.Checked.ToString());
             xmlWriter.WriteEndElement();
 
             xmlWriter.WriteEndDocument();
@@ -276,7 +289,7 @@ namespace onlineplayer
 
         private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
-            midiIn.Close();
+            if (getSettingsAttrBool("settings.xml", "useMidi")) { midiIn.Close(); }
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)

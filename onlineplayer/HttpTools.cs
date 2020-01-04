@@ -93,6 +93,11 @@ namespace onlineplayer
             string albumDataTemp = htmlCode.Substring(htmlCode.IndexOf(startString) + startString.Length - 1);
             string albumData = albumDataTemp.Substring(0, albumDataTemp.IndexOf(stopString) + 1);
 
+            Console.WriteLine(albumData);
+            Console.WriteLine("---------");
+            Console.WriteLine(albumDataTemp);
+            Console.WriteLine("Offset size_start: " + (htmlCode.IndexOf(startString) + startString.Length - 1) + " size_stop: " + albumDataTemp.IndexOf(stopString) + 1);
+
             return albumData;
         }
 

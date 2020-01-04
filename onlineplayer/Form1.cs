@@ -14,15 +14,16 @@ using NAudio.Midi;
 
 namespace onlineplayer
 {
+
     public partial class Form1 : Form
     {
+        MidiIn midiIn;
+
         List<Item> itemsList = new List<Item>();
         List<Track> queueTracks = new List<Track>();
 
         int offset = 0;
         bool streamMode = false;
-
-        MidiIn midiIn = new MidiIn(int.Parse(getSettingsAttr("settings.xml", "midiDevice")));
 
         int imgSize = int.Parse(getSettingsAttr("settings.xml", "albumViewSize"));
         bool downloadImgs = getSettingsAttrBool("settings.xml", "saveArtworks");
@@ -64,6 +65,16 @@ namespace onlineplayer
             };
 
             toolStripTextBox1.Enabled = false;
+
+            if (getSettingsAttrBool("settings.xml", "useMidi"))
+            {
+                midiIn = new MidiIn(int.Parse(getSettingsAttr("settings.xml", "midiDevice")));
+            }
+            else
+            {
+                toolStripButton10.Enabled = false;
+                toolStripButton11.Enabled = false;
+            }
         }
 
         void midiIn_ErrorReceived(object sender, MidiInMessageEventArgs e)
@@ -348,7 +359,7 @@ namespace onlineplayer
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            midiIn.Close();
+            if (getSettingsAttrBool("settings.xml", "useMidi")) { midiIn.Close(); }
             Form settings = new FormSettings();
             settings.Show();
         }

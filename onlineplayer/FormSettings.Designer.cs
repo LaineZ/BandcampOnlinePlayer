@@ -41,6 +41,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pagesLoad = new System.Windows.Forms.TextBox();
@@ -69,7 +70,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxMidiInDevices = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.midiControl = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -98,6 +99,15 @@
             this.toolStripButton1.Size = new System.Drawing.Size(51, 22);
             this.toolStripButton1.Text = "Save";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.Image = global::onlineplayer.Properties.Resources.baseline_loop_black_18dp;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(114, 22);
+            this.toolStripButton3.Text = "Reset all settings";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripButton2
             // 
@@ -322,6 +332,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.midiControl);
             this.tabPage4.Controls.Add(this.listView1);
             this.tabPage4.Controls.Add(this.label4);
             this.tabPage4.Controls.Add(this.comboBoxMidiInDevices);
@@ -343,9 +354,9 @@
             listViewItem1,
             listViewItem2,
             listViewItem3});
-            this.listView1.Location = new System.Drawing.Point(6, 33);
+            this.listView1.Location = new System.Drawing.Point(6, 57);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(342, 197);
+            this.listView1.Size = new System.Drawing.Size(342, 173);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -365,7 +376,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 9);
+            this.label4.Location = new System.Drawing.Point(6, 33);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 1;
@@ -374,7 +385,7 @@
             // comboBoxMidiInDevices
             // 
             this.comboBoxMidiInDevices.FormattingEnabled = true;
-            this.comboBoxMidiInDevices.Location = new System.Drawing.Point(79, 6);
+            this.comboBoxMidiInDevices.Location = new System.Drawing.Point(79, 30);
             this.comboBoxMidiInDevices.Name = "comboBoxMidiInDevices";
             this.comboBoxMidiInDevices.Size = new System.Drawing.Size(269, 21);
             this.comboBoxMidiInDevices.TabIndex = 0;
@@ -383,14 +394,15 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // toolStripButton3
+            // midiControl
             // 
-            this.toolStripButton3.Image = global::onlineplayer.Properties.Resources.baseline_loop_black_18dp;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(114, 22);
-            this.toolStripButton3.Text = "Reset all settings";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            this.midiControl.AutoSize = true;
+            this.midiControl.Location = new System.Drawing.Point(9, 6);
+            this.midiControl.Name = "midiControl";
+            this.midiControl.Size = new System.Drawing.Size(118, 17);
+            this.midiControl.TabIndex = 3;
+            this.midiControl.Text = "Enable MIDI Contol";
+            this.midiControl.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
@@ -457,5 +469,6 @@
         private System.Windows.Forms.ColumnHeader AssignControll;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.CheckBox midiControl;
     }
 }
