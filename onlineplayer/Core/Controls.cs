@@ -13,15 +13,17 @@ namespace onlineplayer
 {
     public partial class Form1
     {
+        HttpClient client = new HttpClient();
+
         private void PlayFormList()
         {
             try
             {
-                string url = itemsList[listView1.FocusedItem.Index].audio_url.mp3;
+                string url = itemsList[listAlbums.FocusedItem.Index].audio_url.mp3;
                 labelStatus.Text = "Loading file...";
                 player.Play(url);
                 labelStatus.Text = "Loading artwork...";
-                pictureBox1.LoadAsync("https://f4.bcbits.com/img/a" + itemsList[listView1.FocusedItem.Index].art_id + "_2.jpg");
+                pictureArtwork.LoadAsync("https://f4.bcbits.com/img/a" + itemsList[listAlbums.FocusedItem.Index].art_id + "_2.jpg");
                 labelStatus.Text = "Done!";
                 UpdateInfo();
             }
@@ -39,17 +41,17 @@ namespace onlineplayer
             il.ImageSize = new System.Drawing.Size(imgSize, imgSize);
             if (downloadImgs)
             {
-                foreach (ListViewItem listItem in listView1.Items)
+                foreach (ListViewItem listItem in listAlbums.Items)
                 {
                     labelStatus.Text = "Loading ablum images...";
                     il.ColorDepth = ColorDepth.Depth32Bit;
-                    listView1.LargeImageList = il;
+                    listAlbums.LargeImageList = il;
                     il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + itemsList[count].art_id + "_8.jpg"));
                     listItem.ImageIndex = count++;
                 }
             }
 
-            toolStripTextBox1.Enabled = true;
+            toolSearch.Enabled = true;
             labelStatus.Text = "Done!";
         }
 
@@ -57,7 +59,7 @@ namespace onlineplayer
         {
             try
             {
-                if (!toolStripButton8.Checked)
+                if (!toolShuffle.Checked)
                 {
                     offset++;
                 }
@@ -107,23 +109,27 @@ namespace onlineplayer
         private async void UpdateAlbums()
         {
             // {"filters":{ "format":"all","location":0,"sort":"pop","tags":["experimental"] },"page":2}
-            HttpClient client = new HttpClient();
-            toolStripButton5.Enabled = true;
+            toolStream.Enabled = true;
             for (int i = 1; i < int.Parse(getSettingsAttr("settings.xml", "loadPages")); i++)
             {
                 labelStatus.Text = "Loading ablums tag data: " + i + "/" + "100";
                 string responseString = "none";
-                if (!File.Exists("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json"))
+                string sorting = "pop";
+
+                if (!toolSort.Checked) {sorting = "date"; } // if not popularity
+
+                string fname = "artwork_cache/" + i + "_" + listTags.SelectedItem + "_" + sorting + ".json";
+                if (!File.Exists(fname))
                 {
-                    string content = "{\"filters\":{ \"format\":\"all\",\"location\":0,\"sort\":\"pop\",\"tags\":[\"" + listBox1.SelectedItem + "\"] },\"page\":" + i + "}";
+                    string content = "{\"filters\":{ \"format\":\"all\",\"location\":0,\"sort\":\"" + sorting + "\",\"tags\":[\"" + listTags.SelectedItem + "\"] },\"page\":" + i + "}";
                     HttpContent c = new StringContent(content, Encoding.UTF8, "application/json");
                     var response = await client.PostAsync("https://bandcamp.com/api/hub/2/dig_deeper", c);
                     responseString = await response.Content.ReadAsStringAsync();
-                    File.WriteAllText("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json", responseString);
+                    File.WriteAllText(fname, responseString);
                 }
                 else
                 {
-                    responseString = File.ReadAllText("artwork_cache/" + i + "_" + listBox1.SelectedItem + ".json");
+                    responseString = File.ReadAllText(fname);
                 }
                 //Console.WriteLine(responseString);
                 try
@@ -133,7 +139,7 @@ namespace onlineplayer
                     {
                         // title, artist, mp3_url, url, artworkid
                         ListViewItem lst = new ListViewItem(new string[] { item.title, item.artist });
-                        listView1.Items.Add(lst);
+                        listAlbums.Items.Add(lst);
                         itemsList.Add(item);
                     }
                 }
@@ -156,16 +162,16 @@ namespace onlineplayer
         {
             try
             {
-                label1.Text = queueTracks[offset].Title;
-                label2.Text = queueTracks[offset].Album.Artist + "\n" + queueTracks[offset].Album.Title + "\n" + queueTracks[offset].Album.ReleaseDate + "\nTrack number " + offset;
+                labelTrackName.Text = queueTracks[offset].Title;
+                labelTrackInfo.Text = queueTracks[offset].Album.Artist + "\n" + queueTracks[offset].Album.Title + "\n" + queueTracks[offset].Album.ReleaseDate + "\nTrack number " + offset;
             }
             catch (ArgumentOutOfRangeException)
             {
-                label1.Text = itemsList[listView1.FocusedItem.Index].title;
-                label2.Text = itemsList[listView1.FocusedItem.Index].artist + "\n" + itemsList[listView1.FocusedItem.Index].genre + "\nComments:" + itemsList[listView1.FocusedItem.Index].num_comments;
+                labelTrackName.Text = itemsList[listAlbums.FocusedItem.Index].title;
+                labelTrackInfo.Text = itemsList[listAlbums.FocusedItem.Index].artist + "\n" + itemsList[listAlbums.FocusedItem.Index].genre + "\nComments:" + itemsList[listAlbums.FocusedItem.Index].num_comments;
             }
             timer1.Enabled = true;
-            trackBar1.Maximum = (int)player.audioFile.TotalTime.TotalSeconds;
+            trackSeek.Maximum = (int)player.audioFile.TotalTime.TotalSeconds;
         }
 
 
@@ -176,7 +182,7 @@ namespace onlineplayer
                 labelStatus.Text = "Loading track:" + offset;
                 player.Play(queueTracks[offset].Mp3Url);
                 labelStatus.Text = "Loading artwork";
-                pictureBox1.LoadAsync("https://f4.bcbits.com/img/a" + queueTracks[offset].Album.ArtworkId + "_2.jpg");
+                pictureArtwork.LoadAsync("https://f4.bcbits.com/img/a" + queueTracks[offset].Album.ArtworkId + "_2.jpg");
                 labelStatus.Text = "Done!";
                 queueList.Items[offset].Selected = true;
                 UpdateInfo();
@@ -216,10 +222,15 @@ namespace onlineplayer
             ToogleAllContorls();
             Form loader = new FormProgress("Fetching tags from bandcamp.com", "Retriving data from bandcamp.com please wait...");
             loader.Show();
-            listBox1.Items.Clear();
-            listView1.Items.Clear();
+            
+            // Full clean up
+            listTags.Items.Clear();
+            listAlbums.Items.Clear();
+            CleanUp();
+
             HttpTools httpTools = new HttpTools();
             String response = await httpTools.MakeRequestAsync("https://bandcamp.com/tags");
+            
             HtmlAgilityPack.HtmlDocument htmlSnippet = new HtmlAgilityPack.HtmlDocument();
             htmlSnippet.LoadHtml(response);
 
@@ -229,7 +240,7 @@ namespace onlineplayer
                 HtmlAttribute att = link.Attributes["href"];
                 if (att.Value.StartsWith("/tag/"))
                 {
-                    listBox1.Items.Add(att.Value.Replace("/tag/", ""));
+                    listTags.Items.Add(att.Value.Replace("/tag/", ""));
                 }
             }
 

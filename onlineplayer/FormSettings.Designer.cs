@@ -64,13 +64,13 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.midiControl = new System.Windows.Forms.CheckBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.Action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.AssignControll = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxMidiInDevices = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.midiControl = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -87,7 +87,7 @@
             this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(366, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(399, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -135,9 +135,9 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(356, 236);
+            this.tabPage1.Size = new System.Drawing.Size(389, 264);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Storage & Perfomance";
+            this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // pagesLoad
@@ -145,7 +145,7 @@
             this.pagesLoad.Location = new System.Drawing.Point(96, 168);
             this.pagesLoad.MaxLength = 10;
             this.pagesLoad.Name = "pagesLoad";
-            this.pagesLoad.Size = new System.Drawing.Size(69, 20);
+            this.pagesLoad.Size = new System.Drawing.Size(48, 20);
             this.pagesLoad.TabIndex = 8;
             this.pagesLoad.Text = "100";
             // 
@@ -244,7 +244,7 @@
             this.tabControl1.Location = new System.Drawing.Point(2, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(364, 262);
+            this.tabControl1.Size = new System.Drawing.Size(397, 290);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -258,7 +258,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(356, 236);
+            this.tabPage2.Size = new System.Drawing.Size(389, 264);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Apperance";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -317,7 +317,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(356, 236);
+            this.tabPage3.Size = new System.Drawing.Size(389, 264);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Blocked artists";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -327,7 +327,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(6, 6);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(344, 225);
+            this.listBox1.Size = new System.Drawing.Size(375, 251);
             this.listBox1.TabIndex = 0;
             // 
             // tabPage4
@@ -339,10 +339,20 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(356, 236);
+            this.tabPage4.Size = new System.Drawing.Size(389, 264);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "MIDI Controllers";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // midiControl
+            // 
+            this.midiControl.AutoSize = true;
+            this.midiControl.Location = new System.Drawing.Point(9, 6);
+            this.midiControl.Name = "midiControl";
+            this.midiControl.Size = new System.Drawing.Size(118, 17);
+            this.midiControl.TabIndex = 3;
+            this.midiControl.Text = "Enable MIDI Contol";
+            this.midiControl.UseVisualStyleBackColor = true;
             // 
             // listView1
             // 
@@ -356,7 +366,7 @@
             listViewItem3});
             this.listView1.Location = new System.Drawing.Point(6, 57);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(342, 173);
+            this.listView1.Size = new System.Drawing.Size(375, 201);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -387,29 +397,19 @@
             this.comboBoxMidiInDevices.FormattingEnabled = true;
             this.comboBoxMidiInDevices.Location = new System.Drawing.Point(79, 30);
             this.comboBoxMidiInDevices.Name = "comboBoxMidiInDevices";
-            this.comboBoxMidiInDevices.Size = new System.Drawing.Size(269, 21);
+            this.comboBoxMidiInDevices.Size = new System.Drawing.Size(302, 21);
             this.comboBoxMidiInDevices.TabIndex = 0;
             // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // midiControl
-            // 
-            this.midiControl.AutoSize = true;
-            this.midiControl.Location = new System.Drawing.Point(9, 6);
-            this.midiControl.Name = "midiControl";
-            this.midiControl.Size = new System.Drawing.Size(118, 17);
-            this.midiControl.TabIndex = 3;
-            this.midiControl.Text = "Enable MIDI Contol";
-            this.midiControl.UseVisualStyleBackColor = true;
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(366, 289);
+            this.ClientSize = new System.Drawing.Size(399, 318);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

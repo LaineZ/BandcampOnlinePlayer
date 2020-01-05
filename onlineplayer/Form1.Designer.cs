@@ -32,29 +32,28 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.queueList = new System.Windows.Forms.ListView();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.listTags = new System.Windows.Forms.ListBox();
+            this.listAlbums = new System.Windows.Forms.ListView();
+            this.labelTrackName = new System.Windows.Forms.Label();
+            this.labelTrackInfo = new System.Windows.Forms.Label();
+            this.trackSeek = new System.Windows.Forms.TrackBar();
             this.label3 = new System.Windows.Forms.Label();
-            this.trackBar2 = new System.Windows.Forms.TrackBar();
+            this.trackVolume = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.toolRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolSettings = new System.Windows.Forms.ToolStripButton();
+            this.toolMidiOpen = new System.Windows.Forms.ToolStripButton();
+            this.toolMidiClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolPrev = new System.Windows.Forms.ToolStripButton();
+            this.toolPlay = new System.Windows.Forms.ToolStripButton();
+            this.toolNext = new System.Windows.Forms.ToolStripButton();
+            this.toolStream = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
+            this.toolBlock = new System.Windows.Forms.ToolStripButton();
+            this.toolShuffle = new System.Windows.Forms.ToolStripButton();
+            this.toolClearAll = new System.Windows.Forms.ToolStripButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,15 +65,17 @@
             this.removeFromQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAlbumWebpageInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blockSelectedArtiststreamingModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureArtwork = new System.Windows.Forms.PictureBox();
             this.labelStatus = new System.Windows.Forms.Label();
+            this.toolSearch = new System.Windows.Forms.ToolStripTextBox();
+            this.toolSort = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureArtwork)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -86,10 +87,10 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 272F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listView1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listTags, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listAlbums, 1, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 28);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -103,78 +104,78 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(388, 3);
+            this.queueList.Location = new System.Drawing.Point(386, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(267, 435);
+            this.queueList.Size = new System.Drawing.Size(269, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
             this.queueList.DoubleClick += new System.EventHandler(this.queueList_DoubleClick);
             // 
-            // listBox1
+            // listTags
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listTags.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(3, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(95, 433);
-            this.listBox1.TabIndex = 0;
-            this.listBox1.DoubleClick += new System.EventHandler(this.listBox1_Click);
+            this.listTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listTags.FormattingEnabled = true;
+            this.listTags.Location = new System.Drawing.Point(3, 3);
+            this.listTags.Name = "listTags";
+            this.listTags.Size = new System.Drawing.Size(95, 433);
+            this.listTags.TabIndex = 0;
+            this.listTags.DoubleClick += new System.EventHandler(this.listBox1_Click);
             // 
-            // listView1
+            // listAlbums
             // 
-            this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listAlbums.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(104, 3);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(278, 435);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Tile;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            this.listView1.DoubleClick += new System.EventHandler(this.AlbumList);
+            this.listAlbums.HideSelection = false;
+            this.listAlbums.Location = new System.Drawing.Point(104, 3);
+            this.listAlbums.MultiSelect = false;
+            this.listAlbums.Name = "listAlbums";
+            this.listAlbums.Size = new System.Drawing.Size(276, 435);
+            this.listAlbums.TabIndex = 3;
+            this.listAlbums.UseCompatibleStateImageBehavior = false;
+            this.listAlbums.View = System.Windows.Forms.View.Tile;
+            this.listAlbums.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listAlbums.DoubleClick += new System.EventHandler(this.AlbumList);
             // 
-            // label1
+            // labelTrackName
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(662, 250);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "None";
+            this.labelTrackName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTrackName.AutoSize = true;
+            this.labelTrackName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTrackName.Location = new System.Drawing.Point(662, 250);
+            this.labelTrackName.Name = "labelTrackName";
+            this.labelTrackName.Size = new System.Drawing.Size(37, 13);
+            this.labelTrackName.TabIndex = 2;
+            this.labelTrackName.Text = "None";
             // 
-            // label2
+            // labelTrackInfo
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(662, 263);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "None";
+            this.labelTrackInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTrackInfo.AutoSize = true;
+            this.labelTrackInfo.Location = new System.Drawing.Point(662, 263);
+            this.labelTrackInfo.Name = "labelTrackInfo";
+            this.labelTrackInfo.Size = new System.Drawing.Size(33, 13);
+            this.labelTrackInfo.TabIndex = 3;
+            this.labelTrackInfo.Text = "None";
             // 
-            // trackBar1
+            // trackSeek
             // 
-            this.trackBar1.AllowDrop = true;
-            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.trackSeek.AllowDrop = true;
+            this.trackSeek.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar1.Location = new System.Drawing.Point(0, 470);
-            this.trackBar1.Maximum = 0;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(761, 45);
-            this.trackBar1.TabIndex = 7;
-            this.trackBar1.TickFrequency = 0;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.trackSeek.Location = new System.Drawing.Point(0, 470);
+            this.trackSeek.Maximum = 0;
+            this.trackSeek.Name = "trackSeek";
+            this.trackSeek.Size = new System.Drawing.Size(761, 45);
+            this.trackSeek.TabIndex = 7;
+            this.trackSeek.TickFrequency = 0;
+            this.trackSeek.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackSeek.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // label3
             // 
@@ -186,17 +187,17 @@
             this.label3.TabIndex = 8;
             this.label3.Text = "00:00:00";
             // 
-            // trackBar2
+            // trackVolume
             // 
-            this.trackBar2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackBar2.Location = new System.Drawing.Point(756, 470);
-            this.trackBar2.Maximum = 100;
-            this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(151, 45);
-            this.trackBar2.TabIndex = 9;
-            this.trackBar2.TickFrequency = 5;
-            this.trackBar2.Value = 100;
-            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
+            this.trackVolume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackVolume.Location = new System.Drawing.Point(756, 470);
+            this.trackVolume.Maximum = 100;
+            this.trackVolume.Name = "trackVolume";
+            this.trackVolume.Size = new System.Drawing.Size(151, 45);
+            this.trackVolume.TabIndex = 9;
+            this.trackVolume.TickFrequency = 5;
+            this.trackVolume.Value = 100;
+            this.trackVolume.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // label4
             // 
@@ -212,20 +213,21 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton6,
-            this.toolStripButton11,
-            this.toolStripButton10,
+            this.toolRefresh,
+            this.toolSort,
+            this.toolSettings,
+            this.toolMidiOpen,
+            this.toolMidiClose,
             this.toolStripSeparator2,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripButton5,
+            this.toolPrev,
+            this.toolPlay,
+            this.toolNext,
+            this.toolStream,
             this.toolStripSeparator1,
-            this.toolStripButton7,
-            this.toolStripButton8,
-            this.toolStripButton9,
-            this.toolStripTextBox1});
+            this.toolBlock,
+            this.toolShuffle,
+            this.toolClearAll,
+            this.toolSearch});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(907, 25);
@@ -233,136 +235,129 @@
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
-            // toolStripButton1
+            // toolRefresh
             // 
-            this.toolStripButton1.Image = global::onlineplayer.Properties.Resources.baseline_loop_black_18dp;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(66, 22);
-            this.toolStripButton1.Text = "Refresh";
-            this.toolStripButton1.ToolTipText = "Press here to fetch all tags";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.toolRefresh.Image = global::onlineplayer.Properties.Resources.baseline_loop_black_18dp;
+            this.toolRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolRefresh.Name = "toolRefresh";
+            this.toolRefresh.Size = new System.Drawing.Size(66, 22);
+            this.toolRefresh.Text = "Refresh";
+            this.toolRefresh.ToolTipText = "Press here to fetch all tags";
+            this.toolRefresh.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // toolStripButton6
+            // toolSettings
             // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = global::onlineplayer.Properties.Resources.ic_settings_18pt;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "Settings";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
+            this.toolSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolSettings.Image = global::onlineplayer.Properties.Resources.ic_settings_18pt;
+            this.toolSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSettings.Name = "toolSettings";
+            this.toolSettings.Size = new System.Drawing.Size(23, 22);
+            this.toolSettings.Text = "Settings";
+            this.toolSettings.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
-            // toolStripButton11
+            // toolMidiOpen
             // 
-            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton11.Image = global::onlineplayer.Properties.Resources.ic_add_18pt;
-            this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton11.Name = "toolStripButton11";
-            this.toolStripButton11.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton11.Text = "Open MIDI";
-            this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click);
+            this.toolMidiOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolMidiOpen.Image = global::onlineplayer.Properties.Resources.ic_add_18pt;
+            this.toolMidiOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolMidiOpen.Name = "toolMidiOpen";
+            this.toolMidiOpen.Size = new System.Drawing.Size(23, 22);
+            this.toolMidiOpen.Text = "Open MIDI";
+            this.toolMidiOpen.Click += new System.EventHandler(this.toolStripButton11_Click);
             // 
-            // toolStripButton10
+            // toolMidiClose
             // 
-            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton10.Image = global::onlineplayer.Properties.Resources.baseline_remove_black_18dp;
-            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton10.Name = "toolStripButton10";
-            this.toolStripButton10.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton10.Text = "Close MIDI";
-            this.toolStripButton10.Click += new System.EventHandler(this.toolStripButton10_Click);
+            this.toolMidiClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolMidiClose.Image = global::onlineplayer.Properties.Resources.baseline_remove_black_18dp;
+            this.toolMidiClose.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolMidiClose.Name = "toolMidiClose";
+            this.toolMidiClose.Size = new System.Drawing.Size(23, 22);
+            this.toolMidiClose.Text = "Close MIDI";
+            this.toolMidiClose.Click += new System.EventHandler(this.toolStripButton10_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton2
+            // toolPrev
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = global::onlineplayer.Properties.Resources.baseline_skip_previous_black_18dp;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "Prev";
-            this.toolStripButton2.ToolTipText = "Prev";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.toolPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolPrev.Image = global::onlineplayer.Properties.Resources.baseline_skip_previous_black_18dp;
+            this.toolPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolPrev.Name = "toolPrev";
+            this.toolPrev.Size = new System.Drawing.Size(23, 22);
+            this.toolPrev.Text = "Prev";
+            this.toolPrev.ToolTipText = "Prev";
+            this.toolPrev.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
-            // toolStripButton3
+            // toolPlay
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "Play/Pause";
-            this.toolStripButton3.ToolTipText = "Play/Pause";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            this.toolPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolPlay.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
+            this.toolPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolPlay.Name = "toolPlay";
+            this.toolPlay.Size = new System.Drawing.Size(23, 22);
+            this.toolPlay.Text = "Play/Pause";
+            this.toolPlay.ToolTipText = "Play/Pause";
+            this.toolPlay.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
-            // toolStripButton4
+            // toolNext
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::onlineplayer.Properties.Resources.ic_skip_next_black_18dp;
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "Next";
-            this.toolStripButton4.ToolTipText = "Next";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            this.toolNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolNext.Image = global::onlineplayer.Properties.Resources.ic_skip_next_black_18dp;
+            this.toolNext.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolNext.Name = "toolNext";
+            this.toolNext.Size = new System.Drawing.Size(23, 22);
+            this.toolNext.Text = "Next";
+            this.toolNext.ToolTipText = "Next";
+            this.toolNext.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
-            // toolStripButton5
+            // toolStream
             // 
-            this.toolStripButton5.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(136, 22);
-            this.toolStripButton5.Text = "Play as stream mode";
-            this.toolStripButton5.ToolTipText = "Play as stream mode - automatically builds a playlist";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click_1);
+            this.toolStream.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
+            this.toolStream.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStream.Name = "toolStream";
+            this.toolStream.Size = new System.Drawing.Size(136, 22);
+            this.toolStream.Text = "Play as stream mode";
+            this.toolStream.ToolTipText = "Play as stream mode - automatically builds a playlist";
+            this.toolStream.Click += new System.EventHandler(this.toolStripButton5_Click_1);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton7
+            // toolBlock
             // 
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = global::onlineplayer.Properties.Resources.baseline_not_interested_black_18dp;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton7.Text = "toolStripButton7";
-            this.toolStripButton7.ToolTipText = "Block selected artist (Not interested)";
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            this.toolBlock.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolBlock.Image = global::onlineplayer.Properties.Resources.baseline_not_interested_black_18dp;
+            this.toolBlock.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolBlock.Name = "toolBlock";
+            this.toolBlock.Size = new System.Drawing.Size(23, 22);
+            this.toolBlock.Text = "toolStripButton7";
+            this.toolBlock.ToolTipText = "Block selected artist (Not interested)";
+            this.toolBlock.Click += new System.EventHandler(this.toolStripButton7_Click);
             // 
-            // toolStripButton8
+            // toolShuffle
             // 
-            this.toolStripButton8.CheckOnClick = true;
-            this.toolStripButton8.Image = global::onlineplayer.Properties.Resources.baseline_shuffle_black_18dp;
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton8.ToolTipText = "Shuffle";
-            this.toolStripButton8.Click += new System.EventHandler(this.toolStripButton8_Click);
+            this.toolShuffle.CheckOnClick = true;
+            this.toolShuffle.Image = global::onlineplayer.Properties.Resources.baseline_shuffle_black_18dp;
+            this.toolShuffle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolShuffle.Name = "toolShuffle";
+            this.toolShuffle.Size = new System.Drawing.Size(23, 22);
+            this.toolShuffle.ToolTipText = "Shuffle";
+            this.toolShuffle.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
-            // toolStripButton9
+            // toolClearAll
             // 
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton9.Image = global::onlineplayer.Properties.Resources.ic_clear_black_18dp;
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton9.Text = "toolStripButton9";
-            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
-            // 
-            // toolStripTextBox1
-            // 
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(200, 25);
-            this.toolStripTextBox1.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
+            this.toolClearAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolClearAll.Image = global::onlineplayer.Properties.Resources.ic_clear_black_18dp;
+            this.toolClearAll.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolClearAll.Name = "toolClearAll";
+            this.toolClearAll.Size = new System.Drawing.Size(23, 22);
+            this.toolClearAll.Text = "toolStripButton9";
+            this.toolClearAll.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
             // timer1
             // 
@@ -450,17 +445,17 @@
             this.blockSelectedArtiststreamingModeToolStripMenuItem.Text = "Block selected artist (streaming mode)";
             this.blockSelectedArtiststreamingModeToolStripMenuItem.Click += new System.EventHandler(this.blockSelectedArtiststreamingModeToolStripMenuItem_Click);
             // 
-            // pictureBox1
+            // pictureArtwork
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(665, 31);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(230, 216);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureArtwork.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureArtwork.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureArtwork.Location = new System.Drawing.Point(665, 31);
+            this.pictureArtwork.Name = "pictureArtwork";
+            this.pictureArtwork.Size = new System.Drawing.Size(230, 216);
+            this.pictureArtwork.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureArtwork.TabIndex = 1;
+            this.pictureArtwork.TabStop = false;
+            this.pictureArtwork.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // labelStatus
             // 
@@ -473,6 +468,26 @@
             this.labelStatus.TabIndex = 13;
             this.labelStatus.Text = "Done";
             // 
+            // toolSearch
+            // 
+            this.toolSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolSearch.Name = "toolSearch";
+            this.toolSearch.Size = new System.Drawing.Size(200, 25);
+            this.toolSearch.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
+            // 
+            // toolSort
+            // 
+            this.toolSort.Checked = true;
+            this.toolSort.CheckOnClick = true;
+            this.toolSort.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolSort.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
+            this.toolSort.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSort.Name = "toolSort";
+            this.toolSort.Size = new System.Drawing.Size(65, 22);
+            this.toolSort.Text = "Sorting";
+            this.toolSort.ToolTipText = "Sorting:\r\nEnabled - sort by popularity. \r\nDisabled: sort by newest";
+            this.toolSort.Click += new System.EventHandler(this.toolSort_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -482,25 +497,25 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.trackBar2);
+            this.Controls.Add(this.trackVolume);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.labelTrackInfo);
+            this.Controls.Add(this.labelTrackName);
+            this.Controls.Add(this.pictureArtwork);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.trackSeek);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Bandcamp online player";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureArtwork)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -509,23 +524,23 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.ListBox listTags;
+        private System.Windows.Forms.PictureBox pictureArtwork;
+        private System.Windows.Forms.Label labelTrackName;
+        private System.Windows.Forms.Label labelTrackInfo;
+        private System.Windows.Forms.TrackBar trackSeek;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TrackBar trackBar2;
+        private System.Windows.Forms.TrackBar trackVolume;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolRefresh;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton toolPrev;
+        private System.Windows.Forms.ToolStripButton toolPlay;
+        private System.Windows.Forms.ToolStripButton toolNext;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listAlbums;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openInBrowserToolStripMenuItem;
@@ -536,16 +551,17 @@
         private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem removeFromQueueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAlbumWebpageInBrowserToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripButton toolStream;
+        private System.Windows.Forms.ToolStripButton toolSettings;
+        private System.Windows.Forms.ToolStripButton toolBlock;
+        private System.Windows.Forms.ToolStripButton toolShuffle;
         private System.Windows.Forms.ToolStripMenuItem blockSelectedArtiststreamingModeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripButton toolStripButton9;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
+        private System.Windows.Forms.ToolStripButton toolClearAll;
         private System.Windows.Forms.Label labelStatus;
-        private System.Windows.Forms.ToolStripButton toolStripButton10;
-        private System.Windows.Forms.ToolStripButton toolStripButton11;
+        private System.Windows.Forms.ToolStripButton toolMidiClose;
+        private System.Windows.Forms.ToolStripButton toolMidiOpen;
+        private System.Windows.Forms.ToolStripTextBox toolSearch;
+        private System.Windows.Forms.ToolStripButton toolSort;
     }
 }
 

@@ -35,20 +35,20 @@ namespace onlineplayer
             InitializeComponent();
             if (viewStyle == "Tile")
             {
-                listView1.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
-                listView1.TileSize = new Size(256, imgSize);
+                listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
+                listAlbums.TileSize = new Size(256, imgSize);
             }
             else
             {
-                listView1.View = View.LargeIcon;
+                listAlbums.View = View.LargeIcon;
             }
 
             queueList.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
             queueList.TileSize = new Size(256, 64);
             Directory.CreateDirectory("artwork_cache");
     
-            toolStripButton5.Enabled = false;
-            listView1.MouseUp += (s, args) =>
+            toolStream.Enabled = false;
+            listAlbums.MouseUp += (s, args) =>
             {
                 if (args.Button == MouseButtons.Right)
                 {
@@ -64,7 +64,7 @@ namespace onlineplayer
                 }
             };
 
-            toolStripTextBox1.Enabled = false;
+            toolSearch.Enabled = false;
 
             if (getSettingsAttrBool("settings.xml", "useMidi"))
             {
@@ -72,8 +72,8 @@ namespace onlineplayer
             }
             else
             {
-                toolStripButton10.Enabled = false;
-                toolStripButton11.Enabled = false;
+                toolMidiClose.Enabled = false;
+                toolMidiOpen.Enabled = false;
             }
         }
 
@@ -141,21 +141,21 @@ namespace onlineplayer
         {
             try
             {
-                trackBar1.Value = (int)player.audioFile.CurrentTime.TotalSeconds;
+                trackSeek.Value = (int)player.audioFile.CurrentTime.TotalSeconds;
                 TimeSpan time = TimeSpan.FromSeconds(player.audioFile.CurrentTime.TotalSeconds);
                 label3.Text = time.ToString(@"hh\:mm\:ss");
                 label5.Text = player.outputDevice.PlaybackState.ToString();
             }
             catch (NullReferenceException)
             {
-                trackBar1.Value = 0;
+                trackSeek.Value = 0;
                 label3.Text = "00:00:00";
                 label5.Text = "Stopped";
             }
 
             if (Math.Abs(player.audioFile.TotalTime.TotalSeconds - player.audioFile.CurrentTime.TotalSeconds) < 0.1)
             {
-                if (!toolStripButton8.Checked)
+                if (!toolShuffle.Checked)
                 {
                     offset++;
                 }
@@ -175,10 +175,10 @@ namespace onlineplayer
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            label4.Text = "Volume: " + trackBar2.Value + "%";
+            label4.Text = "Volume: " + trackVolume.Value + "%";
             try
             {
-                player.outputDevice.Volume = trackBar2.Value / 100f;
+                player.outputDevice.Volume = trackVolume.Value / 100f;
 
             }
             catch (Exception)
@@ -196,7 +196,7 @@ namespace onlineplayer
         {
             try
             {
-                System.Diagnostics.Process.Start(itemsList[listView1.FocusedItem.Index].tralbum_url);
+                System.Diagnostics.Process.Start(itemsList[listAlbums.FocusedItem.Index].tralbum_url);
             }
             catch (NullReferenceException)
             {
@@ -215,7 +215,7 @@ namespace onlineplayer
 
         private async void addAlbumTracksInQueueifAvailbleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Item selectedAlbum = itemsList.Find(item => item.artist.Equals(listView1.FocusedItem.SubItems[1].Text) && item.title.Equals(listView1.FocusedItem.SubItems[0].Text));
+            Item selectedAlbum = itemsList.Find(item => item.artist.Equals(listAlbums.FocusedItem.SubItems[1].Text) && item.title.Equals(listAlbums.FocusedItem.SubItems[0].Text));
             labelStatus.Text = "Loading tracks metadata... " + selectedAlbum.tralbum_url;
             String response = await httpTools.MakeRequestAsync(selectedAlbum.tralbum_url);
             Album album = httpTools.GetAlbum(response);
@@ -293,7 +293,7 @@ namespace onlineplayer
             }
             catch (Exception)
             {
-                Form artForm = new ViewArtwork(itemsList[listView1.FocusedItem.Index].art_id.ToString());
+                Form artForm = new ViewArtwork(itemsList[listAlbums.FocusedItem.Index].art_id.ToString());
                 artForm.Show();
             }
         }
@@ -302,12 +302,12 @@ namespace onlineplayer
         {
             try
             {
-                WaveStreamExtensions.SetPosition(player.audioFile, (double)trackBar1.Value);
+                WaveStreamExtensions.SetPosition(player.audioFile, (double)trackSeek.Value);
 
             }
             catch (NullReferenceException)
             {
-                trackBar1.Value = 0;
+                trackSeek.Value = 0;
                 labelStatus.Text = "Cannot seek: Audio file not loaded!";
             }
         }
@@ -316,11 +316,11 @@ namespace onlineplayer
         {
             if (!streamMode)
             {
-                toolStripButton5.Enabled = false;
+                toolStream.Enabled = false;
                 streamMode = true;
                 bool firstSong = false;
                 CleanUp();
-                toolStripButton5.Text = "Stop stream mode";
+                toolStream.Text = "Stop stream mode";
                 labelStatus.Text = "Loading tracks metadata...";
                 List<string> blocked = viewBlocked();
                 foreach (Item item in itemsList)
@@ -341,7 +341,7 @@ namespace onlineplayer
                             {
                                 firstSong = true;
                                 PlayOffset();
-                                toolStripButton5.Enabled = true;
+                                toolStream.Enabled = true;
                             }
                         }
                 }
@@ -353,7 +353,7 @@ namespace onlineplayer
                 CleanUp();
                 timer1.Stop();
                 player.Close();
-                toolStripButton5.Text = "Play as stream mode";
+                toolStream.Text = "Play as stream mode";
             }
         }
 
@@ -398,28 +398,28 @@ namespace onlineplayer
 
         private async void toolStripTextBox1_TextChanged(object sender, EventArgs e)
         {
-            listView1.Items.Clear();
+            listAlbums.Items.Clear();
             foreach (var alb in itemsList)
             {
-                if (alb.title.ToLower().Contains(toolStripTextBox1.Text.ToLower()) || alb.artist.ToLower().Contains(toolStripTextBox1.Text.ToLower()))
+                if (alb.title.ToLower().Contains(toolSearch.Text.ToLower()) || alb.artist.ToLower().Contains(toolSearch.Text.ToLower()))
                 {
                     ListViewItem lst = new ListViewItem(new string[] { alb.title, alb.artist });
-                    listView1.Items.Add(lst);
+                    listAlbums.Items.Add(lst);
                 }
             }
-            if (toolStripTextBox1.Text.Length == 0)
+            if (toolSearch.Text.Length == 0)
             {
-                listView1.Items.Clear();
+                listAlbums.Items.Clear();
                 foreach (var item in itemsList)
                 {
                     // title, artist, mp3_url, url, artworkid
                     ListViewItem lst = new ListViewItem(new string[] { item.title, item.artist });
-                    listView1.Items.Add(lst);
+                    listAlbums.Items.Add(lst);
                 }
 
                 int count = 0;
                 labelStatus.Text = "Loading ablum images...";
-                foreach (ListViewItem listItem in listView1.Items)
+                foreach (ListViewItem listItem in listAlbums.Items)
                 {
                     listItem.ImageIndex = count++;
                 }
@@ -448,6 +448,11 @@ namespace onlineplayer
             {
                 MessageBox.Show("Error:" + ex.Message, "There error starting MIDI-Devices", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void toolSort_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

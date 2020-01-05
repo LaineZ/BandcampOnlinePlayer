@@ -10,8 +10,8 @@ A simple client for bandcamp.com that's allows listing albums from main tag page
 * Play queue: add/remove album tracks
 * Album explorer: allows to explore albums in specified tag
 * Album artwork viewer and downloader
-* AND MUCH MORE
 * Stream mode - adds all tracks in tag category and plays them
+* **AND MUCH MORE**
 ## Screenshots
 ![Screenshot1](https://i.imgur.com/Kx2Etvm.png)
 ![Screenshot2](https://i.imgur.com/ssbaywa.png)
@@ -22,7 +22,7 @@ A simple client for bandcamp.com that's allows listing albums from main tag page
 Clone repository and open .sln file in Visual Studio with .NET Workload
 
 ## Building (Linux)
-In this moment linux version is very limited and **cannot** play audio
+In this moment linux version **cannot** play audio or somthing else...
 
 1. Install Mono and MonoDevelop and open .sln file in MonoDevelop
 2. To fix all errors go in all errored .resx files and remove icons. Icons looks like this:
