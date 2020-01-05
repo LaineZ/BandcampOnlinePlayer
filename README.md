@@ -13,8 +13,7 @@ A simple client for bandcamp.com that's allows listing albums from main tag page
 * Stream mode - adds all tracks in tag category and plays them
 * **AND MUCH MORE**
 ## Screenshots
-![Screenshot1](https://i.imgur.com/Kx2Etvm.png)
-![Screenshot2](https://i.imgur.com/ssbaywa.png)
+![Screenshot1](https://i.imgur.com/WkLJkvg.png)
 ## Screenshots (current state on Linux)
 ![ScreenshotFail](https://i.imgur.com/ryOIVdO.png)
 
