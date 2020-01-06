@@ -1,6 +1,5 @@
 ﻿namespace onlineplayer
 {
-
     public class Track
     {
 
@@ -39,10 +38,17 @@
         /// </summary>
         public string Title { get; set; }
 
+        public string Url { get; set; }
+
+        /// <summary>
+        /// Only fill from extrenal... Artist url - for saving queue
+        /// </summary>
+        public string ArtistUrl { get; set; }
+
         /// <summary>
         /// Initializes a new Track.
         /// </summary>
-        public Track(Album album, double duration, string lyrics, string mp3Url, int number, string title)
+        public Track(Album album, double duration, string lyrics, string mp3Url, int number, string title, string url)
         {
             Album = album;
             Duration = duration;
@@ -50,6 +56,7 @@
             Mp3Url = mp3Url;
             Number = number;
             Title = title;
+            Url = url;
         }
     }
 }

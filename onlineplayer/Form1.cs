@@ -9,8 +9,8 @@ using System.Text;
 using System.Windows.Forms;
 using static onlineplayer.Utils;
 using static onlineplayer.Json;
-using System.Windows.Forms.VisualStyles;
 using NAudio.Midi;
+using System.Xml;
 
 namespace onlineplayer
 {
@@ -30,7 +30,7 @@ namespace onlineplayer
         string viewStyle = getSettingsAttr("settings.xml", "albumViewType");
         HttpTools httpTools = new HttpTools();
 
-        public Form1()
+        public Form1(List<string> tags, List<Track> restoreQueue)
         {
             InitializeComponent();
             if (viewStyle == "Tile")
@@ -75,6 +75,20 @@ namespace onlineplayer
                 toolMidiClose.Enabled = false;
                 toolMidiOpen.Enabled = false;
             }
+
+            // adding tags
+            listTags.Items.AddRange(tags.ToArray());
+            // adding queue tracks
+
+            List<ListViewItem> listItems = new List<ListViewItem>();
+            foreach (Track trk in restoreQueue)
+            {
+                ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
+                queueList.Items.Add(lst);
+                queueTracks.Add(trk);
+            }
+            
+            labelStatus.Text = "Done!";
         }
 
         void midiIn_ErrorReceived(object sender, MidiInMessageEventArgs e)
@@ -120,9 +134,13 @@ namespace onlineplayer
             }
         }
 
-        private async void toolStripButton1_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            DownloadFromBandcamp();
+            itemsList.Clear();
+            listAlbums.Items.Clear();
+            listAlbums.LargeImageList.Images.Clear();
+            listAlbums.LargeImageList = null;
+            toolRefresh.Enabled = false;
         }
 
         private async void listBox1_Click(object sender, EventArgs e)
@@ -224,6 +242,7 @@ namespace onlineplayer
             {
                 ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
                 queueList.Items.Add(lst);
+                trk.ArtistUrl = selectedAlbum.band_url;
                 queueTracks.Add(trk);
             }
 
@@ -393,7 +412,6 @@ namespace onlineplayer
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            DownloadFromBandcamp();
         }
 
         private async void toolStripTextBox1_TextChanged(object sender, EventArgs e)
@@ -453,6 +471,27 @@ namespace onlineplayer
         private void toolSort_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (getSettingsAttrBool("settings.xml", "saveQueue") && !streamMode)
+            {
+                File.Delete("queueList.xml");
+                XmlWriter xmlWriter = XmlWriter.Create("queueList.xml");
+                xmlWriter.WriteStartDocument();
+                xmlWriter.WriteStartElement("queueList");
+                foreach (Track trk in queueTracks)
+                {
+                    xmlWriter.WriteStartElement("track");
+                    xmlWriter.WriteAttributeString("trackUrl", trk.Url);
+                    xmlWriter.WriteAttributeString("artistUrl", trk.ArtistUrl);
+                    xmlWriter.WriteEndElement();
+                }
+
+                xmlWriter.WriteEndDocument();
+                xmlWriter.Close();
+            }
         }
     }
 }

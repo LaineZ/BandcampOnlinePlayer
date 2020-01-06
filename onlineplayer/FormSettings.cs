@@ -31,38 +31,13 @@ namespace onlineplayer
 
             if (File.Exists("settings.xml"))
             {
-                doc.Load("settings.xml");
-                XmlElement xRoot = doc.DocumentElement;
-
-                foreach (XmlNode xnode in xRoot)
-                {
-                    if (xnode.Attributes.Count > 0)
-                    {
-                        XmlNode attr;
-
-                        attr = xnode.Attributes.GetNamedItem("albumViewType");
-                        if (attr != null) { albumView.Text = attr.Value; }
-
-                        attr = xnode.Attributes.GetNamedItem("albumViewSize");
-                        if (attr != null) { albumSize.Text = attr.Value; }
-
-                        attr = xnode.Attributes.GetNamedItem("saveArtworks");
-                        if (attr != null)
-                        {
-                            if (attr.Value == "True")
-                            {
-                                checkArtwork.Checked = true;
-                            }
-                            else
-                            {
-                                checkArtwork.Checked = false;
-                            }
-                        }
-
-                        attr = xnode.Attributes.GetNamedItem("loadPages");
-                        if (attr != null) { pagesLoad.Text = attr.Value; }
-                    }
-                }
+                albumView.SelectedItem = getSettingsAttr("settings.xml", "albumViewType");
+                albumSize.Text = getSettingsAttr("settings.xml", "albumViewSize");
+                checkArtwork.Checked = getSettingsAttrBool("settings.xml", "saveArtworks");
+                pagesLoad.Text = getSettingsAttr("settings.xml", "loadPages");
+                //comboBoxMidiInDevices.SelectedIndex = int.Parse(getSettingsAttr("settings.xml", "midiDevice"));
+                midiControl.Checked = getSettingsAttrBool("settings.xml", "useMidi");
+                saveQueue.Checked = getSettingsAttrBool("settings.xml", "saveQueue");
             }
             if (File.Exists("blocked.txt"))
             {
@@ -184,6 +159,10 @@ namespace onlineplayer
 
             xmlWriter.WriteStartElement("setting");
             xmlWriter.WriteAttributeString("useMidi", midiControl.Checked.ToString());
+            xmlWriter.WriteEndElement();
+
+            xmlWriter.WriteStartElement("setting");
+            xmlWriter.WriteAttributeString("saveQueue", saveQueue.Checked.ToString());
             xmlWriter.WriteEndElement();
 
             xmlWriter.WriteEndDocument();

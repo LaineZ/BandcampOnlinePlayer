@@ -73,7 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioPlayer.cs" />
+    <Compile Include="Core\AudioPlayer.cs" />
     <Compile Include="Core\Controls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,11 +83,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormProgress.cs">
+    <Compile Include="FormInit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProgress.Designer.cs">
-      <DependentUpon>FormProgress.cs</DependentUpon>
+    <Compile Include="FormInit.Designer.cs">
+      <DependentUpon>FormInit.cs</DependentUpon>
     </Compile>
     <Compile Include="FormSettings.cs">
       <SubType>Form</SubType>
@@ -104,6 +104,7 @@
     <Compile Include="Models\JSON\JsonAlbumData.cs" />
     <Compile Include="Models\JSON\JsonMp3File.cs" />
     <Compile Include="Models\JSON\JsonTrack.cs" />
+    <Compile Include="Models\QueueRestoreData.cs" />
     <Compile Include="Models\Track.cs" />
     <Compile Include="Models\MidiActions.cs" />
     <Compile Include="Models\TrackFile.cs" />
@@ -120,8 +121,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProgress.resx">
-      <DependentUpon>FormProgress.cs</DependentUpon>
+    <EmbeddedResource Include="FormInit.resx">
+      <DependentUpon>FormInit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
@@ -185,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\splash_screen.jpg" />
     <None Include="Resources\ic_add_18pt.png" />
     <None Include="Resources\ic_skip_next_black_18dp.png" />
     <None Include="Resources\%24this.Icon.ico" />

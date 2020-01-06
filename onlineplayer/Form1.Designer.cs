@@ -42,6 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolSort = new System.Windows.Forms.ToolStripButton();
             this.toolSettings = new System.Windows.Forms.ToolStripButton();
             this.toolMidiOpen = new System.Windows.Forms.ToolStripButton();
             this.toolMidiClose = new System.Windows.Forms.ToolStripButton();
@@ -54,6 +55,7 @@
             this.toolBlock = new System.Windows.Forms.ToolStripButton();
             this.toolShuffle = new System.Windows.Forms.ToolStripButton();
             this.toolClearAll = new System.Windows.Forms.ToolStripButton();
+            this.toolSearch = new System.Windows.Forms.ToolStripTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,8 +69,6 @@
             this.blockSelectedArtiststreamingModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureArtwork = new System.Windows.Forms.PictureBox();
             this.labelStatus = new System.Windows.Forms.Label();
-            this.toolSearch = new System.Windows.Forms.ToolStripTextBox();
-            this.toolSort = new System.Windows.Forms.ToolStripButton();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
@@ -87,7 +87,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 274F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 276F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.listTags, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listAlbums, 1, 0);
@@ -104,10 +104,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(386, 3);
+            this.queueList.Location = new System.Drawing.Point(384, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(269, 435);
+            this.queueList.Size = new System.Drawing.Size(271, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
@@ -122,7 +122,7 @@
             this.listTags.FormattingEnabled = true;
             this.listTags.Location = new System.Drawing.Point(3, 3);
             this.listTags.Name = "listTags";
-            this.listTags.Size = new System.Drawing.Size(95, 433);
+            this.listTags.Size = new System.Drawing.Size(94, 433);
             this.listTags.TabIndex = 0;
             this.listTags.DoubleClick += new System.EventHandler(this.listBox1_Click);
             // 
@@ -132,10 +132,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listAlbums.HideSelection = false;
-            this.listAlbums.Location = new System.Drawing.Point(104, 3);
+            this.listAlbums.Location = new System.Drawing.Point(103, 3);
             this.listAlbums.MultiSelect = false;
             this.listAlbums.Name = "listAlbums";
-            this.listAlbums.Size = new System.Drawing.Size(276, 435);
+            this.listAlbums.Size = new System.Drawing.Size(275, 435);
             this.listAlbums.TabIndex = 3;
             this.listAlbums.UseCompatibleStateImageBehavior = false;
             this.listAlbums.View = System.Windows.Forms.View.Tile;
@@ -237,13 +237,27 @@
             // 
             // toolRefresh
             // 
+            this.toolRefresh.Enabled = false;
             this.toolRefresh.Image = global::onlineplayer.Properties.Resources.baseline_loop_black_18dp;
             this.toolRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolRefresh.Name = "toolRefresh";
             this.toolRefresh.Size = new System.Drawing.Size(66, 22);
             this.toolRefresh.Text = "Refresh";
-            this.toolRefresh.ToolTipText = "Press here to fetch all tags";
+            this.toolRefresh.ToolTipText = "Refresh albums";
             this.toolRefresh.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // toolSort
+            // 
+            this.toolSort.Checked = true;
+            this.toolSort.CheckOnClick = true;
+            this.toolSort.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolSort.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
+            this.toolSort.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSort.Name = "toolSort";
+            this.toolSort.Size = new System.Drawing.Size(65, 22);
+            this.toolSort.Text = "Sorting";
+            this.toolSort.ToolTipText = "Sorting:\r\nEnabled - sort by popularity. \r\nDisabled: sort by newest";
+            this.toolSort.Click += new System.EventHandler(this.toolSort_Click);
             // 
             // toolSettings
             // 
@@ -359,6 +373,13 @@
             this.toolClearAll.Text = "toolStripButton9";
             this.toolClearAll.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
+            // toolSearch
+            // 
+            this.toolSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.toolSearch.Name = "toolSearch";
+            this.toolSearch.Size = new System.Drawing.Size(200, 25);
+            this.toolSearch.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
+            // 
             // timer1
             // 
             this.timer1.Interval = 500;
@@ -468,26 +489,6 @@
             this.labelStatus.TabIndex = 13;
             this.labelStatus.Text = "Done";
             // 
-            // toolSearch
-            // 
-            this.toolSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.toolSearch.Name = "toolSearch";
-            this.toolSearch.Size = new System.Drawing.Size(200, 25);
-            this.toolSearch.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
-            // 
-            // toolSort
-            // 
-            this.toolSort.Checked = true;
-            this.toolSort.CheckOnClick = true;
-            this.toolSort.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolSort.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
-            this.toolSort.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolSort.Name = "toolSort";
-            this.toolSort.Size = new System.Drawing.Size(65, 22);
-            this.toolSort.Text = "Sorting";
-            this.toolSort.ToolTipText = "Sorting:\r\nEnabled - sort by popularity. \r\nDisabled: sort by newest";
-            this.toolSort.Click += new System.EventHandler(this.toolSort_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -507,6 +508,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Bandcamp online player";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).EndInit();

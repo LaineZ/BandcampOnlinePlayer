@@ -43,11 +43,18 @@ namespace onlineplayer
             {
                 foreach (ListViewItem listItem in listAlbums.Items)
                 {
-                    labelStatus.Text = "Loading ablum images...";
-                    il.ColorDepth = ColorDepth.Depth32Bit;
-                    listAlbums.LargeImageList = il;
-                    il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + itemsList[count].art_id + "_8.jpg"));
-                    listItem.ImageIndex = count++;
+                    try
+                    {
+                        labelStatus.Text = "Loading ablum images...";
+                        il.ColorDepth = ColorDepth.Depth32Bit;
+                        listAlbums.LargeImageList = il;
+                        il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + itemsList[count].art_id + "_8.jpg"));
+                        listItem.ImageIndex = count++;
+                    }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -110,10 +117,11 @@ namespace onlineplayer
         {
             // {"filters":{ "format":"all","location":0,"sort":"pop","tags":["experimental"] },"page":2}
             toolStream.Enabled = true;
+            toolRefresh.Enabled = false;
             for (int i = 1; i < int.Parse(getSettingsAttr("settings.xml", "loadPages")); i++)
             {
                 labelStatus.Text = "Loading ablums tag data: " + i + "/" + "100";
-                string responseString = "none";
+                string responseString;
                 string sorting = "pop";
 
                 if (!toolSort.Checked) {sorting = "date"; } // if not popularity
@@ -137,7 +145,6 @@ namespace onlineplayer
                     RootObject items = JsonConvert.DeserializeObject<RootObject>(responseString);
                     foreach (var item in items.items)
                     {
-                        // title, artist, mp3_url, url, artworkid
                         ListViewItem lst = new ListViewItem(new string[] { item.title, item.artist });
                         listAlbums.Items.Add(lst);
                         itemsList.Add(item);
@@ -156,6 +163,7 @@ namespace onlineplayer
             }
 
             UpdateAlbumsImages();
+            toolRefresh.Enabled = true;
         }
 
         private void UpdateInfo()
@@ -213,39 +221,6 @@ namespace onlineplayer
             {
                 c.Enabled = !c.Enabled;
             }
-        }
-
-       
-
-        private async void DownloadFromBandcamp()
-        {
-            ToogleAllContorls();
-            Form loader = new FormProgress("Fetching tags from bandcamp.com", "Retriving data from bandcamp.com please wait...");
-            loader.Show();
-            
-            // Full clean up
-            listTags.Items.Clear();
-            listAlbums.Items.Clear();
-            CleanUp();
-
-            HttpTools httpTools = new HttpTools();
-            String response = await httpTools.MakeRequestAsync("https://bandcamp.com/tags");
-            
-            HtmlAgilityPack.HtmlDocument htmlSnippet = new HtmlAgilityPack.HtmlDocument();
-            htmlSnippet.LoadHtml(response);
-
-            List<string> hrefTags = new List<string>();
-            foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//a[@href]"))
-            {
-                HtmlAttribute att = link.Attributes["href"];
-                if (att.Value.StartsWith("/tag/"))
-                {
-                    listTags.Items.Add(att.Value.Replace("/tag/", ""));
-                }
-            }
-
-            loader.Close();
-            ToogleAllContorls();
         }
 
         private void BlockArtist()

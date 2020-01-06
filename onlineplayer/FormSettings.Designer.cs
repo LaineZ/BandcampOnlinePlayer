@@ -71,6 +71,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxMidiInDevices = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.saveQueue = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -122,6 +123,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.saveQueue);
             this.tabPage1.Controls.Add(this.pagesLoad);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.checkArtwork);
@@ -404,6 +406,16 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // saveQueue
+            // 
+            this.saveQueue.AutoSize = true;
+            this.saveQueue.Location = new System.Drawing.Point(18, 194);
+            this.saveQueue.Name = "saveQueue";
+            this.saveQueue.Size = new System.Drawing.Size(150, 17);
+            this.saveQueue.TabIndex = 9;
+            this.saveQueue.Text = "Save tracks queue on exit";
+            this.saveQueue.UseVisualStyleBackColor = true;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,5 +482,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.CheckBox midiControl;
+        private System.Windows.Forms.CheckBox saveQueue;
     }
 }
