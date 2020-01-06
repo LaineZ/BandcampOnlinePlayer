@@ -80,7 +80,6 @@ namespace onlineplayer
             listTags.Items.AddRange(tags.ToArray());
             // adding queue tracks
 
-            List<ListViewItem> listItems = new List<ListViewItem>();
             foreach (Track trk in restoreQueue)
             {
                 ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
@@ -237,7 +236,7 @@ namespace onlineplayer
             labelStatus.Text = "Loading tracks metadata... " + selectedAlbum.tralbum_url;
             String response = await httpTools.MakeRequestAsync(selectedAlbum.tralbum_url);
             Album album = httpTools.GetAlbum(response);
-            List<ListViewItem> listItems = new List<ListViewItem>();
+
             foreach (Track trk in album.Tracks)
             {
                 ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
@@ -477,22 +476,83 @@ namespace onlineplayer
         {
             if (getSettingsAttrBool("settings.xml", "saveQueue") && !streamMode)
             {
-                File.Delete("queueList.xml");
-                XmlWriter xmlWriter = XmlWriter.Create("queueList.xml");
-                xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("queueList");
+                Playlist.SavePlaylist("queueList.xml", queueTracks);
+            }
+        }
 
-                foreach (Track trk in queueTracks)
+        private void toolSavePlaylist_Click(object sender, EventArgs e)
+        {
+            if (queueTracks.Count > 0)
+            {
+                saveFileDialog1.Filter = "BandcampOnlinePlayer Playlists (*.bpl)|*.bpl";
+                saveFileDialog1.FilterIndex = 2;
+                saveFileDialog1.RestoreDirectory = true;
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    xmlWriter.WriteStartElement("track");
-                    xmlWriter.WriteAttributeString("trackUrl", trk.Url);
-                    xmlWriter.WriteAttributeString("artistUrl", trk.ArtistUrl);
-                    xmlWriter.WriteEndElement();
+                    Playlist.SavePlaylist(saveFileDialog1.FileName, queueTracks);
+                    MessageBox.Show("Playlist saved!", "Saved!");
+                }
+            }
+        }
+
+        private async void openPlaylist_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "BandcampOnlinePlayer Playlists (*.bpl)|*.bpl";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //Get the path of specified file
+                string filePath = openFileDialog1.FileName;
+
+                XmlDocument doc = new XmlDocument();
+
+                doc.Load(filePath);
+                XmlElement xRoot = doc.DocumentElement;
+                XmlNode attr;
+
+                labelStatus.Text = "Restoring play queue...";
+
+                List<Models.QueueRestoreData> resetoreData = new List<Models.QueueRestoreData>();
+
+                foreach (XmlNode xnode in xRoot)
+                {
+                    if (xnode.Attributes.Count > 0)
+                    {
+                        Models.QueueRestoreData restoreTrack = new Models.QueueRestoreData();
+                        attr = xnode.Attributes.GetNamedItem("artistUrl");
+                        if (attr != null)
+                        {
+                            restoreTrack.ArtistUrl = attr.Value;
+                        }
+
+                        attr = xnode.Attributes.GetNamedItem("trackUrl");
+                        if (attr != null)
+                        {
+                            restoreTrack.TrackUrl = attr.Value;
+                        }
+
+                        resetoreData.Add(restoreTrack);
+                    }
                 }
 
-                xmlWriter.WriteEndDocument();
-                xmlWriter.Close();
+                foreach (Models.QueueRestoreData restore in resetoreData)
+                {
+                    string responseAlbum = await httpTools.MakeRequestAsync(restore.ArtistUrl + restore.TrackUrl);
+                    Album album = httpTools.GetAlbum(responseAlbum);
+
+                    foreach (Track trk in album.Tracks)
+                    {
+                        trk.ArtistUrl = restore.ArtistUrl;
+                        queueTracks.Add(trk);
+                        ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
+                        queueList.Items.Add(lst);
+                        labelStatus.Text = "Restoring play queue: " + trk.Album.Artist + " - " + trk.Title + " ...";
+                    }
+                }
             }
+            labelStatus.Text = "Done...";
         }
     }
 }

@@ -120,6 +120,15 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Using libraries:
+NAudio - https://github.com/naudio/NAudio
+Newtonsoft.Json - https://www.newtonsoft.com/json
+HtmlAgilityPack - https://html-agility-pack.net/
+This application also contains the code from Bandcamp Downloader Licensed under MIT License
+https://github.com/Otiel/BandcampDownloader
+</value>
+  </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 17</value>
   </metadata>

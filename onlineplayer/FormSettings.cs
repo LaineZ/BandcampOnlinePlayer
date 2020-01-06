@@ -29,6 +29,8 @@ namespace onlineplayer
         {
             InitializeComponent();
 
+            labelVersion.Text = "Version: " + Core.Info.version;
+
             if (File.Exists("settings.xml"))
             {
                 albumView.SelectedItem = getSettingsAttr("settings.xml", "albumViewType");
@@ -279,6 +281,11 @@ namespace onlineplayer
                 File.Delete("settings.xml");
                 MessageBox.Show("All settings has been reset, restart the program to take effect!", "There is no turning back", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/LaineZ/BandcampOnlinePlayer");
         }
     }
 }

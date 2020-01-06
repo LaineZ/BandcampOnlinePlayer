@@ -44,6 +44,7 @@
             this.toolRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolSort = new System.Windows.Forms.ToolStripButton();
             this.toolSettings = new System.Windows.Forms.ToolStripButton();
+            this.toolSavePlaylist = new System.Windows.Forms.ToolStripButton();
             this.toolMidiOpen = new System.Windows.Forms.ToolStripButton();
             this.toolMidiClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -69,6 +70,11 @@
             this.blockSelectedArtiststreamingModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureArtwork = new System.Windows.Forms.PictureBox();
             this.labelStatus = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openPlaylist = new System.Windows.Forms.ToolStripButton();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
@@ -87,7 +93,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 276F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 278F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.listTags, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listAlbums, 1, 0);
@@ -104,10 +110,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(384, 3);
+            this.queueList.Location = new System.Drawing.Point(382, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(271, 435);
+            this.queueList.Size = new System.Drawing.Size(273, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
@@ -135,7 +141,7 @@
             this.listAlbums.Location = new System.Drawing.Point(103, 3);
             this.listAlbums.MultiSelect = false;
             this.listAlbums.Name = "listAlbums";
-            this.listAlbums.Size = new System.Drawing.Size(275, 435);
+            this.listAlbums.Size = new System.Drawing.Size(273, 435);
             this.listAlbums.TabIndex = 3;
             this.listAlbums.UseCompatibleStateImageBehavior = false;
             this.listAlbums.View = System.Windows.Forms.View.Tile;
@@ -216,6 +222,10 @@
             this.toolRefresh,
             this.toolSort,
             this.toolSettings,
+            this.toolStripSeparator3,
+            this.toolSavePlaylist,
+            this.openPlaylist,
+            this.toolStripSeparator4,
             this.toolMidiOpen,
             this.toolMidiClose,
             this.toolStripSeparator2,
@@ -268,6 +278,16 @@
             this.toolSettings.Size = new System.Drawing.Size(23, 22);
             this.toolSettings.Text = "Settings";
             this.toolSettings.Click += new System.EventHandler(this.toolStripButton6_Click);
+            // 
+            // toolSavePlaylist
+            // 
+            this.toolSavePlaylist.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolSavePlaylist.Image = global::onlineplayer.Properties.Resources.ic_album_black_18dp;
+            this.toolSavePlaylist.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSavePlaylist.Name = "toolSavePlaylist";
+            this.toolSavePlaylist.Size = new System.Drawing.Size(23, 22);
+            this.toolSavePlaylist.Text = "Save playlist";
+            this.toolSavePlaylist.Click += new System.EventHandler(this.toolSavePlaylist_Click);
             // 
             // toolMidiOpen
             // 
@@ -489,6 +509,30 @@
             this.labelStatus.TabIndex = 13;
             this.labelStatus.Text = "Done";
             // 
+            // openPlaylist
+            // 
+            this.openPlaylist.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openPlaylist.Image = global::onlineplayer.Properties.Resources.ic_open_in_browser_18pt;
+            this.openPlaylist.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openPlaylist.Name = "openPlaylist";
+            this.openPlaylist.Size = new System.Drawing.Size(23, 22);
+            this.openPlaylist.Text = "Open playlist";
+            this.openPlaylist.Click += new System.EventHandler(this.openPlaylist_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -564,6 +608,12 @@
         private System.Windows.Forms.ToolStripButton toolMidiOpen;
         private System.Windows.Forms.ToolStripTextBox toolSearch;
         private System.Windows.Forms.ToolStripButton toolSort;
+        private System.Windows.Forms.ToolStripButton toolSavePlaylist;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripButton openPlaylist;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 
