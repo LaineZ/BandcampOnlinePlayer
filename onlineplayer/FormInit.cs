@@ -151,6 +151,10 @@ namespace onlineplayer
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Opacity-= .01;
+            if (this.Opacity <= 0)
+            {
+                this.Hide();
+            }
         }
     }
 }

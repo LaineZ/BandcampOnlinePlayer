@@ -481,6 +481,7 @@ namespace onlineplayer
                 XmlWriter xmlWriter = XmlWriter.Create("queueList.xml");
                 xmlWriter.WriteStartDocument();
                 xmlWriter.WriteStartElement("queueList");
+
                 foreach (Track trk in queueTracks)
                 {
                     xmlWriter.WriteStartElement("track");
