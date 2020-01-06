@@ -19,7 +19,8 @@ namespace onlineplayer
         public FormInit()
         {
             InitializeComponent();
-            labelVersion.Text = "BandcampOnlinePlayer " + Core.Info.version + "\ndeveloped by 140bpmdubstep";
+            labelVersion.Text = "BandcampOnlinePlayer \n" + Core.Info.version + "\ndeveloped by 140bpmdubstep";
+            commitText.Text = Core.Info.commit;
         }
 
         private async void FormInit_Load(object sender, EventArgs e)

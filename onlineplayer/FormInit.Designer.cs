@@ -29,48 +29,62 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelVersion = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.commitText = new onlineplayer.TransparentLabel();
+            this.labelVersion = new onlineplayer.TransparentLabel();
+            this.label1 = new onlineplayer.TransparentLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::onlineplayer.Properties.Resources.splash_screen;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(640, 360);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
-            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(12, 336);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Initializing...";
-            // 
-            // labelVersion
-            // 
-            this.labelVersion.AutoSize = true;
-            this.labelVersion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(196)))), ((int)(((byte)(196)))));
-            this.labelVersion.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelVersion.Location = new System.Drawing.Point(465, 328);
-            this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(175, 28);
-            this.labelVersion.TabIndex = 2;
-            this.labelVersion.Text = "BandcampOnlinePlayer v0.5-alpha \r\ndeveloped by 140bpmdubstep\r\n";
             // 
             // timer1
             // 
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::onlineplayer.Properties.Resources.splashscreen2;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(640, 360);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // commitText
+            // 
+            this.commitText.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.commitText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.commitText.Location = new System.Drawing.Point(346, 0);
+            this.commitText.Name = "commitText";
+            this.commitText.Size = new System.Drawing.Size(294, 23);
+            this.commitText.TabIndex = 6;
+            this.commitText.TabStop = false;
+            this.commitText.Text = "commit: unknown";
+            this.commitText.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            // 
+            // labelVersion
+            // 
+            this.labelVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.labelVersion.Location = new System.Drawing.Point(473, 313);
+            this.labelVersion.Name = "labelVersion";
+            this.labelVersion.Size = new System.Drawing.Size(167, 47);
+            this.labelVersion.TabIndex = 5;
+            this.labelVersion.TabStop = false;
+            this.labelVersion.Text = "BandcampOnlinePlayer ????";
+            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.ForeColor = System.Drawing.Color.Gray;
+            this.label1.Location = new System.Drawing.Point(12, 336);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(390, 20);
+            this.label1.TabIndex = 3;
+            this.label1.TabStop = false;
+            this.label1.Text = "Loading...";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             // 
             // FormInit
             // 
@@ -78,6 +92,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 360);
             this.ControlBox = false;
+            this.Controls.Add(this.commitText);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -94,15 +109,14 @@
             this.Load += new System.EventHandler(this.FormInit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Timer timer1;
+        private onlineplayer.TransparentLabel label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private onlineplayer.TransparentLabel labelVersion;
+        private TransparentLabel commitText;
     }
 }
