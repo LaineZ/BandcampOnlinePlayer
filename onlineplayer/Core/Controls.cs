@@ -242,5 +242,22 @@ namespace onlineplayer
                 MessageBox.Show("This feature works only in stream mode", "Not works...", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private async void UpdateQueueImages()
+        {
+            ImageList il = new ImageList();
+            il.ImageSize = new System.Drawing.Size(64, 64);
+            int count = 0;
+
+            foreach (ListViewItem listItem in queueList.Items)
+            {
+                labelStatus.Text = "Loading ablum tracks images...";
+                il.ColorDepth = ColorDepth.Depth32Bit;
+                queueList.LargeImageList = il;
+                il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + queueTracks[count].Album.ArtworkId + "_8.jpg"));
+                listItem.ImageIndex = count++;
+            }
+            labelStatus.Text = "Done!";
+        }
     }
 }

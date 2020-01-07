@@ -86,7 +86,8 @@ namespace onlineplayer
                 queueList.Items.Add(lst);
                 queueTracks.Add(trk);
             }
-            
+
+            if (restoreQueue.Count > 1) { UpdateQueueImages(); }
             labelStatus.Text = "Done!";
         }
 
@@ -140,10 +141,12 @@ namespace onlineplayer
             listAlbums.LargeImageList.Images.Clear();
             listAlbums.LargeImageList = null;
             toolRefresh.Enabled = false;
+            listTags.Enabled = true;
         }
 
         private async void listBox1_Click(object sender, EventArgs e)
         {
+            listTags.Enabled = false;
             UpdateAlbums();
         }
 
@@ -245,20 +248,7 @@ namespace onlineplayer
                 queueTracks.Add(trk);
             }
 
-            HttpClient client = new HttpClient();
-            ImageList il = new ImageList();
-            il.ImageSize = new Size(64, 64);
-            int count = 0;
-
-            foreach (ListViewItem listItem in queueList.Items)
-            {
-                labelStatus.Text = "Loading ablum tracks images...";
-                il.ColorDepth = ColorDepth.Depth32Bit;
-                queueList.LargeImageList = il;
-                il.Images.Add(await httpTools.DownloadImagesFromWeb("https://f4.bcbits.com/img/a" + queueTracks[count].Album.ArtworkId + "_8.jpg"));
-                listItem.ImageIndex = count++;
-            }
-            labelStatus.Text = "Done!";
+            UpdateQueueImages();
         }
 
         private void queueList_DoubleClick(object sender, EventArgs e)
