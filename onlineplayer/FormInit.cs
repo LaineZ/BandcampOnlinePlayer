@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -16,11 +17,24 @@ namespace onlineplayer
 {
     public partial class FormInit : Form
     {
+        bool processedData = false;
+        List<Track> restoreQueue = new List<Track>();
+        List<string> tags = new List<string>();
+
+        // Random splashscreen
+        List<Image> img = new List<Image>(2);
+
         public FormInit()
         {
             InitializeComponent();
             labelVersion.Text = "BandcampOnlinePlayer \n" + Core.Info.version + "\ndeveloped by 140bpmdubstep";
             commitText.Text = Core.Info.commit;
+            // add splashscreeens
+            img.Add(Properties.Resources.splash_screen);
+            img.Add(Properties.Resources.splashscreen2);
+
+            Random rnd = new Random();
+            pictureBox1.Image = img[rnd.Next(0, 2)];
         }
 
         private async void FormInit_Load(object sender, EventArgs e)
@@ -75,7 +89,6 @@ namespace onlineplayer
             htmlSnippet.LoadHtml(response);
 
             List<string> hrefTags = new List<string>();
-            List<string> tags = new List<string>();
 
             foreach (HtmlNode link in htmlSnippet.DocumentNode.SelectNodes("//a[@href]"))
             {
@@ -85,8 +98,6 @@ namespace onlineplayer
                     tags.Add(att.Value.Replace("/tag/", ""));
                 }
             }
-
-            List<Track> restoreQueue = new List<Track>();
 
             if (File.Exists("queueList.xml") && getSettingsAttrBool("settings.xml", "saveQueue"))
             {
@@ -98,7 +109,7 @@ namespace onlineplayer
                 XmlElement xRoot = doc.DocumentElement;
                 XmlNode attr;
 
-                label1.Text = "Restoring play queue...";
+                label1.Text = "Restoring play queue... (may take by while)";
 
                 List<Models.QueueRestoreData> resetoreData = new List<Models.QueueRestoreData>();
 
@@ -123,6 +134,7 @@ namespace onlineplayer
                     }
                 }
 
+                /*
                 foreach (Models.QueueRestoreData restore in resetoreData)
                 {
                     string responseAlbum = await httpTools.MakeRequestAsync(restore.ArtistUrl + restore.TrackUrl);
@@ -135,13 +147,29 @@ namespace onlineplayer
                         label1.Text = "Restoring play queue: " + trk.Album.Artist + " - " + trk.Title + " ...";
                     }
                 }
+                */
+
+
+                // Extreme Multithreading...
+
+                Parallel.ForEach(resetoreData, async (Models.QueueRestoreData restore) =>
+                {
+                    string responseAlbum = await httpTools.MakeRequestAsync(restore.ArtistUrl + restore.TrackUrl);
+                    Album album = httpTools.GetAlbum(responseAlbum);
+
+                    foreach (Track trk in album.Tracks)
+                    {
+                        trk.ArtistUrl = restore.ArtistUrl;
+                        restoreQueue.Add(trk);
+                    }
+
+                    // sorry that not a Rust
+                    if (restoreQueue.Count == resetoreData.Count)
+                    {
+                        processedData = true;
+                    }
+                });
             }
-            Form mainForm = new Form1(tags, restoreQueue);
-            mainForm.Show();
-            label1.Text = "";
-            mainForm.FormClosed += MainForm_FormClosed;
-            timer1.Start();
-            restoreQueue.Clear();
 
         }
 
@@ -156,6 +184,19 @@ namespace onlineplayer
             if (this.Opacity <= 0)
             {
                 this.Hide();
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (processedData)
+            {
+                Form mainForm = new Form1(tags, restoreQueue);
+                mainForm.Show();
+                label1.Text = "";
+                mainForm.FormClosed += MainForm_FormClosed;
+                timer1.Start();
+                timer2.Stop();
             }
         }
     }

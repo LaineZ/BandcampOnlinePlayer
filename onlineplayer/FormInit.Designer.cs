@@ -31,9 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.commitText = new onlineplayer.TransparentLabel();
             this.labelVersion = new onlineplayer.TransparentLabel();
             this.label1 = new onlineplayer.TransparentLabel();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +52,12 @@
             this.pictureBox1.Size = new System.Drawing.Size(640, 360);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 500;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // commitText
             // 
@@ -118,5 +126,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private onlineplayer.TransparentLabel labelVersion;
         private TransparentLabel commitText;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer3;
     }
 }
