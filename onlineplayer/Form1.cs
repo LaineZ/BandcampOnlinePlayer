@@ -474,7 +474,7 @@ namespace onlineplayer
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (getSettingsAttrBool("settings.xml", "saveQueue") && !streamMode)
+            if (getSettingsAttrBool("settings.xml", "saveQueue") && !streamMode && queueTracks.Count > 0)
             {
                 Playlist.SavePlaylist("queueList.xml", queueTracks);
             }

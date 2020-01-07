@@ -170,6 +170,10 @@ namespace onlineplayer
                     }
                 });
             }
+            else
+            {
+                processedData = true;
+            }
 
         }
 

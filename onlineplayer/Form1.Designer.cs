@@ -44,7 +44,10 @@
             this.toolRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolSort = new System.Windows.Forms.ToolStripButton();
             this.toolSettings = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolSavePlaylist = new System.Windows.Forms.ToolStripButton();
+            this.openPlaylist = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolMidiOpen = new System.Windows.Forms.ToolStripButton();
             this.toolMidiClose = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -71,10 +74,7 @@
             this.pictureArtwork = new System.Windows.Forms.PictureBox();
             this.labelStatus = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openPlaylist = new System.Windows.Forms.ToolStripButton();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
@@ -93,7 +93,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 278F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 279F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.listTags, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listAlbums, 1, 0);
@@ -110,10 +110,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(382, 3);
+            this.queueList.Location = new System.Drawing.Point(381, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(273, 435);
+            this.queueList.Size = new System.Drawing.Size(274, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
@@ -128,7 +128,7 @@
             this.listTags.FormattingEnabled = true;
             this.listTags.Location = new System.Drawing.Point(3, 3);
             this.listTags.Name = "listTags";
-            this.listTags.Size = new System.Drawing.Size(94, 433);
+            this.listTags.Size = new System.Drawing.Size(93, 433);
             this.listTags.TabIndex = 0;
             this.listTags.DoubleClick += new System.EventHandler(this.listBox1_Click);
             // 
@@ -138,7 +138,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listAlbums.HideSelection = false;
-            this.listAlbums.Location = new System.Drawing.Point(103, 3);
+            this.listAlbums.Location = new System.Drawing.Point(102, 3);
             this.listAlbums.MultiSelect = false;
             this.listAlbums.Name = "listAlbums";
             this.listAlbums.Size = new System.Drawing.Size(273, 435);
@@ -279,6 +279,11 @@
             this.toolSettings.Text = "Settings";
             this.toolSettings.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolSavePlaylist
             // 
             this.toolSavePlaylist.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -288,6 +293,21 @@
             this.toolSavePlaylist.Size = new System.Drawing.Size(23, 22);
             this.toolSavePlaylist.Text = "Save playlist";
             this.toolSavePlaylist.Click += new System.EventHandler(this.toolSavePlaylist_Click);
+            // 
+            // openPlaylist
+            // 
+            this.openPlaylist.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openPlaylist.Image = global::onlineplayer.Properties.Resources.ic_open_in_browser_18pt;
+            this.openPlaylist.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openPlaylist.Name = "openPlaylist";
+            this.openPlaylist.Size = new System.Drawing.Size(23, 22);
+            this.openPlaylist.Text = "Open playlist";
+            this.openPlaylist.Click += new System.EventHandler(this.openPlaylist_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // toolMidiOpen
             // 
@@ -509,29 +529,9 @@
             this.labelStatus.TabIndex = 13;
             this.labelStatus.Text = "Done";
             // 
-            // openPlaylist
-            // 
-            this.openPlaylist.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openPlaylist.Image = global::onlineplayer.Properties.Resources.ic_open_in_browser_18pt;
-            this.openPlaylist.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openPlaylist.Name = "openPlaylist";
-            this.openPlaylist.Size = new System.Drawing.Size(23, 22);
-            this.openPlaylist.Text = "Open playlist";
-            this.openPlaylist.Click += new System.EventHandler(this.openPlaylist_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // Form1
             // 
