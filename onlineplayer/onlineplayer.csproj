@@ -93,7 +93,7 @@
     <Compile Include="Core\TransperentLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Core\WaveStreamExtentsionsMp3.cs" />
+    <Compile Include="Core\WaveStreamExtentsionsJack.cs" />
     <Compile Include="Core\WaveStreamExtentsions.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

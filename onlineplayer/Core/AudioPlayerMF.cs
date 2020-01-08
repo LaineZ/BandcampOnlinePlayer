@@ -31,6 +31,7 @@ namespace onlineplayer
 
         public void Play(string url)
         {
+            Console.WriteLine(url);
             if (audioFile != null)
             {
                 Close();

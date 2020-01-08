@@ -93,7 +93,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 283F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 284F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.listTags, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listAlbums, 1, 0);
@@ -110,10 +110,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(377, 3);
+            this.queueList.Location = new System.Drawing.Point(376, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(278, 435);
+            this.queueList.Size = new System.Drawing.Size(279, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
@@ -141,7 +141,7 @@
             this.listAlbums.Location = new System.Drawing.Point(101, 3);
             this.listAlbums.MultiSelect = false;
             this.listAlbums.Name = "listAlbums";
-            this.listAlbums.Size = new System.Drawing.Size(270, 435);
+            this.listAlbums.Size = new System.Drawing.Size(269, 435);
             this.listAlbums.TabIndex = 3;
             this.listAlbums.UseCompatibleStateImageBehavior = false;
             this.listAlbums.View = System.Windows.Forms.View.Tile;

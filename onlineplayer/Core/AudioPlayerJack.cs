@@ -5,13 +5,14 @@ using System.Windows.Forms;
 using JackSharp;
 using System.IO;
 using System.Net;
+using System.Diagnostics;
 
 namespace onlineplayer
 {
     public class AudioPlayerJack : Core.IAudioPlayer
     {
         public AudioOut outputDevice;
-        public Mp3FileReader audioFile;
+        public WaveFileReader audioFile;
 
         public void Init()
         {
@@ -41,13 +42,18 @@ namespace onlineplayer
                 outputDevice = new AudioOut(client);
             }
 
-            using (WebClient myWebClient = new WebClient())
+            var processStartInfo = new ProcessStartInfo
             {
-                // Download the Web resource and save it into the current filesystem folder.
-                myWebClient.DownloadFile(url, "tempfile.mp3");
-            }
+                FileName = @"ffmpeg",
+                Arguments = "-i \"" + url + "\" -f wav tempfile.wav",
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+            };
 
-            audioFile = new Mp3FileReader("tempfile.mp3");
+            var process = Process.Start(processStartInfo);
+            process.WaitForExit(0);
+            audioFile = new WaveFileReader("tempfile.wav");
             Wave16ToFloatProvider converter = new Wave16ToFloatProvider(audioFile);
             outputDevice.Init(converter);
             outputDevice.Play();
@@ -106,7 +112,7 @@ namespace onlineplayer
         {
             try
             {
-                WaveStreamExtensionsMp3.SetPosition(audioFile, seconds);
+                WaveStreamExtensionsJack.SetPosition(audioFile, seconds);
             }
             catch (NullReferenceException)
             {

@@ -3,10 +3,10 @@ using System;
 
 namespace onlineplayer
 {
-    public static class WaveStreamExtensionsMp3
+    public static class WaveStreamExtensionsJack
     {
         // Set position of WaveStream to nearest block to supplied position
-        public static void SetPosition(this Mp3FileReader strm, long position)
+        public static void SetPosition(this WaveFileReader strm, long position)
         {
             // distance from block boundary (may be 0)
             long adj = position % strm.WaveFormat.BlockAlign;
@@ -17,19 +17,19 @@ namespace onlineplayer
         }
 
         // Set playback position of WaveStream by seconds
-        public static void SetPosition(this Mp3FileReader strm, double seconds)
+        public static void SetPosition(this WaveFileReader strm, double seconds)
         {
             strm.SetPosition((long)(seconds * strm.WaveFormat.AverageBytesPerSecond));
         }
 
         // Set playback position of WaveStream by time (as a TimeSpan)
-        public static void SetPosition(this Mp3FileReader strm, TimeSpan time)
+        public static void SetPosition(this WaveFileReader strm, TimeSpan time)
         {
             strm.SetPosition(time.TotalSeconds);
         }
 
         // Set playback position of WaveStream relative to current position
-        public static void Seek(this Mp3FileReader strm, double offset)
+        public static void Seek(this WaveFileReader strm, double offset)
         {
             strm.SetPosition(strm.Position + (long)(offset * strm.WaveFormat.AverageBytesPerSecond));
         }
