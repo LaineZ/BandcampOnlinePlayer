@@ -42,10 +42,15 @@ namespace onlineplayer
                 Console.WriteLine("using wavout");
                 player = new AudioPlayerMF();
             }
-            else
+            if (Core.Config.audioSystem == 1)
             {
                 Console.WriteLine("using jack");
                 player = new AudioPlayerJack();
+            }
+            if (Core.Config.audioSystem == 2)
+            {
+                Console.WriteLine("using jack2");
+                player = new AudioPlayerJackWF();
             }
 
             if (viewStyle == "Tile")

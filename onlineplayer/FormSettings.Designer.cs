@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Play/Pause",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Volume up",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Volume down",
             ""}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
@@ -387,9 +387,9 @@
             this.AssignControll});
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
+            listViewItem16,
+            listViewItem17,
+            listViewItem18});
             this.listView1.Location = new System.Drawing.Point(6, 57);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(375, 201);
@@ -503,10 +503,10 @@
             this.audiosystemBox.FormattingEnabled = true;
             this.audiosystemBox.Items.AddRange(new object[] {
             "WaveOut (Windows ONLY)",
-            "Jack (Windows, Linux) - Requires jack installed"});
+            "Jack+FFmpeg (Windows, Linux) - Requires jack and FFmpeg installed"});
             this.audiosystemBox.Location = new System.Drawing.Point(93, 230);
             this.audiosystemBox.Name = "audiosystemBox";
-            this.audiosystemBox.Size = new System.Drawing.Size(287, 21);
+            this.audiosystemBox.Size = new System.Drawing.Size(288, 21);
             this.audiosystemBox.TabIndex = 10;
             // 
             // label10
