@@ -76,7 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\AudioPlayer.cs" />
+    <Compile Include="Core\AudioPlayerMF.cs" />
     <Compile Include="Core\Controls.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +84,7 @@
     <Compile Include="Core\TransperentLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Core\WaveStreamExtentsions.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,7 +126,6 @@
     <Compile Include="ViewArtwork.Designer.cs">
       <DependentUpon>ViewArtwork.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\WaveStreamExtensions.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

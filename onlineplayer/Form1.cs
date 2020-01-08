@@ -30,9 +30,12 @@ namespace onlineplayer
         string viewStyle = getSettingsAttr("settings.xml", "albumViewType");
         HttpTools httpTools = new HttpTools();
 
+        AudioPlayerMF player = new AudioPlayerMF();
+
         public Form1(List<string> tags, List<Track> restoreQueue)
         {
             InitializeComponent();
+            player.Init();
             if (viewStyle == "Tile")
             {
                 listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
@@ -112,18 +115,18 @@ namespace onlineplayer
 
                 if (MidiActionsBindings.actionsMidi[2].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[1].ControlData.ControllerValue == cce.ControllerValue)
                 {
-                    if (player.outputDevice.Volume <= 1.0)
+                    if (player.GetVolume() <= 1.0)
                     {
-                        player.outputDevice.Volume += 0.1F;
+                        player.SetVolume(player.GetVolume() + 0.1F);
                     }
                     return;
                 }
 
                 if (MidiActionsBindings.actionsMidi[3].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[1].ControlData.ControllerValue == cce.ControllerValue)
                 {
-                    if (player.outputDevice.Volume >= 0)
+                    if (player.GetVolume() >= 0)
                     {
-                        player.outputDevice.Volume -= 0.1F;
+                        player.SetVolume(player.GetVolume() - 0.1F);
                     }
                     return;
                 }
@@ -150,8 +153,6 @@ namespace onlineplayer
             UpdateAlbums();
         }
 
-        AudioPlayer player = new AudioPlayer();
-
         private void AlbumList(object sender, EventArgs e)
         {
             PlayFormList();
@@ -161,19 +162,20 @@ namespace onlineplayer
         {
             try
             {
-                trackSeek.Value = (int)player.audioFile.CurrentTime.TotalSeconds;
-                TimeSpan time = TimeSpan.FromSeconds(player.audioFile.CurrentTime.TotalSeconds);
+                trackSeek.Enabled = true;
+                trackSeek.Value = (int)player.GetCurrentTimeTotalSeconds();
+                TimeSpan time = TimeSpan.FromSeconds(player.GetCurrentTimeTotalSeconds());
                 label3.Text = time.ToString(@"hh\:mm\:ss");
-                label5.Text = player.outputDevice.PlaybackState.ToString();
+                label5.Text = player.GetPlaybackState();
             }
             catch (NullReferenceException)
             {
-                trackSeek.Value = 0;
+                trackSeek.Enabled = false;
                 label3.Text = "00:00:00";
                 label5.Text = "Stopped";
             }
 
-            if (Math.Abs(player.audioFile.TotalTime.TotalSeconds - player.audioFile.CurrentTime.TotalSeconds) < 0.1)
+            if (Math.Abs(player.GetTotalTimeSeconds() - player.GetCurrentTimeTotalSeconds()) < 0.1)
             {
                 if (!toolShuffle.Checked)
                 {
@@ -195,10 +197,10 @@ namespace onlineplayer
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            label4.Text = "Volume: " + trackVolume.Value + "%";
+            label4.Text = "Volume: " + player.GetVolume() + "%";
             try
             {
-                player.outputDevice.Volume = trackVolume.Value / 100f;
+                player.SetVolume(trackVolume.Value / 100f);
 
             }
             catch (Exception)
@@ -310,8 +312,7 @@ namespace onlineplayer
         {
             try
             {
-                WaveStreamExtensions.SetPosition(player.audioFile, (double)trackSeek.Value);
-
+                player.SetPos((int)trackSeek.Value);
             }
             catch (NullReferenceException)
             {

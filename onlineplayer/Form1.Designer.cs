@@ -93,7 +93,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 281F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 282F));
             this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.listTags, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.listAlbums, 1, 0);
@@ -110,10 +110,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(379, 3);
+            this.queueList.Location = new System.Drawing.Point(378, 3);
             this.queueList.MultiSelect = false;
             this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(276, 435);
+            this.queueList.Size = new System.Drawing.Size(277, 435);
             this.queueList.TabIndex = 4;
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
@@ -141,7 +141,7 @@
             this.listAlbums.Location = new System.Drawing.Point(102, 3);
             this.listAlbums.MultiSelect = false;
             this.listAlbums.Name = "listAlbums";
-            this.listAlbums.Size = new System.Drawing.Size(271, 435);
+            this.listAlbums.Size = new System.Drawing.Size(270, 435);
             this.listAlbums.TabIndex = 3;
             this.listAlbums.UseCompatibleStateImageBehavior = false;
             this.listAlbums.View = System.Windows.Forms.View.Tile;
@@ -415,6 +415,7 @@
             // 
             // toolSearch
             // 
+            this.toolSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolSearch.Name = "toolSearch";
             this.toolSearch.Size = new System.Drawing.Size(200, 25);
             this.toolSearch.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);

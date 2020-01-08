@@ -179,7 +179,7 @@ namespace onlineplayer
                 labelTrackInfo.Text = itemsList[listAlbums.FocusedItem.Index].artist + "\n" + itemsList[listAlbums.FocusedItem.Index].genre + "\nComments:" + itemsList[listAlbums.FocusedItem.Index].num_comments;
             }
             timer1.Enabled = true;
-            trackSeek.Maximum = (int)player.audioFile.TotalTime.TotalSeconds;
+            trackSeek.Maximum = (int)player.GetTotalTimeSeconds();
         }
 
 

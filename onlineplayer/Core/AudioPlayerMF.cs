@@ -4,15 +4,14 @@ using System.Windows.Forms;
 
 namespace onlineplayer
 {
-    public class AudioPlayer
+    public class AudioPlayerMF
     {
         public WaveOutEvent outputDevice;
         public MediaFoundationReader audioFile;
 
-        public void AudioDev(WaveOutEvent OutPutDevice, MediaFoundationReader AudioFile)
+        public void Init()
         {
-            outputDevice = OutPutDevice;
-            audioFile = AudioFile;
+            // not used by MediaFoundation backend
         }
 
         public void Close()
@@ -75,5 +74,42 @@ namespace onlineplayer
 
             }
         }
+
+
+        public int GetCurrentTimeSeconds()
+        {
+            return audioFile.CurrentTime.Seconds;
+        }
+
+        public double GetCurrentTimeTotalSeconds()
+        {
+            return audioFile.CurrentTime.TotalSeconds;
+        }
+
+        public double GetTotalTimeSeconds()
+        {
+            return audioFile.TotalTime.TotalSeconds;
+        }
+
+        public void SetPos(double seconds)
+        {
+            WaveStreamExtensions.SetPosition(audioFile, seconds);
+        }
+
+        public float GetVolume()
+        {
+            return outputDevice.Volume;
+        }
+
+        public void SetVolume(float volume)
+        {
+            outputDevice.Volume = volume;
+        }
+
+        public string GetPlaybackState()
+        {
+            return outputDevice.PlaybackState.ToString();
+        }
     }
 }
+    
