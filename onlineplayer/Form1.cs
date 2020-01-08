@@ -30,12 +30,24 @@ namespace onlineplayer
         string viewStyle = getSettingsAttr("settings.xml", "albumViewType");
         HttpTools httpTools = new HttpTools();
 
-        AudioPlayerMF player = new AudioPlayerMF();
+
+        Core.IAudioPlayer player;
 
         public Form1(List<string> tags, List<Track> restoreQueue)
         {
             InitializeComponent();
-            player.Init();
+
+            if (Core.Config.audioSystem == 0)
+            {
+                Console.WriteLine("using wavout");
+                player = new AudioPlayerMF();
+            }
+            else
+            {
+                Console.WriteLine("using jack");
+                player = new AudioPlayerJack();
+            }
+
             if (viewStyle == "Tile")
             {
                 listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });

@@ -42,42 +42,12 @@ namespace onlineplayer
             label1.Text = "Loading configuration...";
             if (!File.Exists("settings.xml"))
             {
-                XmlWriter xmlWriter = XmlWriter.Create("settings.xml");
-
-                xmlWriter.WriteStartDocument();
-                xmlWriter.WriteStartElement("settings");
-
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("albumViewType", "Tile");
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("albumViewSize", "64");
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("saveArtworks", "True");
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("loadPages", "100");
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("midiDevice", "0");
-                xmlWriter.WriteEndElement();
-
-
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("useMidi", "False");
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("saveQueue", "True");
-                xmlWriter.WriteEndElement();
-
-                xmlWriter.WriteEndDocument();
-                xmlWriter.Close();
+                Core.Config.LoadConfig();
+                Core.Config.SaveConfig();
+            }
+            else
+            {
+                Core.Config.LoadConfig();
             }
 
             label1.Text = "Loading tags from bandcamp.com...";

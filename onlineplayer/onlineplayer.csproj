@@ -56,6 +56,12 @@
     <Reference Include="HtmlAgilityPack, Version=1.11.17.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.17\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Jack.NAudio, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jack.NAudio.0.5.0\lib\net35\Jack.NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="JackSharp, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JackSharp.0.4.0\lib\net35\JackSharp.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
@@ -76,14 +82,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\AudioPlayerJack.cs" />
     <Compile Include="Core\AudioPlayerMF.cs" />
+    <Compile Include="Core\Config.cs" />
     <Compile Include="Core\Controls.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Core\IAudioPlayer.cs" />
     <Compile Include="Core\Info.cs" />
     <Compile Include="Core\TransperentLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Core\WaveStreamExtentsionsMp3.cs" />
     <Compile Include="Core\WaveStreamExtentsions.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

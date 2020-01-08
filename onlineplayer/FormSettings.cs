@@ -31,16 +31,21 @@ namespace onlineplayer
 
             labelVersion.Text = "Version: " + Core.Info.version;
 
-            if (File.Exists("settings.xml"))
+            albumView.SelectedItem = Core.Config.viewType;
+            albumSize.Text = Core.Config.viewSize.ToString();
+            checkArtwork.Checked = Core.Config.saveArtworks;
+            pagesLoad.Text = Core.Config.pagesLoad.ToString();
+            if (Core.Config.midiDevice > 0)
             {
-                albumView.SelectedItem = getSettingsAttr("settings.xml", "albumViewType");
-                albumSize.Text = getSettingsAttr("settings.xml", "albumViewSize");
-                checkArtwork.Checked = getSettingsAttrBool("settings.xml", "saveArtworks");
-                pagesLoad.Text = getSettingsAttr("settings.xml", "loadPages");
-                //comboBoxMidiInDevices.SelectedIndex = int.Parse(getSettingsAttr("settings.xml", "midiDevice"));
-                midiControl.Checked = getSettingsAttrBool("settings.xml", "useMidi");
-                saveQueue.Checked = getSettingsAttrBool("settings.xml", "saveQueue");
+                comboBoxMidiInDevices.SelectedIndex = Core.Config.midiDevice;
             }
+            midiControl.Checked = Core.Config.useMidi;
+            saveQueue.Checked = Core.Config.saveQueue;
+            if (Core.Config.audioSystem > 0)
+            {
+                audiosystemBox.SelectedIndex = Core.Config.audioSystem;
+            }
+
             if (File.Exists("blocked.txt"))
             {
                 List<string> blockers = viewBlocked();
@@ -114,61 +119,36 @@ namespace onlineplayer
         {
             albumSize.BackColor = Color.FromArgb(255, 255, 255);
             pagesLoad.BackColor = Color.FromArgb(255, 255, 255);
-            XmlWriter xmlWriter = XmlWriter.Create("settings.xml");
-
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement("settings");
-
-            xmlWriter.WriteStartElement("setting");
-            xmlWriter.WriteAttributeString("albumViewType", albumView.Text);
-            xmlWriter.WriteEndElement();
 
             if (int.Parse(albumSize.Text) <= 124)
             {
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("albumViewSize", albumSize.Text);
-                xmlWriter.WriteEndElement();
+                Core.Config.viewSize = int.Parse(albumSize.Text);
             }
             else
             {
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("albumViewSize", "124");
-                xmlWriter.WriteEndElement();
+                Core.Config.viewSize = 124;
                 albumSize.BackColor = Color.FromArgb(255, 0, 0);
             }
 
-            xmlWriter.WriteStartElement("setting");
-            xmlWriter.WriteAttributeString("saveArtworks", checkArtwork.Checked.ToString());
-            xmlWriter.WriteEndElement();
-            int idk = 0;
-            if (int.TryParse(pagesLoad.Text, out idk))
+            Core.Config.saveArtworks = checkArtwork.Checked;
+            Core.Config.saveQueue = saveQueue.Checked;
+            Core.Config.useMidi = midiControl.Checked;
+
+            int pagesSave = 0;
+            if (int.TryParse(pagesLoad.Text, out pagesSave))
             {
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("loadPages", pagesLoad.Text);
-                xmlWriter.WriteEndElement();
+                Core.Config.pagesLoad = pagesSave;
             }
             else
             {
-                xmlWriter.WriteStartElement("setting");
-                xmlWriter.WriteAttributeString("loadPages", "100");
-                xmlWriter.WriteEndElement();
+                Core.Config.pagesLoad = 100;
                 pagesLoad.BackColor = Color.FromArgb(255, 0, 0);
             }
 
-            xmlWriter.WriteStartElement("setting");
-            xmlWriter.WriteAttributeString("midiDevice", comboBoxMidiInDevices.SelectedIndex.ToString());
-            xmlWriter.WriteEndElement();
+            Core.Config.midiDevice = comboBoxMidiInDevices.SelectedIndex;
 
-            xmlWriter.WriteStartElement("setting");
-            xmlWriter.WriteAttributeString("useMidi", midiControl.Checked.ToString());
-            xmlWriter.WriteEndElement();
-
-            xmlWriter.WriteStartElement("setting");
-            xmlWriter.WriteAttributeString("saveQueue", saveQueue.Checked.ToString());
-            xmlWriter.WriteEndElement();
-
-            xmlWriter.WriteEndDocument();
-            xmlWriter.Close();
+            Core.Config.audioSystem = audiosystemBox.SelectedIndex;
+            Core.Config.SaveConfig();
         }
 
         private async void button1_Click(object sender, EventArgs e)

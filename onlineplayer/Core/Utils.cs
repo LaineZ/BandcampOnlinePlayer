@@ -31,40 +31,28 @@ namespace onlineplayer
 
         public static string getSettingsAttr(string filename, string attrb)
         {
-            try
+            XmlDocument doc = new XmlDocument();
+
+            doc.Load(filename);
+            XmlElement xRoot = doc.DocumentElement;
+            XmlNode attr;
+
+            foreach (XmlNode xnode in xRoot)
             {
-                XmlDocument doc = new XmlDocument();
-
-                doc.Load(filename);
-                XmlElement xRoot = doc.DocumentElement;
-                XmlNode attr;
-                string value = "unknown key" + attrb;
-
-                foreach (XmlNode xnode in xRoot)
+                if (xnode.Attributes.Count > 0)
                 {
-                    if (xnode.Attributes.Count > 0)
+                    attr = xnode.Attributes.GetNamedItem(attrb);
+                    if (attr != null)
                     {
-                        attr = xnode.Attributes.GetNamedItem(attrb);
-                        if (attr != null)
-                        {
-                            value = attr.Value;
-                        }
+                        return attr.Value;
                     }
                 }
-                return value;
-            }
-            catch (Exception)
-            {
-                DialogResult res = MessageBox.Show("Settings file is missing or corrupted...\nIf you have changed settings.xml independently it is necessary fix their errors\nIf not - this looks like a program bug - good to report this at GitHub =)\nIf you click YES - program will reset all settings", "Settings file corruption detected!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                if (res == DialogResult.Yes)
+                else
                 {
-                    File.Delete("settings.xml");
-                    MessageBox.Show("Settings file sucessfully removed! Please launch program again to apply changes", "Full reset", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    throw new Exception("XML Attribute count is zero");
                 }
-
-                Environment.Exit(1);
-                return "error"; // i dont know - this code is not reachable.....
             }
+            return "Not found"; // IDK
         }
 
         public static bool getSettingsAttrBool(string filename, string attrib)

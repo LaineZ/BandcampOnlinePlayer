@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace onlineplayer
 {
-    public class AudioPlayerMF
+    public class AudioPlayerMF : Core.IAudioPlayer
     {
         public WaveOutEvent outputDevice;
         public MediaFoundationReader audioFile;

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Play/Pause",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Volume up",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Volume down",
             ""}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
@@ -78,6 +78,9 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.audiosystemBox = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -130,6 +133,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label11);
+            this.tabPage1.Controls.Add(this.label10);
+            this.tabPage1.Controls.Add(this.audiosystemBox);
             this.tabPage1.Controls.Add(this.saveQueue);
             this.tabPage1.Controls.Add(this.pagesLoad);
             this.tabPage1.Controls.Add(this.label6);
@@ -152,7 +158,7 @@
             // saveQueue
             // 
             this.saveQueue.AutoSize = true;
-            this.saveQueue.Location = new System.Drawing.Point(18, 194);
+            this.saveQueue.Location = new System.Drawing.Point(21, 194);
             this.saveQueue.Name = "saveQueue";
             this.saveQueue.Size = new System.Drawing.Size(150, 17);
             this.saveQueue.TabIndex = 9;
@@ -381,9 +387,9 @@
             this.AssignControll});
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8,
-            listViewItem9});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3});
             this.listView1.Location = new System.Drawing.Point(6, 57);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(375, 201);
@@ -491,6 +497,37 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // audiosystemBox
+            // 
+            this.audiosystemBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.audiosystemBox.FormattingEnabled = true;
+            this.audiosystemBox.Items.AddRange(new object[] {
+            "WaveOut (Windows ONLY)",
+            "Jack (Windows, Linux) - Requires jack installed"});
+            this.audiosystemBox.Location = new System.Drawing.Point(93, 230);
+            this.audiosystemBox.Name = "audiosystemBox";
+            this.audiosystemBox.Size = new System.Drawing.Size(287, 21);
+            this.audiosystemBox.TabIndex = 10;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(15, 233);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Audio system:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(15, 214);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(137, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "REQUIRES RESTART!";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -568,5 +605,8 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox audiosystemBox;
+        private System.Windows.Forms.Label label11;
     }
 }
