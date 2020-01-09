@@ -59,9 +59,10 @@ namespace onlineplayer
             }
 
             queueList.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
+            listGlobalSearch.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
             queueList.TileSize = new Size(256, 64);
             Directory.CreateDirectory("artwork_cache");
-    
+
             toolStream.Enabled = false;
             listAlbums.MouseUp += (s, args) =>
             {
@@ -145,7 +146,7 @@ namespace onlineplayer
             }
             catch (NullReferenceException)
             {
-                
+
             }
         }
 
@@ -346,25 +347,25 @@ namespace onlineplayer
                 List<string> blocked = viewBlocked();
                 foreach (Item item in itemsList)
                 {
-                        if (!streamMode) { break; }
-                        String response = await httpTools.MakeRequestAsync(item.tralbum_url);
-                        Album album = httpTools.GetAlbum(response);
-                        if (!blocked.Contains(album.Artist))
+                    if (!streamMode) { break; }
+                    String response = await httpTools.MakeRequestAsync(item.tralbum_url);
+                    Album album = httpTools.GetAlbum(response);
+                    if (!blocked.Contains(album.Artist))
+                    {
+                        foreach (Track trk in album.Tracks)
                         {
-                            foreach (Track trk in album.Tracks)
-                            {
-                                if (!streamMode) { break; }
-                                ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
-                                queueList.Items.Add(lst);
-                                queueTracks.Add(trk);
-                            }
-                            if (queueList.Items.Count > 0 && !firstSong)
-                            {
-                                firstSong = true;
-                                PlayOffset();
-                                toolStream.Enabled = true;
-                            }
+                            if (!streamMode) { break; }
+                            ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
+                            queueList.Items.Add(lst);
+                            queueTracks.Add(trk);
                         }
+                        if (queueList.Items.Count > 0 && !firstSong)
+                        {
+                            firstSong = true;
+                            PlayOffset();
+                            toolStream.Enabled = true;
+                        }
+                    }
                 }
                 labelStatus.Text = "Done!";
             }
@@ -556,6 +557,29 @@ namespace onlineplayer
                 }
             }
             labelStatus.Text = "Done...";
+        }
+
+        private async void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            listGlobalSearch.Items.Clear();
+            string response = await httpTools.MakeRequestAsync("https://bandcamp.com/api/fuzzysearch/1/autocomplete?q=" + textBox1.Text);
+
+            if (textBox1.Text.Length > 0)
+            {
+                try
+                {
+                    Models.JSON.JsonSearch.RootObject items = JsonConvert.DeserializeObject<Models.JSON.JsonSearch.RootObject>(response);
+                    foreach (Models.JSON.JsonSearch.Result searchItem in items.auto.results)
+                    {
+                        ListViewItem lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name });
+                        listGlobalSearch.Items.Add(lst);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
     }
 }

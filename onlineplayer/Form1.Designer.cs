@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.queueList = new System.Windows.Forms.ListView();
-            this.listTags = new System.Windows.Forms.ListBox();
-            this.listAlbums = new System.Windows.Forms.ListView();
             this.labelTrackName = new System.Windows.Forms.Label();
             this.labelTrackInfo = new System.Windows.Forms.Label();
             this.trackSeek = new System.Windows.Forms.TrackBar();
@@ -75,78 +71,28 @@
             this.labelStatus = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listAlbums = new System.Windows.Forms.ListView();
+            this.listTags = new System.Windows.Forms.ListBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.queueList = new System.Windows.Forms.ListView();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.listGlobalSearch = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureArtwork)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.38191F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.61809F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 285F));
-            this.tableLayoutPanel1.Controls.Add(this.queueList, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listTags, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listAlbums, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1, 28);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(658, 441);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // queueList
-            // 
-            this.queueList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.queueList.HideSelection = false;
-            this.queueList.Location = new System.Drawing.Point(375, 3);
-            this.queueList.MultiSelect = false;
-            this.queueList.Name = "queueList";
-            this.queueList.Size = new System.Drawing.Size(280, 435);
-            this.queueList.TabIndex = 4;
-            this.queueList.UseCompatibleStateImageBehavior = false;
-            this.queueList.View = System.Windows.Forms.View.Tile;
-            this.queueList.DoubleClick += new System.EventHandler(this.queueList_DoubleClick);
-            // 
-            // listTags
-            // 
-            this.listTags.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listTags.FormattingEnabled = true;
-            this.listTags.Location = new System.Drawing.Point(3, 3);
-            this.listTags.Name = "listTags";
-            this.listTags.Size = new System.Drawing.Size(92, 433);
-            this.listTags.TabIndex = 0;
-            this.listTags.DoubleClick += new System.EventHandler(this.listBox1_Click);
-            // 
-            // listAlbums
-            // 
-            this.listAlbums.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listAlbums.HideSelection = false;
-            this.listAlbums.Location = new System.Drawing.Point(101, 3);
-            this.listAlbums.MultiSelect = false;
-            this.listAlbums.Name = "listAlbums";
-            this.listAlbums.Size = new System.Drawing.Size(268, 435);
-            this.listAlbums.TabIndex = 3;
-            this.listAlbums.UseCompatibleStateImageBehavior = false;
-            this.listAlbums.View = System.Windows.Forms.View.Tile;
-            this.listAlbums.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            this.listAlbums.DoubleClick += new System.EventHandler(this.AlbumList);
             // 
             // labelTrackName
             // 
@@ -172,7 +118,7 @@
             // trackSeek
             // 
             this.trackSeek.AllowDrop = true;
-            this.trackSeek.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.trackSeek.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackSeek.Location = new System.Drawing.Point(0, 470);
             this.trackSeek.Maximum = 0;
@@ -520,7 +466,7 @@
             // 
             // labelStatus
             // 
-            this.labelStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelStatus.AutoSize = true;
             this.labelStatus.Location = new System.Drawing.Point(127, 493);
@@ -533,11 +479,145 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(0, 28);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(659, 445);
+            this.tabControl1.TabIndex = 14;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.listTags);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(651, 419);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Tags";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.tableLayoutPanel1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(651, 419);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Albums & Play queue";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listAlbums
+            // 
+            this.listAlbums.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listAlbums.HideSelection = false;
+            this.listAlbums.Location = new System.Drawing.Point(3, 3);
+            this.listAlbums.MultiSelect = false;
+            this.listAlbums.Name = "listAlbums";
+            this.listAlbums.Size = new System.Drawing.Size(365, 410);
+            this.listAlbums.TabIndex = 5;
+            this.listAlbums.UseCompatibleStateImageBehavior = false;
+            this.listAlbums.View = System.Windows.Forms.View.Tile;
+            // 
+            // listTags
+            // 
+            this.listTags.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listTags.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listTags.FormattingEnabled = true;
+            this.listTags.Location = new System.Drawing.Point(0, 0);
+            this.listTags.Name = "listTags";
+            this.listTags.Size = new System.Drawing.Size(651, 420);
+            this.listTags.TabIndex = 0;
+            this.listTags.DoubleClick += new System.EventHandler(this.listBox1_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 280F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.listAlbums, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.queueList, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(651, 416);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // queueList
+            // 
+            this.queueList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.queueList.HideSelection = false;
+            this.queueList.Location = new System.Drawing.Point(374, 3);
+            this.queueList.MultiSelect = false;
+            this.queueList.Name = "queueList";
+            this.queueList.Size = new System.Drawing.Size(274, 410);
+            this.queueList.TabIndex = 6;
+            this.queueList.UseCompatibleStateImageBehavior = false;
+            this.queueList.View = System.Windows.Forms.View.Tile;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.listGlobalSearch);
+            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(651, 419);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Global search";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(651, 24);
+            this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // listGlobalSearch
+            // 
+            this.listGlobalSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listGlobalSearch.HideSelection = false;
+            this.listGlobalSearch.Location = new System.Drawing.Point(0, 26);
+            this.listGlobalSearch.Name = "listGlobalSearch";
+            this.listGlobalSearch.Size = new System.Drawing.Size(651, 393);
+            this.listGlobalSearch.TabIndex = 1;
+            this.listGlobalSearch.TileSize = new System.Drawing.Size(256, 64);
+            this.listGlobalSearch.UseCompatibleStateImageBehavior = false;
+            this.listGlobalSearch.View = System.Windows.Forms.View.Tile;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(907, 515);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.toolStrip1);
@@ -547,14 +627,12 @@
             this.Controls.Add(this.labelTrackInfo);
             this.Controls.Add(this.labelTrackName);
             this.Controls.Add(this.pictureArtwork);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.trackSeek);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Bandcamp online player";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -562,15 +640,18 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureArtwork)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ListBox listTags;
         private System.Windows.Forms.PictureBox pictureArtwork;
         private System.Windows.Forms.Label labelTrackName;
         private System.Windows.Forms.Label labelTrackInfo;
@@ -586,12 +667,10 @@
         private System.Windows.Forms.ToolStripButton toolNext;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ListView listAlbums;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openInBrowserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addAlbumTracksInQueueifAvailbleToolStripMenuItem;
-        private System.Windows.Forms.ListView queueList;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem1;
@@ -614,6 +693,16 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ListView listAlbums;
+        private System.Windows.Forms.ListBox listTags;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ListView queueList;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ListView listGlobalSearch;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
