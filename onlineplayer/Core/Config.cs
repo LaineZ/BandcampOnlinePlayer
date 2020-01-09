@@ -102,6 +102,7 @@ namespace onlineplayer.Core
         public static void LoadConfig()
         {
             // Add here config values
+            pagesLoad = TryLoadInt("loadPages", 100);
             midiDevice = TryLoadInt("midiDevice", 0);
             viewSize = TryLoadInt("albumViewSize", 64);
             audioSystem = TryLoadInt("audioSystem", 0);
