@@ -25,9 +25,10 @@ namespace onlineplayer
             InitializeComponent();
             if (OSUtils.GetOperatingSystem() == OSPlatform.Linux)
             {
-                label1.Enabled = false;
-                labelVersion.Enabled = false;
-                commitText.Enabled = false;
+                label1.Hide();
+                labelVersion.Hide();
+                commitText.Hide();
+                this.Size = new Size(640, 360); // Fix that weird bug on linux: https://i.imgur.com/3wdlV3W.png
             }
             labelVersion.Text = "BandcampOnlinePlayer \n" + Core.Info.version + "\ndeveloped by 140bpmdubstep";
             commitText.Text = Core.Info.commit;
