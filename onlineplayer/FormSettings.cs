@@ -45,6 +45,7 @@ namespace onlineplayer
             {
                 audiosystemBox.SelectedIndex = Core.Config.audioSystem;
             }
+            checkReopen.Checked = Core.Config.jackReopen;
 
             if (File.Exists("blocked.txt"))
             {

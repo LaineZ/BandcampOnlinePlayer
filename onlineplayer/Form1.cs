@@ -482,6 +482,8 @@ namespace onlineplayer
             {
                 Playlist.SavePlaylist("queueList.xml", queueTracks);
             }
+            player.Close();
+            File.Delete("tempfile.wav");
         }
 
         private void toolSavePlaylist_Click(object sender, EventArgs e)

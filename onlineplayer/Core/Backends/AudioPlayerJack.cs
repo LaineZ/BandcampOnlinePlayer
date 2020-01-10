@@ -40,6 +40,7 @@ namespace onlineplayer
             if (Core.Config.jackReopen)
             {
                 Close();
+                File.Delete("tempfile.wav");
             }
             if (outputDevice == null)
             {
@@ -53,7 +54,7 @@ namespace onlineplayer
             var processStartInfo = new ProcessStartInfo
             {
                 FileName = fname,
-                Arguments = "-i \"" + url + "\" -f wav tempfile.wav",
+                Arguments = "-i \"" + url + "\" -f wav tempfile.wav -y",
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
@@ -62,7 +63,7 @@ namespace onlineplayer
             try
             {
                 var process = Process.Start(processStartInfo);
-                process.WaitForExit(0);
+                process.WaitForExit();
                 audioFile = new WaveFileReader("tempfile.wav");
                 Wave16ToFloatProvider converter = new Wave16ToFloatProvider(audioFile);
                 outputDevice.Init(converter);
