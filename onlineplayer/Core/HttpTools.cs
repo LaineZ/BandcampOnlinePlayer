@@ -26,7 +26,7 @@ namespace onlineplayer
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("Error occured:" + e.Message, "пиздец", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error occured:" + e.Message, url, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 return null;
             });

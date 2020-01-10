@@ -21,6 +21,7 @@ namespace onlineplayer
 
         List<Item> itemsList = new List<Item>();
         List<Track> queueTracks = new List<Track>();
+        List<Models.JSON.JsonSearch.Result> searchResults = new List<Models.JSON.JsonSearch.Result>();
 
         int offset = 0;
         bool streamMode = false;
@@ -210,7 +211,7 @@ namespace onlineplayer
 
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            label4.Text = "Volume: " + player.GetVolume() + "%";
+            label4.Text = "Volume: " + trackVolume.Value + "%";
             try
             {
                 player.SetVolume(trackVolume.Value / 100f);
@@ -218,7 +219,6 @@ namespace onlineplayer
             }
             catch (Exception)
             {
-
             }
         }
 
@@ -562,6 +562,7 @@ namespace onlineplayer
         private async void textBox1_TextChanged(object sender, EventArgs e)
         {
             listGlobalSearch.Items.Clear();
+            searchResults.Clear();
             string response = await httpTools.MakeRequestAsync("https://bandcamp.com/api/fuzzysearch/1/autocomplete?q=" + textBox1.Text);
 
             if (textBox1.Text.Length > 0)
@@ -571,8 +572,24 @@ namespace onlineplayer
                     Models.JSON.JsonSearch.RootObject items = JsonConvert.DeserializeObject<Models.JSON.JsonSearch.RootObject>(response);
                     foreach (Models.JSON.JsonSearch.Result searchItem in items.auto.results)
                     {
-                        ListViewItem lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name });
+                        ListViewItem lst;
+                        switch (searchItem.type)
+                        {
+                            case "a":
+                                lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name, "Album" });
+                                break;
+                            case "f":
+                                lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name, "Fan" });
+                                break;
+                            case "b":
+                                lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name, "Artist/Band" });
+                                break;
+                            default:
+                                lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name, "Unknown: " + searchItem.type });
+                                break;
+                        }
                         listGlobalSearch.Items.Add(lst);
+                        searchResults.Add(searchItem);
                     }
                 }
                 catch (Exception)
@@ -580,6 +597,27 @@ namespace onlineplayer
 
                 }
             }
+        }
+
+        private async void listGlobalSearch_DoubleClick(object sender, EventArgs e)
+        {
+            String response = await httpTools.MakeRequestAsync(searchResults[listGlobalSearch.FocusedItem.Index].url);
+            Album album = httpTools.GetAlbum(response);
+
+            foreach (Track trk in album.Tracks)
+            {
+                ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
+                queueList.Items.Add(lst);
+                trk.ArtistUrl = "https://" + searchResults[listGlobalSearch.FocusedItem.Index].url.Split('/')[2];
+                queueTracks.Add(trk);
+            }
+
+            UpdateQueueImages();
+        }
+
+        private void playToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            PlayOffset();
         }
     }
 }

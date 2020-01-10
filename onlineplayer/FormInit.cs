@@ -71,7 +71,7 @@ namespace onlineplayer
 
             if (File.Exists("queueList.xml") && getSettingsAttrBool("settings.xml", "saveQueue"))
             {
-                label1.Text = "Restoring play queue...";
+                label1.Text = "Loading queue list...";
 
                 XmlDocument doc = new XmlDocument();
 
@@ -125,6 +125,7 @@ namespace onlineplayer
                 Parallel.ForEach(resetoreData, async (Models.QueueRestoreData restore) =>
                 {
                     string responseAlbum = await httpTools.MakeRequestAsync(restore.ArtistUrl + restore.TrackUrl);
+
                     Album album = httpTools.GetAlbum(responseAlbum);
 
                     foreach (Track trk in album.Tracks)
