@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Play/Pause",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Volume up",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Volume down",
             ""}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
@@ -44,6 +44,9 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.audiosystemBox = new System.Windows.Forms.ComboBox();
             this.saveQueue = new System.Windows.Forms.CheckBox();
             this.pagesLoad = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -78,9 +81,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.audiosystemBox = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.checkReopen = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -133,6 +134,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.checkReopen);
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.audiosystemBox);
@@ -155,10 +157,41 @@
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(3, 146);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(137, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "REQUIRES RESTART!";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 165);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Audio system:";
+            // 
+            // audiosystemBox
+            // 
+            this.audiosystemBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.audiosystemBox.FormattingEnabled = true;
+            this.audiosystemBox.Items.AddRange(new object[] {
+            "WaveOut (Windows ONLY)",
+            "Jack+FFmpeg (Windows, Linux) - Requires jack and FFmpeg installed"});
+            this.audiosystemBox.Location = new System.Drawing.Point(6, 181);
+            this.audiosystemBox.Name = "audiosystemBox";
+            this.audiosystemBox.Size = new System.Drawing.Size(375, 21);
+            this.audiosystemBox.TabIndex = 10;
+            // 
             // saveQueue
             // 
             this.saveQueue.AutoSize = true;
-            this.saveQueue.Location = new System.Drawing.Point(21, 194);
+            this.saveQueue.Location = new System.Drawing.Point(6, 103);
             this.saveQueue.Name = "saveQueue";
             this.saveQueue.Size = new System.Drawing.Size(150, 17);
             this.saveQueue.TabIndex = 9;
@@ -167,7 +200,7 @@
             // 
             // pagesLoad
             // 
-            this.pagesLoad.Location = new System.Drawing.Point(96, 168);
+            this.pagesLoad.Location = new System.Drawing.Point(224, 62);
             this.pagesLoad.MaxLength = 10;
             this.pagesLoad.Name = "pagesLoad";
             this.pagesLoad.Size = new System.Drawing.Size(48, 20);
@@ -177,7 +210,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 171);
+            this.label6.Location = new System.Drawing.Point(143, 66);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(75, 13);
             this.label6.TabIndex = 7;
@@ -186,7 +219,7 @@
             // checkArtwork
             // 
             this.checkArtwork.AutoSize = true;
-            this.checkArtwork.Location = new System.Drawing.Point(121, 12);
+            this.checkArtwork.Location = new System.Drawing.Point(146, 20);
             this.checkArtwork.Name = "checkArtwork";
             this.checkArtwork.Size = new System.Drawing.Size(134, 17);
             this.checkArtwork.TabIndex = 6;
@@ -196,7 +229,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 118);
+            this.label5.Location = new System.Drawing.Point(3, 87);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(314, 13);
             this.label5.TabIndex = 5;
@@ -204,7 +237,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(18, 134);
+            this.button2.Location = new System.Drawing.Point(65, 61);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -215,7 +248,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 81);
+            this.label3.Location = new System.Drawing.Point(3, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 13);
             this.label3.TabIndex = 2;
@@ -225,7 +258,7 @@
             // 
             this.labelMeta.AutoSize = true;
             this.labelMeta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelMeta.Location = new System.Drawing.Point(14, 94);
+            this.labelMeta.Location = new System.Drawing.Point(2, 58);
             this.labelMeta.Name = "labelMeta";
             this.labelMeta.Size = new System.Drawing.Size(57, 24);
             this.labelMeta.TabIndex = 3;
@@ -233,7 +266,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(18, 53);
+            this.button1.Location = new System.Drawing.Point(65, 16);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -244,7 +277,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 13);
+            this.label2.Location = new System.Drawing.Point(3, 3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 13);
             this.label2.TabIndex = 0;
@@ -254,7 +287,7 @@
             // 
             this.labelArt.AutoSize = true;
             this.labelArt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelArt.Location = new System.Drawing.Point(14, 26);
+            this.labelArt.Location = new System.Drawing.Point(2, 16);
             this.labelArt.Name = "labelArt";
             this.labelArt.Size = new System.Drawing.Size(57, 24);
             this.labelArt.TabIndex = 0;
@@ -387,9 +420,9 @@
             this.AssignControll});
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem16,
-            listViewItem17,
-            listViewItem18});
+            listViewItem4,
+            listViewItem5,
+            listViewItem6});
             this.listView1.Location = new System.Drawing.Point(6, 57);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(375, 201);
@@ -497,36 +530,15 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // audiosystemBox
+            // checkReopen
             // 
-            this.audiosystemBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.audiosystemBox.FormattingEnabled = true;
-            this.audiosystemBox.Items.AddRange(new object[] {
-            "WaveOut (Windows ONLY)",
-            "Jack+FFmpeg (Windows, Linux) - Requires jack and FFmpeg installed"});
-            this.audiosystemBox.Location = new System.Drawing.Point(93, 230);
-            this.audiosystemBox.Name = "audiosystemBox";
-            this.audiosystemBox.Size = new System.Drawing.Size(288, 21);
-            this.audiosystemBox.TabIndex = 10;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 233);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 13);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "Audio system:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(15, 214);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(137, 13);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "REQUIRES RESTART!";
+            this.checkReopen.AutoSize = true;
+            this.checkReopen.Location = new System.Drawing.Point(6, 126);
+            this.checkReopen.Name = "checkReopen";
+            this.checkReopen.Size = new System.Drawing.Size(284, 17);
+            this.checkReopen.TabIndex = 13;
+            this.checkReopen.Text = "Re-open audio device before beginning playing (JACK)";
+            this.checkReopen.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
@@ -608,5 +620,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ComboBox audiosystemBox;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox checkReopen;
     }
 }

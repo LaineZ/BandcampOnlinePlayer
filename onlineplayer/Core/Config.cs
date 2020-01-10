@@ -18,6 +18,7 @@ namespace onlineplayer.Core
         public static bool saveArtworks { get; set; }
         public static bool saveQueue { get; set; }
         public static int audioSystem { get; set; }
+        public static bool jackReopen { get; set; }
 
         public static void SaveConfig()
         {
@@ -57,6 +58,10 @@ namespace onlineplayer.Core
 
             xmlWriter.WriteStartElement("setting");
             xmlWriter.WriteAttributeString("audioSystem", audioSystem.ToString());
+            xmlWriter.WriteEndElement();
+
+            xmlWriter.WriteStartElement("setting");
+            xmlWriter.WriteAttributeString("jackReopen", jackReopen.ToString());
             xmlWriter.WriteEndElement();
 
             xmlWriter.WriteEndDocument();
@@ -110,6 +115,7 @@ namespace onlineplayer.Core
             saveArtworks = TryLoadBool("saveArtworks", true);
             saveQueue = TryLoadBool("saveQueue", true);
             useMidi = TryLoadBool("useMidi", false);
+            jackReopen = TryLoadBool("jackReopen", true);
         }
     }
 }

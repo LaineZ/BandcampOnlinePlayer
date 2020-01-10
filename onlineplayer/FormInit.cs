@@ -1,13 +1,9 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
@@ -27,6 +23,12 @@ namespace onlineplayer
         public FormInit()
         {
             InitializeComponent();
+            if (OSUtils.GetOperatingSystem() == OSPlatform.Linux)
+            {
+                label1.Enabled = false;
+                labelVersion.Enabled = false;
+                commitText.Enabled = false;
+            }
             labelVersion.Text = "BandcampOnlinePlayer \n" + Core.Info.version + "\ndeveloped by 140bpmdubstep";
             commitText.Text = Core.Info.commit;
             // add splashscreeens

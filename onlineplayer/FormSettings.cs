@@ -55,21 +55,23 @@ namespace onlineplayer
                 }
             }
 
-            for (int device = 0; device < MidiIn.NumberOfDevices; device++)
+            if (Core.Config.useMidi)
             {
-                comboBoxMidiInDevices.Items.Add(MidiIn.DeviceInfo(device).ProductName);
+                for (int device = 0; device < MidiIn.NumberOfDevices; device++)
+                {
+                    comboBoxMidiInDevices.Items.Add(MidiIn.DeviceInfo(device).ProductName);
+                }
+                if (comboBoxMidiInDevices.Items.Count > 0)
+                {
+                    comboBoxMidiInDevices.SelectedIndex = 0;
+                }
+                else
+                {
+                    comboBoxMidiInDevices.Enabled = false;
+                    listView1.Enabled = false;
+                    midiControl.Enabled = false;
+                }
             }
-            if (comboBoxMidiInDevices.Items.Count > 0)
-            {
-                comboBoxMidiInDevices.SelectedIndex = 0;
-            }
-            else
-            {
-                comboBoxMidiInDevices.Enabled = false;
-                listView1.Enabled = false;
-                midiControl.Enabled = false;
-            }
-
             int count = 0;
 
             foreach (MidiAction action in MidiActionsBindings.actionsMidi)
@@ -148,6 +150,7 @@ namespace onlineplayer
             Core.Config.midiDevice = comboBoxMidiInDevices.SelectedIndex;
 
             Core.Config.audioSystem = audiosystemBox.SelectedIndex;
+            Core.Config.jackReopen = checkReopen.Checked;
             Core.Config.SaveConfig();
         }
 

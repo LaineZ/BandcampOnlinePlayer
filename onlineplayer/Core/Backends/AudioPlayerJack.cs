@@ -6,6 +6,7 @@ using JackSharp;
 using System.IO;
 using System.Net;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace onlineplayer
 {
@@ -36,27 +37,41 @@ namespace onlineplayer
 
         public void Play(string url)
         {
+            if (Core.Config.jackReopen)
+            {
+                Close();
+            }
             if (outputDevice == null)
             {
                 Processor client = new Processor("BandcampOnlinePlayer", 0, 2, 0, 0, true);
                 outputDevice = new AudioOut(client);
             }
 
+            string fname = "ffmpeg";
+
+            if (OSUtils.GetOperatingSystem() == OSPlatform.Windows) { fname = @"ffmpeg.exe"; }
             var processStartInfo = new ProcessStartInfo
             {
-                FileName = @"ffmpeg",
+                FileName = fname,
                 Arguments = "-i \"" + url + "\" -f wav tempfile.wav",
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
                 CreateNoWindow = true,
             };
 
-            var process = Process.Start(processStartInfo);
-            process.WaitForExit(0);
-            audioFile = new WaveFileReader("tempfile.wav");
-            Wave16ToFloatProvider converter = new Wave16ToFloatProvider(audioFile);
-            outputDevice.Init(converter);
-            outputDevice.Play();
+            try
+            {
+                var process = Process.Start(processStartInfo);
+                process.WaitForExit(0);
+                audioFile = new WaveFileReader("tempfile.wav");
+                Wave16ToFloatProvider converter = new Wave16ToFloatProvider(audioFile);
+                outputDevice.Init(converter);
+                outputDevice.Play();
+            }
+            catch (System.ComponentModel.Win32Exception)
+            {
+                MessageBox.Show("FFmpeg is not installed in this system.", "Playback error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void PlayPause()
