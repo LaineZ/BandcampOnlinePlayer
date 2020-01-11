@@ -49,6 +49,8 @@ namespace onlineplayer
                 player = new AudioPlayerJack();
             }
 
+            //player.Init();
+
             if (viewStyle == "Tile")
             {
                 listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });

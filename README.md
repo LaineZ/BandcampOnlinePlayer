@@ -1,5 +1,6 @@
 # Bandcamp Online Player
-[Download](https://github.com/LaineZ/BandcampOnlinePlayer/releases/download/alpha-0.4/Player.zip)
+[Download (Win)](https://github.com/LaineZ/BandcampOnlinePlayer/releases/download/alpha-0.5/Player-Win.zip)
+[Download (Linux)](https://github.com/LaineZ/BandcampOnlinePlayer/releases/download/alpha-0.5/Player-Linux.zip)
 
 A simple client for bandcamp.com that's allows listing albums from main tag page much easier and provides features like play queue, shuffle mode, low memory usage rather than browser, etc.
 
@@ -11,16 +12,18 @@ A simple client for bandcamp.com that's allows listing albums from main tag page
 * Album explorer: allows to explore albums in specified tag
 * Album artwork viewer and downloader
 * Stream mode - adds all tracks in tag category and plays them
+* Search in albums in category or global search aroud website
+* Playlist saving feature
 * **AND MUCH MORE**
 ## Screenshots
 ![Screenshot1](https://i.imgur.com/WkLJkvg.png)
+![Audio now works via jack](https://i.imgur.com/DY17dBO.png)
 
 ## Building (Windows)
 Clone repository and open .sln file in Visual Studio with .NET Workload
 
 ## Building (Linux)
 In this moment linux version is very buggy
-![Audio now works via jack](https://i.imgur.com/DY17dBO.png)
 
 
 1. Install Mono and MonoDevelop and open .sln file in MonoDevelop

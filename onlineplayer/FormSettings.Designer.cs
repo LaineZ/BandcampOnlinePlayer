@@ -44,6 +44,7 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkReopen = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.audiosystemBox = new System.Windows.Forms.ComboBox();
@@ -81,7 +82,6 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.checkReopen = new System.Windows.Forms.CheckBox();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -156,6 +156,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // checkReopen
+            // 
+            this.checkReopen.AutoSize = true;
+            this.checkReopen.Location = new System.Drawing.Point(6, 126);
+            this.checkReopen.Name = "checkReopen";
+            this.checkReopen.Size = new System.Drawing.Size(284, 17);
+            this.checkReopen.TabIndex = 13;
+            this.checkReopen.Text = "Re-open audio device before beginning playing (JACK)";
+            this.checkReopen.UseVisualStyleBackColor = true;
             // 
             // label11
             // 
@@ -529,16 +539,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // checkReopen
-            // 
-            this.checkReopen.AutoSize = true;
-            this.checkReopen.Location = new System.Drawing.Point(6, 126);
-            this.checkReopen.Name = "checkReopen";
-            this.checkReopen.Size = new System.Drawing.Size(284, 17);
-            this.checkReopen.TabIndex = 13;
-            this.checkReopen.Text = "Re-open audio device before beginning playing (JACK)";
-            this.checkReopen.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
