@@ -118,6 +118,18 @@ namespace onlineplayer
             // {"filters":{ "format":"all","location":0,"sort":"pop","tags":["experimental"] },"page":2}
             toolStream.Enabled = true;
             toolRefresh.Enabled = false;
+
+            string[] tags = textTags.Text.Split(' ');
+            List<string> tagsFixed = new List<string>();
+
+            foreach (string tag in tags)
+            {
+                if (tag.Length > 0)
+                {
+                    tagsFixed.Add("\"" + tag + "\"");
+                }
+            }
+
             for (int i = 1; i < int.Parse(getSettingsAttr("settings.xml", "loadPages")); i++)
             {
                 labelStatus.Text = "Loading ablums tag data: " + i + "/" + "100";
@@ -126,10 +138,11 @@ namespace onlineplayer
 
                 if (!toolSort.Checked) {sorting = "date"; } // if not popularity
 
-                string fname = "artwork_cache/" + i + "_" + listTags.SelectedItem + "_" + sorting + ".json";
+                string fname = "artwork_cache/" + i + "_" + string.Join(",", tags) + "_" + sorting + ".json";
                 if (!File.Exists(fname))
                 {
-                    string content = "{\"filters\":{ \"format\":\"all\",\"location\":0,\"sort\":\"" + sorting + "\",\"tags\":[\"" + listTags.SelectedItem + "\"] },\"page\":" + i + "}";
+                    string content = "{\"filters\":{ \"format\":\"all\",\"location\":0,\"sort\":\"" + sorting + "\",\"tags\":[" + string.Join(",", tagsFixed) + "] },\"page\":" + i + "}";
+                    //Console.WriteLine(content);
                     HttpContent c = new StringContent(content, Encoding.UTF8, "application/json");
                     var response = await client.PostAsync("https://bandcamp.com/api/hub/2/dig_deeper", c);
                     responseString = await response.Content.ReadAsStringAsync();
@@ -154,7 +167,7 @@ namespace onlineplayer
                 {
                     if (ekj is NullReferenceException)
                     {
-                        MessageBox.Show("Albums not recived", "Error getting data...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Album data not recieved check tags and try again", "Error getting data...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
                     //MessageBox.Show("Error occured:" + ekj.Message, "пиздец", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -164,6 +177,7 @@ namespace onlineplayer
 
             UpdateAlbumsImages();
             toolRefresh.Enabled = true;
+            button1.Enabled = true;
         }
 
         private void UpdateInfo()

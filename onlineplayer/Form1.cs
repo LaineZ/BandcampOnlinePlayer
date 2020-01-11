@@ -163,10 +163,9 @@ namespace onlineplayer
             listTags.Enabled = true;
         }
 
-        private async void listBox1_Click(object sender, EventArgs e)
+        private void listBox1_Click(object sender, EventArgs e)
         {
-            listTags.Enabled = false;
-            UpdateAlbums();
+            textTags.Text += listTags.SelectedItem + " ";
         }
 
         private void AlbumList(object sender, EventArgs e)
@@ -588,6 +587,9 @@ namespace onlineplayer
                             case "b":
                                 lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name, "Artist/Band" });
                                 break;
+                            case "t":
+                                lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name, "Track" });
+                                break;
                             default:
                                 lst = new ListViewItem(new string[] { searchItem.name, searchItem.band_name, "Unknown: " + searchItem.type });
                                 break;
@@ -605,23 +607,46 @@ namespace onlineplayer
 
         private async void listGlobalSearch_DoubleClick(object sender, EventArgs e)
         {
-            String response = await httpTools.MakeRequestAsync(searchResults[listGlobalSearch.FocusedItem.Index].url);
-            Album album = httpTools.GetAlbum(response);
-
-            foreach (Track trk in album.Tracks)
+            if (listGlobalSearch.FocusedItem.SubItems[2].Text == "Album" || listGlobalSearch.FocusedItem.SubItems[2].Text == "Track")
             {
-                ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
-                queueList.Items.Add(lst);
-                trk.ArtistUrl = "https://" + searchResults[listGlobalSearch.FocusedItem.Index].url.Split('/')[2];
-                queueTracks.Add(trk);
-            }
+                String response = await httpTools.MakeRequestAsync(searchResults[listGlobalSearch.FocusedItem.Index].url);
+                Album album = httpTools.GetAlbum(response);
 
-            UpdateQueueImages();
+                foreach (Track trk in album.Tracks)
+                {
+                    ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
+                    queueList.Items.Add(lst);
+                    trk.ArtistUrl = "https://" + searchResults[listGlobalSearch.FocusedItem.Index].url.Split('/')[2];
+                    queueTracks.Add(trk);
+                }
+
+                UpdateQueueImages();
+            }
+            else
+            {
+                DialogResult res = MessageBox.Show("Open webpage page in external browser?", searchResults[listGlobalSearch.FocusedItem.Index].url, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (res == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(searchResults[listGlobalSearch.FocusedItem.Index].url);
+                }
+            }
         }
 
         private void playToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             PlayOffset();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedIndex = 1;
+            UpdateAlbums();
+            button1.Enabled = false;
+        }
+
+        private void textTags_TextChanged(object sender, EventArgs e)
+        {
+            button1.Enabled = textTags.Text.Length > 0;
         }
     }
 }
