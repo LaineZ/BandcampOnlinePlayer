@@ -121,6 +121,8 @@ namespace onlineplayer
 
             string[] tags = textTags.Text.Split(' ');
             List<string> tagsFixed = new List<string>();
+            int tries = 0;
+
 
             foreach (string tag in tags)
             {
@@ -156,6 +158,11 @@ namespace onlineplayer
                 try
                 {
                     RootObject items = JsonConvert.DeserializeObject<RootObject>(responseString);
+                    if (items.items.Count <= 0)
+                    {
+                        tries++;
+                    }
+
                     foreach (var item in items.items)
                     {
                         ListViewItem lst = new ListViewItem(new string[] { item.title, item.artist });
@@ -172,6 +179,8 @@ namespace onlineplayer
                     }
                     //MessageBox.Show("Error occured:" + ekj.Message, "пиздец", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                if (tries > 5) { break; }
                 labelStatus.Text = "Done!";
             }
 

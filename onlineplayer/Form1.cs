@@ -404,7 +404,7 @@ namespace onlineplayer
 
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
-            var res = MessageBox.Show("Clear queue items completely?", "Queue manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var res = MessageBox.Show("Clear queue items completely?", "Queue manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (res == DialogResult.Yes)
             {
                 queueTracks.Clear();
@@ -479,6 +479,7 @@ namespace onlineplayer
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            File.Delete("queueList.xml");
             if (getSettingsAttrBool("settings.xml", "saveQueue") && !streamMode && queueTracks.Count > 0)
             {
                 Playlist.SavePlaylist("queueList.xml", queueTracks);
