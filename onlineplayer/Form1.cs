@@ -62,7 +62,6 @@ namespace onlineplayer
             }
 
             queueList.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
-            listGlobalSearch.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
             queueList.TileSize = new Size(256, 64);
             Directory.CreateDirectory("artwork_cache");
 
@@ -414,11 +413,7 @@ namespace onlineplayer
 
         }
 
-        private async void Form1_Load(object sender, EventArgs e)
-        {
-        }
-
-        private async void toolStripTextBox1_TextChanged(object sender, EventArgs e)
+        private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
         {
             listAlbums.Items.Clear();
             foreach (var alb in itemsList)
@@ -648,6 +643,11 @@ namespace onlineplayer
         private void textTags_TextChanged(object sender, EventArgs e)
         {
             button1.Enabled = textTags.Text.Length > 0;
+        }
+
+        private void openAlbumWebpageInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(queueTracks[queueList.FocusedItem.Index].ArtistUrl + queueTracks[queueList.FocusedItem.Index].Url);
         }
     }
 }

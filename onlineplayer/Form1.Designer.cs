@@ -73,7 +73,9 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.textTags = new System.Windows.Forms.TextBox();
             this.listTags = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -85,8 +87,9 @@
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.textTags = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Aritst = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -428,7 +431,7 @@
             this.openAlbumWebpageInBrowserToolStripMenuItem,
             this.blockSelectedArtiststreamingModeToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(277, 92);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(277, 114);
             // 
             // playToolStripMenuItem1
             // 
@@ -451,6 +454,7 @@
             this.openAlbumWebpageInBrowserToolStripMenuItem.Name = "openAlbumWebpageInBrowserToolStripMenuItem";
             this.openAlbumWebpageInBrowserToolStripMenuItem.Size = new System.Drawing.Size(276, 22);
             this.openAlbumWebpageInBrowserToolStripMenuItem.Text = "Open album webpage in browser";
+            this.openAlbumWebpageInBrowserToolStripMenuItem.Click += new System.EventHandler(this.openAlbumWebpageInBrowserToolStripMenuItem_Click);
             // 
             // blockSelectedArtiststreamingModeToolStripMenuItem
             // 
@@ -515,6 +519,19 @@
             this.tabPage1.Text = "Tags";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Enabled = false;
+            this.button1.Location = new System.Drawing.Point(219, 45);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(423, 33);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Load";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -525,6 +542,16 @@
             this.label1.Size = new System.Drawing.Size(327, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Input or select tags from list (multiple supported, separate by spaces)";
+            // 
+            // textTags
+            // 
+            this.textTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textTags.Location = new System.Drawing.Point(219, 19);
+            this.textTags.Name = "textTags";
+            this.textTags.Size = new System.Drawing.Size(423, 20);
+            this.textTags.TabIndex = 1;
+            this.textTags.TextChanged += new System.EventHandler(this.textTags_TextChanged);
             // 
             // listTags
             // 
@@ -614,6 +641,10 @@
             this.listGlobalSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listGlobalSearch.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Title,
+            this.Aritst,
+            this.Type});
             this.listGlobalSearch.HideSelection = false;
             this.listGlobalSearch.Location = new System.Drawing.Point(0, 26);
             this.listGlobalSearch.Name = "listGlobalSearch";
@@ -621,7 +652,7 @@
             this.listGlobalSearch.TabIndex = 1;
             this.listGlobalSearch.TileSize = new System.Drawing.Size(256, 64);
             this.listGlobalSearch.UseCompatibleStateImageBehavior = false;
-            this.listGlobalSearch.View = System.Windows.Forms.View.Tile;
+            this.listGlobalSearch.View = System.Windows.Forms.View.Details;
             this.listGlobalSearch.DoubleClick += new System.EventHandler(this.listGlobalSearch_DoubleClick);
             // 
             // textBox1
@@ -655,28 +686,20 @@
             this.openInBrowserToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem1.Text = "Open in browser";
             // 
-            // textTags
+            // Title
             // 
-            this.textTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textTags.Location = new System.Drawing.Point(219, 19);
-            this.textTags.Name = "textTags";
-            this.textTags.Size = new System.Drawing.Size(423, 20);
-            this.textTags.TabIndex = 1;
-            this.textTags.TextChanged += new System.EventHandler(this.textTags_TextChanged);
+            this.Title.Text = "Title";
+            this.Title.Width = 183;
             // 
-            // button1
+            // Aritst
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(219, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(423, 33);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Load";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Aritst.Text = "Artist";
+            this.Aritst.Width = 215;
+            // 
+            // Type
+            // 
+            this.Type.Text = "Type";
+            this.Type.Width = 92;
             // 
             // Form1
             // 
@@ -698,7 +721,6 @@
             this.Name = "Form1";
             this.Text = "Bandcamp online player";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -777,6 +799,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textTags;
+        private System.Windows.Forms.ColumnHeader Title;
+        private System.Windows.Forms.ColumnHeader Aritst;
+        private System.Windows.Forms.ColumnHeader Type;
     }
 }
 

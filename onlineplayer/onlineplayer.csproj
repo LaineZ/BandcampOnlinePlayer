@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\1.gif" />
     <None Include="Resources\splashscreen2.jpg" />
     <None Include="Resources\splashscreen2.bmp" />
     <None Include="Resources\splash_screen.jpg" />
