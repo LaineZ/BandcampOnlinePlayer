@@ -34,22 +34,13 @@ namespace onlineplayer
 
         Core.IAudioPlayer player;
 
-        public Form1(List<string> tags, List<Track> restoreQueue)
+        public Form1(List<string> tags, List<Track> restoreQueue, Core.IAudioPlayer plr)
         {
             InitializeComponent();
-
-            if (Core.Config.audioSystem == 0)
-            {
-                Console.WriteLine("using wavout");
-                player = new AudioPlayerMF();
-            }
-            if (Core.Config.audioSystem == 1)
-            {
-                Console.WriteLine("using jack");
-                player = new AudioPlayerJack();
-            }
-
+            player = plr;
             //player.Init();
+
+
 
             if (viewStyle == "Tile")
             {
@@ -81,6 +72,8 @@ namespace onlineplayer
                     contextMenuStrip2.Show(Cursor.Position);
                 }
             };
+
+            comboFormat.SelectedIndex = 0;
 
             toolSearch.Enabled = false;
 
@@ -177,6 +170,9 @@ namespace onlineplayer
             try
             {
                 trackSeek.Enabled = true;
+                toolPlay.Enabled = true;
+                toolNext.Enabled = true;
+                toolPrev.Enabled = true;
                 trackSeek.Value = (int)player.GetCurrentTimeTotalSeconds();
                 TimeSpan time = TimeSpan.FromSeconds(player.GetCurrentTimeTotalSeconds());
                 label3.Text = time.ToString(@"hh\:mm\:ss");
@@ -479,7 +475,14 @@ namespace onlineplayer
             {
                 Playlist.SavePlaylist("queueList.xml", queueTracks);
             }
-            player.Close();
+            try
+            {
+                player.Close();
+            }
+            catch (NullReferenceException)
+            {
+            
+            }
             File.Delete("tempfile.wav");
         }
 
@@ -637,12 +640,12 @@ namespace onlineplayer
         {
             tabControl1.SelectedIndex = 1;
             UpdateAlbums();
-            button1.Enabled = false;
+            buttonLoad.Enabled = false;
         }
 
         private void textTags_TextChanged(object sender, EventArgs e)
         {
-            button1.Enabled = textTags.Text.Length > 0;
+            buttonLoad.Enabled = textTags.Text.Length > 0;
         }
 
         private void openAlbumWebpageInBrowserToolStripMenuItem_Click(object sender, EventArgs e)

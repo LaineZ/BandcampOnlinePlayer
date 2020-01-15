@@ -140,10 +140,10 @@ namespace onlineplayer
 
                 if (!toolSort.Checked) {sorting = "date"; } // if not popularity
 
-                string fname = "artwork_cache/" + i + "_" + string.Join(",", tags) + "_" + sorting + ".json";
+                string fname = "artwork_cache/" + i + "_" + string.Join(",", tags) + "_" + sorting + "_" + comboFormat.SelectedItem +".json";
                 if (!File.Exists(fname))
                 {
-                    string content = "{\"filters\":{ \"format\":\"all\",\"location\":0,\"sort\":\"" + sorting + "\",\"tags\":[" + string.Join(",", tagsFixed) + "] },\"page\":" + i + "}";
+                    string content = "{\"filters\":{ \"format\":\"" + comboFormat.SelectedItem + "\",\"location\":0,\"sort\":\"" + sorting + "\",\"tags\":[" + string.Join(",", tagsFixed) + "] },\"page\":" + i + "}";
                     //Console.WriteLine(content);
                     HttpContent c = new StringContent(content, Encoding.UTF8, "application/json");
                     var response = await client.PostAsync("https://bandcamp.com/api/hub/2/dig_deeper", c);
@@ -186,7 +186,7 @@ namespace onlineplayer
 
             UpdateAlbumsImages();
             toolRefresh.Enabled = true;
-            button1.Enabled = true;
+            buttonLoad.Enabled = true;
         }
 
         private void UpdateInfo()

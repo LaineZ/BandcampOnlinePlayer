@@ -16,6 +16,7 @@ namespace onlineplayer
         bool processedData = false;
         List<Track> restoreQueue = new List<Track>();
         List<string> tags = new List<string>();
+        Core.IAudioPlayer player;
 
         // Random splashscreen
         List<Image> img = new List<Image>(2);
@@ -70,6 +71,33 @@ namespace onlineplayer
                 {
                     tags.Add(att.Value.Replace("/tag/", ""));
                 }
+            }
+
+            label1.Text = "Opening audio devices...";
+
+            switch (Core.Config.audioSystem)
+            {
+                case 0:
+                    Console.WriteLine("using wavout");
+                    player = new AudioPlayerMF();
+                    break;
+                case 1:
+                    Console.WriteLine("using jack");
+                    player = new AudioPlayerJack();
+                    break;
+                default:
+                    DialogResult res = MessageBox.Show("Unalbe to initialize audio system!\nPressing 'Retry' will be set audiosystem to 'WaveOut'", "Error opening audio device" + Core.Config.audioSystem, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+                    if (res == DialogResult.Retry)
+                    {
+                        Console.WriteLine("using wavout");
+                        player = new AudioPlayerMF();
+                        Core.Config.audioSystem = 0;
+                    }
+                    if (res == DialogResult.Abort)
+                    {
+                        Application.Exit();
+                    }
+                    break;
             }
 
             if (File.Exists("queueList.xml") && getSettingsAttrBool("settings.xml", "saveQueue"))
@@ -148,7 +176,6 @@ namespace onlineplayer
             {
                 processedData = true;
             }
-
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -169,7 +196,7 @@ namespace onlineplayer
         {
             if (processedData)
             {
-                Form mainForm = new Form1(tags, restoreQueue);
+                Form mainForm = new Form1(tags, restoreQueue, player);
                 mainForm.Show();
                 label1.Text = "";
                 mainForm.FormClosed += MainForm_FormClosed;

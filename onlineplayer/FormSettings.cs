@@ -123,6 +123,8 @@ namespace onlineplayer
             albumSize.BackColor = Color.FromArgb(255, 255, 255);
             pagesLoad.BackColor = Color.FromArgb(255, 255, 255);
 
+            Core.Config.viewType = albumView.Text;
+
             if (int.Parse(albumSize.Text) <= 124)
             {
                 Core.Config.viewSize = int.Parse(albumSize.Text);

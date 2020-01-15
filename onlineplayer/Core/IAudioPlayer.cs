@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace onlineplayer.Core
 {
-    interface IAudioPlayer
+    public interface IAudioPlayer
     {
         void Init();
         void Close();

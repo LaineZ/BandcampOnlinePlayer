@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.commitText = new onlineplayer.TransparentLabel();
             this.labelVersion = new onlineplayer.TransparentLabel();
             this.label1 = new onlineplayer.TransparentLabel();
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,6 +43,12 @@
             // 
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 500;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // pictureBox1
             // 
@@ -52,12 +58,6 @@
             this.pictureBox1.Size = new System.Drawing.Size(640, 360);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
-            // 
-            // timer2
-            // 
-            this.timer2.Enabled = true;
-            this.timer2.Interval = 500;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // commitText
             // 
@@ -88,7 +88,7 @@
             this.label1.ForeColor = System.Drawing.Color.Gray;
             this.label1.Location = new System.Drawing.Point(12, 336);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(390, 20);
+            this.label1.Size = new System.Drawing.Size(429, 20);
             this.label1.TabIndex = 3;
             this.label1.TabStop = false;
             this.label1.Text = "Loading...";

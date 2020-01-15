@@ -38,7 +38,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolRefresh = new System.Windows.Forms.ToolStripButton();
-            this.toolSort = new System.Windows.Forms.ToolStripButton();
             this.toolSettings = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolSavePlaylist = new System.Windows.Forms.ToolStripButton();
@@ -73,7 +72,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonLoad = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textTags = new System.Windows.Forms.TextBox();
             this.listTags = new System.Windows.Forms.ListBox();
@@ -83,13 +82,16 @@
             this.queueList = new System.Windows.Forms.ListView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listGlobalSearch = new System.Windows.Forms.ListView();
+            this.Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Aritst = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Aritst = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.comboFormat = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.toolSort = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -176,7 +178,6 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolRefresh,
-            this.toolSort,
             this.toolSettings,
             this.toolStripSeparator3,
             this.toolSavePlaylist,
@@ -211,19 +212,6 @@
             this.toolRefresh.Text = "Refresh";
             this.toolRefresh.ToolTipText = "Refresh albums";
             this.toolRefresh.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // toolSort
-            // 
-            this.toolSort.Checked = true;
-            this.toolSort.CheckOnClick = true;
-            this.toolSort.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolSort.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
-            this.toolSort.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolSort.Name = "toolSort";
-            this.toolSort.Size = new System.Drawing.Size(65, 22);
-            this.toolSort.Text = "Sorting";
-            this.toolSort.ToolTipText = "Sorting:\r\nEnabled - sort by popularity. \r\nDisabled: sort by newest";
-            this.toolSort.Click += new System.EventHandler(this.toolSort_Click);
             // 
             // toolSettings
             // 
@@ -293,6 +281,7 @@
             // toolPrev
             // 
             this.toolPrev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolPrev.Enabled = false;
             this.toolPrev.Image = global::onlineplayer.Properties.Resources.baseline_skip_previous_black_18dp;
             this.toolPrev.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolPrev.Name = "toolPrev";
@@ -304,6 +293,7 @@
             // toolPlay
             // 
             this.toolPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolPlay.Enabled = false;
             this.toolPlay.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
             this.toolPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolPlay.Name = "toolPlay";
@@ -315,6 +305,7 @@
             // toolNext
             // 
             this.toolNext.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolNext.Enabled = false;
             this.toolNext.Image = global::onlineplayer.Properties.Resources.ic_skip_next_black_18dp;
             this.toolNext.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolNext.Name = "toolNext";
@@ -371,7 +362,6 @@
             // 
             // toolSearch
             // 
-            this.toolSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolSearch.Name = "toolSearch";
             this.toolSearch.Size = new System.Drawing.Size(200, 25);
             this.toolSearch.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
@@ -431,7 +421,7 @@
             this.openAlbumWebpageInBrowserToolStripMenuItem,
             this.blockSelectedArtiststreamingModeToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(277, 114);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(277, 92);
             // 
             // playToolStripMenuItem1
             // 
@@ -507,7 +497,10 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.toolSort);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.comboFormat);
+            this.tabPage1.Controls.Add(this.buttonLoad);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.textTags);
             this.tabPage1.Controls.Add(this.listTags);
@@ -519,18 +512,18 @@
             this.tabPage1.Text = "Tags";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonLoad
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.buttonLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Enabled = false;
-            this.button1.Location = new System.Drawing.Point(219, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(423, 33);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Load";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonLoad.Enabled = false;
+            this.buttonLoad.Location = new System.Drawing.Point(219, 85);
+            this.buttonLoad.Name = "buttonLoad";
+            this.buttonLoad.Size = new System.Drawing.Size(422, 33);
+            this.buttonLoad.TabIndex = 3;
+            this.buttonLoad.Text = "Load";
+            this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -655,6 +648,21 @@
             this.listGlobalSearch.View = System.Windows.Forms.View.Details;
             this.listGlobalSearch.DoubleClick += new System.EventHandler(this.listGlobalSearch_DoubleClick);
             // 
+            // Title
+            // 
+            this.Title.Text = "Title";
+            this.Title.Width = 183;
+            // 
+            // Aritst
+            // 
+            this.Aritst.Text = "Artist";
+            this.Aritst.Width = 215;
+            // 
+            // Type
+            // 
+            this.Type.Text = "Type";
+            this.Type.Width = 92;
+            // 
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -686,20 +694,42 @@
             this.openInBrowserToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem1.Text = "Open in browser";
             // 
-            // Title
+            // comboFormat
             // 
-            this.Title.Text = "Title";
-            this.Title.Width = 183;
+            this.comboFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFormat.FormattingEnabled = true;
+            this.comboFormat.Items.AddRange(new object[] {
+            "all",
+            "cassette",
+            "cd",
+            "digital",
+            "vinyl"});
+            this.comboFormat.Location = new System.Drawing.Point(219, 58);
+            this.comboFormat.Name = "comboFormat";
+            this.comboFormat.Size = new System.Drawing.Size(309, 21);
+            this.comboFormat.Sorted = true;
+            this.comboFormat.TabIndex = 4;
             // 
-            // Aritst
+            // label2
             // 
-            this.Aritst.Text = "Artist";
-            this.Aritst.Width = 215;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(216, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Format:";
             // 
-            // Type
+            // toolSort
             // 
-            this.Type.Text = "Type";
-            this.Type.Width = 92;
+            this.toolSort.AutoSize = true;
+            this.toolSort.Checked = true;
+            this.toolSort.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolSort.Location = new System.Drawing.Point(534, 60);
+            this.toolSort.Name = "toolSort";
+            this.toolSort.Size = new System.Drawing.Size(107, 17);
+            this.toolSort.TabIndex = 6;
+            this.toolSort.Text = "Sort by popularity";
+            this.toolSort.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -776,7 +806,6 @@
         private System.Windows.Forms.ToolStripButton toolMidiClose;
         private System.Windows.Forms.ToolStripButton toolMidiOpen;
         private System.Windows.Forms.ToolStripTextBox toolSearch;
-        private System.Windows.Forms.ToolStripButton toolSort;
         private System.Windows.Forms.ToolStripButton toolSavePlaylist;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripButton openPlaylist;
@@ -797,11 +826,14 @@
         private System.Windows.Forms.ToolStripMenuItem addToQueueToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openInBrowserToolStripMenuItem1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.TextBox textTags;
         private System.Windows.Forms.ColumnHeader Title;
         private System.Windows.Forms.ColumnHeader Aritst;
         private System.Windows.Forms.ColumnHeader Type;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboFormat;
+        private System.Windows.Forms.CheckBox toolSort;
     }
 }
 
