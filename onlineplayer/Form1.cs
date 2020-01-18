@@ -24,9 +24,6 @@ namespace onlineplayer
         int offset = 0;
         bool streamMode = false;
 
-        int imgSize = int.Parse(getSettingsAttr("settings.xml", "albumViewSize"));
-        bool downloadImgs = getSettingsAttrBool("settings.xml", "saveArtworks");
-        string viewStyle = getSettingsAttr("settings.xml", "albumViewType");
         HttpTools httpTools = new HttpTools();
 
 
@@ -38,16 +35,32 @@ namespace onlineplayer
             player = plr;
             //player.Init();
 
-
-
-            if (viewStyle == "Tile")
+            switch (Core.Config.viewType)
             {
-                listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
-                listAlbums.TileSize = new Size(256, imgSize);
-            }
-            else
-            {
-                listAlbums.View = View.LargeIcon;
+                case "Tile":
+                    listAlbums.Columns.Clear();
+                    listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
+                    listAlbums.TileSize = new Size(256, Core.Config.viewSize);
+                    break;
+                case "Large Images":
+                    if (listAlbums.LargeImageList != null)
+                    {
+                        listAlbums.LargeImageList.ImageSize = new Size(Core.Config.viewSize, Core.Config.viewSize);
+                    }
+                    listAlbums.View = View.LargeIcon;
+                    break;
+                case "Details":
+                    listAlbums.Columns.Clear();
+                    listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader()});
+                    listAlbums.Columns[0].Text = "Album name";
+                    listAlbums.Columns[1].Text = "Artist";
+                    listAlbums.View = View.Details;
+                    break;
+                default:
+                    listAlbums.Columns.Clear();
+                    listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
+                    listAlbums.TileSize = new Size(256, Core.Config.viewSize);
+                    break;
             }
 
             queueList.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
@@ -225,7 +238,8 @@ namespace onlineplayer
         {
             try
             {
-                System.Diagnostics.Process.Start(itemsList[listAlbums.FocusedItem.Index].tralbum_url);
+                Item selectedAlbum = itemsList.Find(item => item.artist.Equals(listAlbums.FocusedItem.SubItems[1].Text) && item.title.Equals(listAlbums.FocusedItem.SubItems[0].Text));
+                System.Diagnostics.Process.Start(selectedAlbum.tralbum_url);
             }
             catch (NullReferenceException)
             {
@@ -644,6 +658,38 @@ namespace onlineplayer
         private void openAlbumWebpageInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(queueTracks[queueList.FocusedItem.Index].ArtistUrl + queueTracks[queueList.FocusedItem.Index].Url);
+        }
+
+        private void tileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listAlbums.View = View.Tile;
+            listAlbums.Columns.Clear();
+            listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
+            listAlbums.TileSize = new Size(256, Core.Config.viewSize);
+        }
+
+        private void largeImagesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listAlbums.View = View.LargeIcon;
+        }
+
+        private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listAlbums.Columns.Clear();
+            listAlbums.Columns.AddRange(new ColumnHeader[] { new ColumnHeader(), new ColumnHeader(), new ColumnHeader() });
+            listAlbums.Columns[0].Text = "Album name";
+            listAlbums.Columns[1].Text = "Artist";
+            listAlbums.View = View.Details;
+        }
+
+        private void ascendToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listAlbums.Sorting = SortOrder.Ascending;
+        }
+
+        private void descendToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            listAlbums.Sorting = SortOrder.Descending;
         }
     }
 }

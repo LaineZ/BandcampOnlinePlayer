@@ -34,12 +34,12 @@ namespace onlineplayer
             }
         }
 
-        private async void UpdateAlbumsImages()
+        public async void UpdateAlbumsImages()
         {
             ImageList il = new ImageList();
             int count = 0;
-            il.ImageSize = new System.Drawing.Size(imgSize, imgSize);
-            if (downloadImgs)
+            il.ImageSize = new System.Drawing.Size(Core.Config.viewSize, Core.Config.viewSize);
+            if (Core.Config.saveArtworks)
             {
                 foreach (ListViewItem listItem in listAlbums.Items)
                 {
@@ -195,6 +195,7 @@ namespace onlineplayer
             {
                 labelTrackName.Text = queueTracks[offset].Title;
                 labelTrackInfo.Text = queueTracks[offset].Album.Artist + "\n" + queueTracks[offset].Album.Title + "\n" + queueTracks[offset].Album.ReleaseDate + "\nTrack number " + offset;
+                ActiveForm.Text = queueTracks[offset].Album.Artist + " - " + queueTracks[offset].Album.Title + " :: BandcampOnlinePlayer";
             }
             catch (ArgumentOutOfRangeException)
             {

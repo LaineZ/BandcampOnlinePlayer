@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Play/Pause",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Volume up",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
             "Playback: Volume down",
             ""}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
@@ -61,7 +61,6 @@
             this.labelArt = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
             this.albumSize = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -82,6 +81,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -332,28 +332,18 @@
             this.tabPage2.Text = "Apperance";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(7, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Restart requied!";
-            // 
             // albumSize
             // 
-            this.albumSize.Location = new System.Drawing.Point(10, 72);
+            this.albumSize.Location = new System.Drawing.Point(144, 20);
             this.albumSize.Name = "albumSize";
-            this.albumSize.Size = new System.Drawing.Size(121, 20);
+            this.albumSize.Size = new System.Drawing.Size(47, 20);
             this.albumSize.TabIndex = 3;
             this.albumSize.Text = "64";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 56);
+            this.label8.Location = new System.Drawing.Point(141, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(165, 13);
             this.label8.TabIndex = 2;
@@ -362,11 +352,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 16);
+            this.label7.Location = new System.Drawing.Point(7, 3);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 13);
+            this.label7.Size = new System.Drawing.Size(128, 13);
             this.label7.TabIndex = 1;
-            this.label7.Text = "Album view type:";
+            this.label7.Text = "Default albums view type:";
             // 
             // albumView
             // 
@@ -374,8 +364,9 @@
             this.albumView.FormattingEnabled = true;
             this.albumView.Items.AddRange(new object[] {
             "Tile",
-            "Large Images"});
-            this.albumView.Location = new System.Drawing.Point(10, 32);
+            "Large Images",
+            "Details"});
+            this.albumView.Location = new System.Drawing.Point(10, 19);
             this.albumView.Name = "albumView";
             this.albumView.Size = new System.Drawing.Size(121, 21);
             this.albumView.TabIndex = 0;
@@ -430,9 +421,9 @@
             this.AssignControll});
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
+            listViewItem4,
+            listViewItem5,
+            listViewItem6});
             this.listView1.Location = new System.Drawing.Point(6, 57);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(375, 201);
@@ -540,6 +531,16 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(193, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(196, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Restart or redrawing list required!";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -600,7 +601,6 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label4;
@@ -621,5 +621,6 @@
         private System.Windows.Forms.ComboBox audiosystemBox;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox checkReopen;
+        private System.Windows.Forms.Label label1;
     }
 }

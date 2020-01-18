@@ -54,6 +54,12 @@ namespace onlineplayer
             {
                 Core.Config.LoadConfig();
             }
+
+            if (!File.Exists("blocked.txt"))
+            {
+                File.Create("blocked.txt");
+            }
+
             HttpTools httpTools = new HttpTools();
 
 

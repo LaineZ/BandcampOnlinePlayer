@@ -60,6 +60,10 @@
             this.playToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAlbumTracksInQueueifAvailbleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewStyleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.largeImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.detailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.playToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,6 +76,9 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.toolSort = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboFormat = new System.Windows.Forms.ComboBox();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textTags = new System.Windows.Forms.TextBox();
@@ -89,9 +96,9 @@
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.comboFormat = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.toolSort = new System.Windows.Forms.CheckBox();
+            this.sortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ascendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.descendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -361,6 +368,7 @@
             // 
             // toolSearch
             // 
+            this.toolSearch.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolSearch.Name = "toolSearch";
             this.toolSearch.Size = new System.Drawing.Size(200, 25);
             this.toolSearch.TextChanged += new System.EventHandler(this.toolStripTextBox1_TextChanged);
@@ -375,9 +383,11 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.playToolStripMenuItem,
             this.addAlbumTracksInQueueifAvailbleToolStripMenuItem,
-            this.openInBrowserToolStripMenuItem});
+            this.openInBrowserToolStripMenuItem,
+            this.viewStyleToolStripMenuItem,
+            this.sortingToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(278, 114);
             // 
             // playToolStripMenuItem
             // 
@@ -389,6 +399,7 @@
             // 
             // addAlbumTracksInQueueifAvailbleToolStripMenuItem
             // 
+            this.addAlbumTracksInQueueifAvailbleToolStripMenuItem.Image = global::onlineplayer.Properties.Resources.ic_add_18pt;
             this.addAlbumTracksInQueueifAvailbleToolStripMenuItem.Name = "addAlbumTracksInQueueifAvailbleToolStripMenuItem";
             this.addAlbumTracksInQueueifAvailbleToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.addAlbumTracksInQueueifAvailbleToolStripMenuItem.Text = "Add album tracks in queue (if availble)";
@@ -396,10 +407,42 @@
             // 
             // openInBrowserToolStripMenuItem
             // 
+            this.openInBrowserToolStripMenuItem.Image = global::onlineplayer.Properties.Resources.ic_open_in_browser_18pt;
             this.openInBrowserToolStripMenuItem.Name = "openInBrowserToolStripMenuItem";
             this.openInBrowserToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
             this.openInBrowserToolStripMenuItem.Text = "Open album page in browser";
             this.openInBrowserToolStripMenuItem.Click += new System.EventHandler(this.openInBrowserToolStripMenuItem_Click);
+            // 
+            // viewStyleToolStripMenuItem
+            // 
+            this.viewStyleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tileToolStripMenuItem,
+            this.largeImagesToolStripMenuItem,
+            this.detailsToolStripMenuItem});
+            this.viewStyleToolStripMenuItem.Name = "viewStyleToolStripMenuItem";
+            this.viewStyleToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.viewStyleToolStripMenuItem.Text = "View style";
+            // 
+            // tileToolStripMenuItem
+            // 
+            this.tileToolStripMenuItem.Name = "tileToolStripMenuItem";
+            this.tileToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.tileToolStripMenuItem.Text = "Tile";
+            this.tileToolStripMenuItem.Click += new System.EventHandler(this.tileToolStripMenuItem_Click);
+            // 
+            // largeImagesToolStripMenuItem
+            // 
+            this.largeImagesToolStripMenuItem.Name = "largeImagesToolStripMenuItem";
+            this.largeImagesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.largeImagesToolStripMenuItem.Text = "Large Images";
+            this.largeImagesToolStripMenuItem.Click += new System.EventHandler(this.largeImagesToolStripMenuItem_Click);
+            // 
+            // detailsToolStripMenuItem
+            // 
+            this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
+            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.detailsToolStripMenuItem.Text = "Details";
+            this.detailsToolStripMenuItem.Click += new System.EventHandler(this.detailsToolStripMenuItem_Click);
             // 
             // label5
             // 
@@ -510,6 +553,43 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Tags";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // toolSort
+            // 
+            this.toolSort.AutoSize = true;
+            this.toolSort.Checked = true;
+            this.toolSort.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolSort.Location = new System.Drawing.Point(534, 60);
+            this.toolSort.Name = "toolSort";
+            this.toolSort.Size = new System.Drawing.Size(107, 17);
+            this.toolSort.TabIndex = 6;
+            this.toolSort.Text = "Sort by popularity";
+            this.toolSort.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(216, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Format:";
+            // 
+            // comboFormat
+            // 
+            this.comboFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFormat.FormattingEnabled = true;
+            this.comboFormat.Items.AddRange(new object[] {
+            "all",
+            "cassette",
+            "cd",
+            "digital",
+            "vinyl"});
+            this.comboFormat.Location = new System.Drawing.Point(219, 58);
+            this.comboFormat.Name = "comboFormat";
+            this.comboFormat.Size = new System.Drawing.Size(309, 21);
+            this.comboFormat.Sorted = true;
+            this.comboFormat.TabIndex = 4;
             // 
             // buttonLoad
             // 
@@ -693,42 +773,29 @@
             this.openInBrowserToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem1.Text = "Open in browser";
             // 
-            // comboFormat
+            // sortingToolStripMenuItem
             // 
-            this.comboFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboFormat.FormattingEnabled = true;
-            this.comboFormat.Items.AddRange(new object[] {
-            "all",
-            "cassette",
-            "cd",
-            "digital",
-            "vinyl"});
-            this.comboFormat.Location = new System.Drawing.Point(219, 58);
-            this.comboFormat.Name = "comboFormat";
-            this.comboFormat.Size = new System.Drawing.Size(309, 21);
-            this.comboFormat.Sorted = true;
-            this.comboFormat.TabIndex = 4;
+            this.sortingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ascendToolStripMenuItem,
+            this.descendToolStripMenuItem});
+            this.sortingToolStripMenuItem.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
+            this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
+            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.sortingToolStripMenuItem.Text = "Sorting";
             // 
-            // label2
+            // ascendToolStripMenuItem
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(216, 42);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Format:";
+            this.ascendToolStripMenuItem.Name = "ascendToolStripMenuItem";
+            this.ascendToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ascendToolStripMenuItem.Text = "Ascend";
+            this.ascendToolStripMenuItem.Click += new System.EventHandler(this.ascendToolStripMenuItem_Click);
             // 
-            // toolSort
+            // descendToolStripMenuItem
             // 
-            this.toolSort.AutoSize = true;
-            this.toolSort.Checked = true;
-            this.toolSort.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolSort.Location = new System.Drawing.Point(534, 60);
-            this.toolSort.Name = "toolSort";
-            this.toolSort.Size = new System.Drawing.Size(107, 17);
-            this.toolSort.TabIndex = 6;
-            this.toolSort.Text = "Sort by popularity";
-            this.toolSort.UseVisualStyleBackColor = true;
+            this.descendToolStripMenuItem.Name = "descendToolStripMenuItem";
+            this.descendToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.descendToolStripMenuItem.Text = "Descend";
+            this.descendToolStripMenuItem.Click += new System.EventHandler(this.descendToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -833,6 +900,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboFormat;
         private System.Windows.Forms.CheckBox toolSort;
+        private System.Windows.Forms.ToolStripMenuItem viewStyleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem largeImagesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem detailsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sortingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ascendToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem descendToolStripMenuItem;
     }
 }
 
