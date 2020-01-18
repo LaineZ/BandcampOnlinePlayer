@@ -7,7 +7,6 @@ using System.IO;
 using System.Windows.Forms;
 using static onlineplayer.Utils;
 using static onlineplayer.Json;
-using NAudio.Midi;
 using System.Xml;
 
 namespace onlineplayer
@@ -15,8 +14,6 @@ namespace onlineplayer
 
     public partial class Form1 : Form
     {
-        MidiIn midiIn;
-
         List<Item> itemsList = new List<Item>();
         List<Track> queueTracks = new List<Track>();
         List<Models.JSON.JsonSearch.Result> searchResults = new List<Models.JSON.JsonSearch.Result>();
@@ -88,16 +85,6 @@ namespace onlineplayer
 
             toolSearch.Enabled = false;
 
-            if (getSettingsAttrBool("settings.xml", "useMidi"))
-            {
-                midiIn = new MidiIn(int.Parse(getSettingsAttr("settings.xml", "midiDevice")));
-            }
-            else
-            {
-                toolMidiClose.Enabled = false;
-                toolMidiOpen.Enabled = false;
-            }
-
             // adding tags
             listTags.Items.AddRange(tags.ToArray());
             // adding queue tracks
@@ -114,49 +101,6 @@ namespace onlineplayer
 
             if (restoreQueue.Count > 1) { UpdateQueueImages(); }
             labelStatus.Text = "Done!";
-        }
-
-        void midiIn_ErrorReceived(object sender, MidiInMessageEventArgs e)
-        {
-            MessageBox.Show("Midi receive error:" + e.RawMessage, e.MidiEvent.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        void midiIn_MessageReceived(object sender, MidiInMessageEventArgs e)
-        {
-
-            ControlChangeEvent cce = e.MidiEvent as ControlChangeEvent;
-            NoteEvent note = e.MidiEvent as NoteEvent;
-            try
-            {
-                // playpause
-                if (MidiActionsBindings.actionsMidi[0].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[0].ControlData.ControllerValue == cce.ControllerValue)
-                {
-                    player.PlayPause();
-                    return;
-                }
-
-                if (MidiActionsBindings.actionsMidi[2].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[1].ControlData.ControllerValue == cce.ControllerValue)
-                {
-                    if (player.GetVolume() <= 1.0)
-                    {
-                        player.SetVolume(player.GetVolume() + 0.1F);
-                    }
-                    return;
-                }
-
-                if (MidiActionsBindings.actionsMidi[3].ControlData.Controller == cce.Controller && MidiActionsBindings.actionsMidi[1].ControlData.ControllerValue == cce.ControllerValue)
-                {
-                    if (player.GetVolume() >= 0)
-                    {
-                        player.SetVolume(player.GetVolume() - 0.1F);
-                    }
-                    return;
-                }
-            }
-            catch (NullReferenceException)
-            {
-
-            }
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -387,14 +331,8 @@ namespace onlineplayer
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            if (getSettingsAttrBool("settings.xml", "useMidi")) { midiIn.Close(); }
             Form settings = new FormSettings();
             settings.Show();
-        }
-
-        private void toolStripButton8_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void toolStripButton7_Click(object sender, EventArgs e)
@@ -448,34 +386,6 @@ namespace onlineplayer
                 }
                 labelStatus.Text = "Done...";
             }
-        }
-
-        private void toolStripButton10_Click(object sender, EventArgs e)
-        {
-            midiIn.Close();
-            labelStatus.Text = "MIDI Device closed:" + MidiIn.DeviceInfo(int.Parse(getSettingsAttr("settings.xml", "midiDevice"))).ProductName;
-
-        }
-
-        private void toolStripButton11_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                midiIn = new MidiIn(int.Parse(getSettingsAttr("settings.xml", "midiDevice")));
-                midiIn.Start();
-                midiIn.MessageReceived += midiIn_MessageReceived;
-                midiIn.ErrorReceived += midiIn_ErrorReceived;
-                labelStatus.Text = "MIDI Device opened:" + MidiIn.DeviceInfo(int.Parse(getSettingsAttr("settings.xml", "midiDevice"))).ProductName;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error:" + ex.Message, "There error starting MIDI-Devices", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void toolSort_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

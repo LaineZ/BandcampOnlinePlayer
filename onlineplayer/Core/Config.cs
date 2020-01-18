@@ -10,7 +10,6 @@ namespace onlineplayer.Core
 
     public class Config
     {
-        public static int midiDevice { get; set; }
         public static int pagesLoad { get; set; }
         public static int viewSize { get; set; }
         public static string viewType { get; set; }
@@ -19,6 +18,9 @@ namespace onlineplayer.Core
         public static bool saveQueue { get; set; }
         public static int audioSystem { get; set; }
         public static bool jackReopen { get; set; }
+        public static bool compEnabled { get; set; }
+        public static int compReduction { get; set; }
+        public static int compThresh { get; set; }
 
         public static void SaveConfig()
         {
@@ -44,11 +46,6 @@ namespace onlineplayer.Core
             xmlWriter.WriteEndElement();
 
             xmlWriter.WriteStartElement("setting");
-            xmlWriter.WriteAttributeString("midiDevice", midiDevice.ToString());
-            xmlWriter.WriteEndElement();
-
-
-            xmlWriter.WriteStartElement("setting");
             xmlWriter.WriteAttributeString("useMidi", useMidi.ToString());
             xmlWriter.WriteEndElement();
 
@@ -58,6 +55,19 @@ namespace onlineplayer.Core
 
             xmlWriter.WriteStartElement("setting");
             xmlWriter.WriteAttributeString("audioSystem", audioSystem.ToString());
+            xmlWriter.WriteEndElement();
+
+            xmlWriter.WriteStartElement("setting");
+            xmlWriter.WriteAttributeString("compThresh", compThresh.ToString());
+            xmlWriter.WriteEndElement();
+
+            xmlWriter.WriteStartElement("setting");
+            xmlWriter.WriteAttributeString("compEnabled", compEnabled.ToString());
+            xmlWriter.WriteEndElement();
+
+
+            xmlWriter.WriteStartElement("setting");
+            xmlWriter.WriteAttributeString("compReduction", compReduction.ToString());
             xmlWriter.WriteEndElement();
 
             xmlWriter.WriteStartElement("setting");
@@ -108,7 +118,6 @@ namespace onlineplayer.Core
         {
             // Add here config values
             pagesLoad = TryLoadInt("loadPages", 100);
-            midiDevice = TryLoadInt("midiDevice", 0);
             viewSize = TryLoadInt("albumViewSize", 64);
             audioSystem = TryLoadInt("audioSystem", 0);
             viewType = TryLoadString("albumViewType", "Tile");
@@ -116,6 +125,9 @@ namespace onlineplayer.Core
             saveQueue = TryLoadBool("saveQueue", true);
             useMidi = TryLoadBool("useMidi", false);
             jackReopen = TryLoadBool("jackReopen", true);
+            compEnabled = TryLoadBool("compEnabled", false);
+            compThresh = TryLoadInt("compThresh", 0);
+            compReduction = TryLoadInt("compReduction", 0);
         }
     }
 }

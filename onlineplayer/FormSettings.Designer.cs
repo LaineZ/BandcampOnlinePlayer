@@ -29,15 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Playback: Play/Pause",
-            ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Playback: Volume up",
-            ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Playback: Volume down",
-            ""}, -1);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -61,35 +52,37 @@
             this.labelArt = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.albumSize = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.albumView = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.midiControl = new System.Windows.Forms.CheckBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.Action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.AssignControll = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxMidiInDevices = new System.Windows.Forms.ComboBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.labelVersion = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.checkComp = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.Action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AssignControll = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.potThres = new NAudio.Gui.Pot();
+            this.label4 = new System.Windows.Forms.Label();
+            this.potReduct = new NAudio.Gui.Pot();
+            this.label12 = new System.Windows.Forms.Label();
+            this.labelInfo = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -308,8 +301,8 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Location = new System.Drawing.Point(2, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -331,6 +324,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Apperance";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(193, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(196, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Restart or redrawing list required!";
             // 
             // albumSize
             // 
@@ -390,76 +393,6 @@
             this.listBox1.Size = new System.Drawing.Size(375, 251);
             this.listBox1.TabIndex = 0;
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.midiControl);
-            this.tabPage4.Controls.Add(this.listView1);
-            this.tabPage4.Controls.Add(this.label4);
-            this.tabPage4.Controls.Add(this.comboBoxMidiInDevices);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(389, 264);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "MIDI Controllers";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // midiControl
-            // 
-            this.midiControl.AutoSize = true;
-            this.midiControl.Location = new System.Drawing.Point(9, 6);
-            this.midiControl.Name = "midiControl";
-            this.midiControl.Size = new System.Drawing.Size(118, 17);
-            this.midiControl.TabIndex = 3;
-            this.midiControl.Text = "Enable MIDI Contol";
-            this.midiControl.UseVisualStyleBackColor = true;
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Action,
-            this.AssignControll});
-            this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
-            this.listView1.Location = new System.Drawing.Point(6, 57);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(375, 201);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.EnabledChanged += new System.EventHandler(this.listView1_EnabledChanged);
-            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
-            // 
-            // Action
-            // 
-            this.Action.Text = "Action";
-            this.Action.Width = 125;
-            // 
-            // AssignControll
-            // 
-            this.AssignControll.Text = "Assiggn control";
-            this.AssignControll.Width = 193;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(70, 13);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "MIDI Device:";
-            // 
-            // comboBoxMidiInDevices
-            // 
-            this.comboBoxMidiInDevices.FormattingEnabled = true;
-            this.comboBoxMidiInDevices.Location = new System.Drawing.Point(79, 30);
-            this.comboBoxMidiInDevices.Name = "comboBoxMidiInDevices";
-            this.comboBoxMidiInDevices.Size = new System.Drawing.Size(302, 21);
-            this.comboBoxMidiInDevices.TabIndex = 0;
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.linkLabel1);
@@ -478,7 +411,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(161, 65);
+            this.linkLabel1.Location = new System.Drawing.Point(162, 65);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(87, 13);
             this.linkLabel1.TabIndex = 4;
@@ -489,7 +422,7 @@
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(161, 26);
+            this.labelVersion.Location = new System.Drawing.Point(162, 26);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(185, 52);
             this.labelVersion.TabIndex = 3;
@@ -527,19 +460,99 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.labelInfo);
+            this.tabPage6.Controls.Add(this.label12);
+            this.tabPage6.Controls.Add(this.potReduct);
+            this.tabPage6.Controls.Add(this.label4);
+            this.tabPage6.Controls.Add(this.potThres);
+            this.tabPage6.Controls.Add(this.checkComp);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(389, 264);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "DSP Effects";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // checkComp
+            // 
+            this.checkComp.AutoSize = true;
+            this.checkComp.Location = new System.Drawing.Point(6, 6);
+            this.checkComp.Name = "checkComp";
+            this.checkComp.Size = new System.Drawing.Size(81, 17);
+            this.checkComp.TabIndex = 0;
+            this.checkComp.Text = "Compressor";
+            this.checkComp.UseVisualStyleBackColor = true;
+            this.checkComp.CheckedChanged += new System.EventHandler(this.checkComp_CheckedChanged);
+            // 
             // timer1
             // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 250;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // label1
+            // Action
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(193, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Restart or redrawing list required!";
+            this.Action.DisplayIndex = 0;
+            this.Action.Text = "Action";
+            this.Action.Width = 125;
+            // 
+            // AssignControll
+            // 
+            this.AssignControll.DisplayIndex = 1;
+            this.AssignControll.Text = "Assiggn control";
+            this.AssignControll.Width = 193;
+            // 
+            // potThres
+            // 
+            this.potThres.Enabled = false;
+            this.potThres.Location = new System.Drawing.Point(93, 6);
+            this.potThres.Maximum = 100D;
+            this.potThres.Minimum = -100D;
+            this.potThres.Name = "potThres";
+            this.potThres.Size = new System.Drawing.Size(32, 32);
+            this.potThres.TabIndex = 3;
+            this.potThres.Value = 1D;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(81, 41);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Threshold";
+            // 
+            // potReduct
+            // 
+            this.potReduct.Enabled = false;
+            this.potReduct.Location = new System.Drawing.Point(144, 6);
+            this.potReduct.Maximum = 100D;
+            this.potReduct.Minimum = 1D;
+            this.potReduct.Name = "potReduct";
+            this.potReduct.Size = new System.Drawing.Size(32, 32);
+            this.potReduct.TabIndex = 5;
+            this.potReduct.Value = 1D;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(141, 41);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(56, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Reduction";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelInfo
+            // 
+            this.labelInfo.AutoSize = true;
+            this.labelInfo.Location = new System.Drawing.Point(6, 26);
+            this.labelInfo.Name = "labelInfo";
+            this.labelInfo.Size = new System.Drawing.Size(0, 13);
+            this.labelInfo.TabIndex = 7;
             // 
             // FormSettings
             // 
@@ -557,8 +570,6 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
-            this.Load += new System.EventHandler(this.FormSettings_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -567,11 +578,11 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -601,15 +612,8 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBoxMidiInDevices;
-        private System.Windows.Forms.ColumnHeader Action;
-        private System.Windows.Forms.ColumnHeader AssignControll;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.CheckBox midiControl;
         private System.Windows.Forms.CheckBox saveQueue;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Label labelVersion;
@@ -622,5 +626,14 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox checkReopen;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.CheckBox checkComp;
+        private System.Windows.Forms.ColumnHeader Action;
+        private System.Windows.Forms.ColumnHeader AssignControll;
+        private System.Windows.Forms.Label label12;
+        private NAudio.Gui.Pot potReduct;
+        private System.Windows.Forms.Label label4;
+        private NAudio.Gui.Pot potThres;
+        private System.Windows.Forms.Label labelInfo;
     }
 }

@@ -43,9 +43,6 @@
             this.toolSavePlaylist = new System.Windows.Forms.ToolStripButton();
             this.openPlaylist = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolMidiOpen = new System.Windows.Forms.ToolStripButton();
-            this.toolMidiClose = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolPrev = new System.Windows.Forms.ToolStripButton();
             this.toolPlay = new System.Windows.Forms.ToolStripButton();
             this.toolNext = new System.Windows.Forms.ToolStripButton();
@@ -64,6 +61,9 @@
             this.tileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.largeImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ascendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.descendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.playToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,9 +96,6 @@
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ascendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.descendToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -189,9 +186,6 @@
             this.toolSavePlaylist,
             this.openPlaylist,
             this.toolStripSeparator4,
-            this.toolMidiOpen,
-            this.toolMidiClose,
-            this.toolStripSeparator2,
             this.toolPrev,
             this.toolPlay,
             this.toolNext,
@@ -258,31 +252,6 @@
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolMidiOpen
-            // 
-            this.toolMidiOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolMidiOpen.Image = global::onlineplayer.Properties.Resources.ic_add_18pt;
-            this.toolMidiOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolMidiOpen.Name = "toolMidiOpen";
-            this.toolMidiOpen.Size = new System.Drawing.Size(23, 22);
-            this.toolMidiOpen.Text = "Open MIDI";
-            this.toolMidiOpen.Click += new System.EventHandler(this.toolStripButton11_Click);
-            // 
-            // toolMidiClose
-            // 
-            this.toolMidiClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolMidiClose.Image = global::onlineplayer.Properties.Resources.baseline_remove_black_18dp;
-            this.toolMidiClose.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolMidiClose.Name = "toolMidiClose";
-            this.toolMidiClose.Size = new System.Drawing.Size(23, 22);
-            this.toolMidiClose.Text = "Close MIDI";
-            this.toolMidiClose.Click += new System.EventHandler(this.toolStripButton10_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // toolPrev
             // 
@@ -354,7 +323,6 @@
             this.toolShuffle.Name = "toolShuffle";
             this.toolShuffle.Size = new System.Drawing.Size(23, 22);
             this.toolShuffle.ToolTipText = "Shuffle";
-            this.toolShuffle.Click += new System.EventHandler(this.toolStripButton8_Click);
             // 
             // toolClearAll
             // 
@@ -443,6 +411,30 @@
             this.detailsToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.detailsToolStripMenuItem.Text = "Details";
             this.detailsToolStripMenuItem.Click += new System.EventHandler(this.detailsToolStripMenuItem_Click);
+            // 
+            // sortingToolStripMenuItem
+            // 
+            this.sortingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ascendToolStripMenuItem,
+            this.descendToolStripMenuItem});
+            this.sortingToolStripMenuItem.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
+            this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
+            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
+            this.sortingToolStripMenuItem.Text = "Sorting";
+            // 
+            // ascendToolStripMenuItem
+            // 
+            this.ascendToolStripMenuItem.Name = "ascendToolStripMenuItem";
+            this.ascendToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.ascendToolStripMenuItem.Text = "Ascend";
+            this.ascendToolStripMenuItem.Click += new System.EventHandler(this.ascendToolStripMenuItem_Click);
+            // 
+            // descendToolStripMenuItem
+            // 
+            this.descendToolStripMenuItem.Name = "descendToolStripMenuItem";
+            this.descendToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.descendToolStripMenuItem.Text = "Descend";
+            this.descendToolStripMenuItem.Click += new System.EventHandler(this.descendToolStripMenuItem_Click);
             // 
             // label5
             // 
@@ -773,30 +765,6 @@
             this.openInBrowserToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem1.Text = "Open in browser";
             // 
-            // sortingToolStripMenuItem
-            // 
-            this.sortingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ascendToolStripMenuItem,
-            this.descendToolStripMenuItem});
-            this.sortingToolStripMenuItem.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
-            this.sortingToolStripMenuItem.Name = "sortingToolStripMenuItem";
-            this.sortingToolStripMenuItem.Size = new System.Drawing.Size(277, 22);
-            this.sortingToolStripMenuItem.Text = "Sorting";
-            // 
-            // ascendToolStripMenuItem
-            // 
-            this.ascendToolStripMenuItem.Name = "ascendToolStripMenuItem";
-            this.ascendToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ascendToolStripMenuItem.Text = "Ascend";
-            this.ascendToolStripMenuItem.Click += new System.EventHandler(this.ascendToolStripMenuItem_Click);
-            // 
-            // descendToolStripMenuItem
-            // 
-            this.descendToolStripMenuItem.Name = "descendToolStripMenuItem";
-            this.descendToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.descendToolStripMenuItem.Text = "Descend";
-            this.descendToolStripMenuItem.Click += new System.EventHandler(this.descendToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -851,7 +819,6 @@
         private System.Windows.Forms.ToolStripButton toolPrev;
         private System.Windows.Forms.ToolStripButton toolPlay;
         private System.Windows.Forms.ToolStripButton toolNext;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem playToolStripMenuItem;
@@ -869,8 +836,6 @@
         private System.Windows.Forms.ToolStripMenuItem blockSelectedArtiststreamingModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton toolClearAll;
         private System.Windows.Forms.Label labelStatus;
-        private System.Windows.Forms.ToolStripButton toolMidiClose;
-        private System.Windows.Forms.ToolStripButton toolMidiOpen;
         private System.Windows.Forms.ToolStripTextBox toolSearch;
         private System.Windows.Forms.ToolStripButton toolSavePlaylist;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;

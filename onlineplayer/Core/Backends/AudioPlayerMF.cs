@@ -1,6 +1,7 @@
 ﻿using NAudio.Wave;
 using System;
 using System.Windows.Forms;
+using NAudio.Dsp;
 
 namespace onlineplayer
 {
@@ -46,7 +47,19 @@ namespace onlineplayer
                 try
                 {
                     audioFile = new MediaFoundationReader(url);
-                    outputDevice.Init(audioFile);
+                    if (Core.Config.compEnabled)
+                    {
+                        SimpleCompressorEffect compressorEffect = new SimpleCompressorEffect(audioFile.ToSampleProvider());
+                        compressorEffect.Threshold = Core.Config.compThresh;
+                        compressorEffect.Ratio = Core.Config.compReduction;
+                        outputDevice.Init(compressorEffect.ToWaveProvider());
+                        WaveFileWriter.CreateWaveFile("compressON.wav", compressorEffect.ToWaveProvider16());
+                    }
+                    else
+                    {
+                        WaveFileWriter.CreateWaveFile("compressOFF.wav", audioFile);
+                        outputDevice.Init(audioFile);
+                    }
                     outputDevice.Play();
 
                 }
