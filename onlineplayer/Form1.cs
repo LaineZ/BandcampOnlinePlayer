@@ -104,9 +104,12 @@ namespace onlineplayer
 
             foreach (Track trk in restoreQueue)
             {
-                ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
-                queueList.Items.Add(lst);
-                queueTracks.Add(trk);
+                if (trk != null)
+                {
+                    ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
+                    queueList.Items.Add(lst);
+                    queueTracks.Add(trk);
+                }
             }
 
             if (restoreQueue.Count > 1) { UpdateQueueImages(); }

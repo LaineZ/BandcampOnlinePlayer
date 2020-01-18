@@ -10,5 +10,6 @@ namespace onlineplayer.Models
     {
         public string ArtistUrl { get; set; }
         public string TrackUrl { get; set; }
+        public int Number { get; set; }
     }
 }

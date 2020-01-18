@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using Newtonsoft.Json;
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -137,7 +137,7 @@ namespace onlineplayer
                 XmlElement xRoot = doc.DocumentElement;
                 XmlNode attr;
 
-                label1.Text = "Restoring play queue... (may take by while)";
+                label1.Text = "Restoring play queue... (this may take a while)";
 
                 List<Models.QueueRestoreData> resetoreData = new List<Models.QueueRestoreData>();
 
@@ -146,19 +146,35 @@ namespace onlineplayer
                     if (xnode.Attributes.Count > 0)
                     {
                         Models.QueueRestoreData restoreTrack = new Models.QueueRestoreData();
-                        attr = xnode.Attributes.GetNamedItem("artistUrl");
-                        if (attr != null)
+                        try
                         {
-                            restoreTrack.ArtistUrl = attr.Value;
-                        }
+                            attr = xnode.Attributes.GetNamedItem("artistUrl");
+                            if (attr != null)
+                            {
+                                restoreTrack.ArtistUrl = attr.Value;
+                            }
 
-                        attr = xnode.Attributes.GetNamedItem("trackUrl");
-                        if (attr != null)
+                            attr = xnode.Attributes.GetNamedItem("trackUrl");
+                            if (attr != null)
+                            {
+                                restoreTrack.TrackUrl = attr.Value;
+                            }
+
+                            attr = xnode.Attributes.GetNamedItem("position");
+                            if (attr != null)
+                            {
+                                restoreTrack.Number = int.Parse(attr.Value);
+                            }
+
+                            resetoreData.Add(restoreTrack);
+                            restoreQueue.Add(null);
+                        }
+                        catch (FormatException)
                         {
-                            restoreTrack.TrackUrl = attr.Value;
+                            MessageBox.Show("Queue file is corrupted or have incorrect format\nIt's may a format upgrade and just ignore this error", "Queue list cannot restore!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            File.Delete("queueList.xml");
+                            processedData = true;
                         }
-
-                        resetoreData.Add(restoreTrack);
                     }
                 }
 
@@ -180,7 +196,7 @@ namespace onlineplayer
 
                 // Extreme Multithreading...
 
-                Parallel.ForEach(resetoreData, async (Models.QueueRestoreData restore) =>
+                Parallel.ForEach(resetoreData, async (Models.QueueRestoreData restore, ParallelLoopState state) =>
                 {
                     string responseAlbum = await httpTools.MakeRequestAsync(restore.ArtistUrl + restore.TrackUrl);
 
@@ -189,11 +205,11 @@ namespace onlineplayer
                     foreach (Track trk in album.Tracks)
                     {
                         trk.ArtistUrl = restore.ArtistUrl;
-                        restoreQueue.Add(trk);
+                        restoreQueue[restore.Number] = trk;
                     }
 
                     // sorry that not a Rust
-                    if (restoreQueue.Count == resetoreData.Count)
+                    if (restoreQueue.Count(s => s != null) == resetoreData.Count)
                     {
                         processedData = true;
                     }

@@ -17,12 +17,16 @@ namespace onlineplayer
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("queueList");
 
+            int counter = 0;
+
             foreach (Track trk in queueTracks)
             {
                 xmlWriter.WriteStartElement("track");
                 xmlWriter.WriteAttributeString("trackUrl", trk.Url);
                 xmlWriter.WriteAttributeString("artistUrl", trk.ArtistUrl);
+                xmlWriter.WriteAttributeString("position", counter.ToString());
                 xmlWriter.WriteEndElement();
+                counter++;
             }
 
             xmlWriter.WriteEndDocument();
