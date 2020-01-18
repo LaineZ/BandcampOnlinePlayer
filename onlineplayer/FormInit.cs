@@ -1,4 +1,5 @@
 ﻿using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -31,7 +32,7 @@ namespace onlineplayer
                 commitText.Hide();
                 this.Size = new Size(640, 360); // Fix that weird bug on linux: https://i.imgur.com/3wdlV3W.png
             }
-            labelVersion.Text = "BandcampOnlinePlayer \n" + Core.Info.version + "\ndeveloped by 140bpmdubstep";
+            labelVersion.Text = "BandcampOnlinePlayer \n" + Core.Info.version + " " +  Core.Info.prefix +"\ndeveloped by 140bpmdubstep";
             commitText.Text = Core.Info.commit;
             // add splashscreeens
             img.Add(Properties.Resources.splash_screen);
@@ -53,10 +54,30 @@ namespace onlineplayer
             {
                 Core.Config.LoadConfig();
             }
+            HttpTools httpTools = new HttpTools();
+
+
+            label1.Text = "Checking for updates...";
+            string versionResponse = await httpTools.MakeRequestAsync("https://raw.githubusercontent.com/LaineZ/BandcampOnlinePlayer/master/lastestversion.txt");
+            if (versionResponse != null)
+            {
+                if (versionResponse.TrimEnd() != Core.Info.version)
+                {
+                    DialogResult res = MessageBox.Show("New version is released: " + versionResponse + "\nYour version: " + Core.Info.version + "\nInstall new version?", versionResponse, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (res == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start("updater.exe");
+                        Application.Exit();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cannot determine version", "Update checking failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             label1.Text = "Loading tags from bandcamp.com...";
 
-            HttpTools httpTools = new HttpTools();
             String response = await httpTools.MakeRequestAsync("https://bandcamp.com/tags");
 
             HtmlAgilityPack.HtmlDocument htmlSnippet = new HtmlAgilityPack.HtmlDocument();

@@ -29,8 +29,7 @@ namespace onlineplayer
         {
             InitializeComponent();
 
-            labelVersion.Text = "Version: " + Core.Info.version;
-
+            labelVersion.Text = "Version: " + Core.Info.version + " " + Core.Info.prefix;
             albumView.SelectedItem = Core.Config.viewType;
             albumSize.Text = Core.Config.viewSize.ToString();
             checkArtwork.Checked = Core.Config.saveArtworks;
@@ -140,6 +139,7 @@ namespace onlineplayer
             Core.Config.useMidi = midiControl.Checked;
 
             int pagesSave = 0;
+
             if (int.TryParse(pagesLoad.Text, out pagesSave))
             {
                 Core.Config.pagesLoad = pagesSave;

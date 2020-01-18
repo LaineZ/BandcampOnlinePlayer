@@ -122,6 +122,7 @@
     <Compile Include="Models\JSON\JsonAlbum.cs" />
     <Compile Include="Models\JSON\JsonAlbumData.cs" />
     <Compile Include="Models\JSON\JsonMp3File.cs" />
+    <Compile Include="Models\JSON\JsonRelease.cs" />
     <Compile Include="Models\JSON\JsonSearch.cs" />
     <Compile Include="Models\JSON\JsonTrack.cs" />
     <Compile Include="Models\QueueRestoreData.cs" />

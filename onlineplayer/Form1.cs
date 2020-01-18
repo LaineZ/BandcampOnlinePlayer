@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Net.Http;
-using System.Text;
 using System.Windows.Forms;
 using static onlineplayer.Utils;
 using static onlineplayer.Json;
@@ -282,11 +280,6 @@ namespace onlineplayer
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             player.PlayPause();
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void removeFromQueueToolStripMenuItem_Click(object sender, EventArgs e)
