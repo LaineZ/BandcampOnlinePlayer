@@ -58,7 +58,7 @@ namespace onlineplayer
 
 
             label1.Text = "Checking for updates...";
-            string versionResponse = await httpTools.MakeRequestAsync("https://raw.githubusercontent.com/LaineZ/BandcampOnlinePlayer/master/lastestversion.txt");
+            string versionResponse = await httpTools.MakeRequestAsync("https://raw.githubusercontent.com/LaineZ/BandcampOnlinePlayer/master/latestversion.txt");
             if (versionResponse != null)
             {
                 if (versionResponse.TrimEnd() != Core.Info.version)
