@@ -1,4 +1,5 @@
-﻿using NAudio.Midi;
+﻿using NAudio;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,9 +15,8 @@ namespace onlineplayer
     public partial class FormSettings : Form
     {
         XmlDocument doc = new XmlDocument();
-        bool assignMode = false;
-        int selectedIndex = 0;
-        MidiIn midiIn;
+        Core.WaveProviderToWaveStream waveProcessed;
+
         public void recomputeSize()
         {
             int jsonSize = (int)GetDirectorySize("artwork_cache", "json") / 1024 / 1024;
@@ -28,7 +28,6 @@ namespace onlineplayer
         public FormSettings()
         {
             InitializeComponent();
-
             labelVersion.Text = "Version:" + Core.Info.version + "\n by 140bpmdubstep\nLicensed under MIT License\n2019 - 2020";
             albumView.SelectedItem = Core.Config.viewType;
             albumSize.Text = Core.Config.viewSize.ToString();
@@ -87,11 +86,19 @@ namespace onlineplayer
                 pagesLoad.BackColor = Color.FromArgb(255, 0, 0);
             }
 
-            Core.Config.audioSystem = audiosystemBox.SelectedIndex;
+            if (audiosystemBox.SelectedIndex == -1)
+            {
+                Core.Config.audioSystem = 0;
+            }
+            else
+            {
+                Core.Config.audioSystem = audiosystemBox.SelectedIndex;
+            }
             Core.Config.jackReopen = checkReopen.Checked;
             Core.Config.compEnabled = checkComp.Checked;
             Core.Config.compThresh = (int)potThres.Value;
             Core.Config.compReduction = (int)potReduct.Value;
+
             Core.Config.SaveConfig();
         }
 
@@ -168,13 +175,37 @@ namespace onlineplayer
         {
             potThres.Enabled = checkComp.Checked;
             potReduct.Enabled = checkComp.Checked;
+            toolStripButton4.Enabled = checkComp.Checked;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (checkComp.Checked)
             {
-                labelInfo.Text = "Threshold: " + potThres.Value + "\nReduction: " + potReduct.Value;
+                WaveStream example = new WaveFileReader("example.wav");
+                labelInfo.Text = "Threshold: " + (int)potThres.Value + " db\nReduction: " + (int)potReduct.Value + " db";
+                SimpleCompressorEffect compressorEffect = new SimpleCompressorEffect(example.ToSampleProvider());
+                compressorEffect.Threshold = potThres.Value;
+                compressorEffect.Ratio = potReduct.Value;
+                compressorEffect.Attack = 50;
+                compressorEffect.Release = 1000;
+
+                compressorEffect.Enabled = true;
+
+                waveProcessed = new Core.WaveProviderToWaveStream(compressorEffect.ToWaveProvider());
+
+                waveViewer1.WaveStream = waveProcessed;
+            }
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            WaveOutEvent outputDevice = new WaveOutEvent();
+            outputDevice.Init(waveProcessed);
+            outputDevice.Play();
+            while (outputDevice.PlaybackState == PlaybackState.Playing)
+            {
+                System.Threading.Thread.Sleep(500);
             }
         }
     }

@@ -65,8 +65,7 @@ namespace onlineplayer
 
             label1.Text = "Checking for updates...";
             string versionResponse = await httpTools.MakeRequestAsync("https://raw.githubusercontent.com/LaineZ/BandcampOnlinePlayer/master/latestversion.txt");
-            versionResponse = null;
-            if (versionResponse != null)
+            if (versionResponse != null && Core.Info.prefix != "(developer edition)")
             {
                 if (versionResponse.TrimEnd() != Core.Info.version)
                 {
@@ -80,7 +79,10 @@ namespace onlineplayer
             }
             else
             {
-                MessageBox.Show("Cannot determine version", "Update checking failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (Core.Info.prefix != "(developer edition)")
+                {
+                    MessageBox.Show("Cannot determine version", "Update checking failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             label1.Text = "Loading tags from bandcamp.com...";
@@ -102,30 +104,23 @@ namespace onlineplayer
             }
 
             label1.Text = "Opening audio devices...";
-
-            switch (Core.Config.audioSystem)
+            try
             {
-                case 0:
+                player = Core.AudioSystem.CreateAudioDevice();
+            }
+            catch (NullReferenceException)
+            {
+                DialogResult res = MessageBox.Show("Unalbe to initialize audio system!\nPressing 'Retry' will be set audiosystem to 'WaveOut'", "Error opening audio device" + Core.Config.audioSystem, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
+                if (res == DialogResult.Retry)
+                {
                     Console.WriteLine("using wavout");
+                    Core.Config.audioSystem = 0;
                     player = new AudioPlayerMF();
-                    break;
-                case 1:
-                    Console.WriteLine("using jack");
-                    player = new AudioPlayerJack();
-                    break;
-                default:
-                    DialogResult res = MessageBox.Show("Unalbe to initialize audio system!\nPressing 'Retry' will be set audiosystem to 'WaveOut'", "Error opening audio device" + Core.Config.audioSystem, MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Warning);
-                    if (res == DialogResult.Retry)
-                    {
-                        Console.WriteLine("using wavout");
-                        player = new AudioPlayerMF();
-                        Core.Config.audioSystem = 0;
-                    }
-                    if (res == DialogResult.Abort)
-                    {
-                        Application.Exit();
-                    }
-                    break;
+                }
+                if (res == DialogResult.Abort)
+                {
+                    Application.Exit();
+                }
             }
 
             if (File.Exists("queueList.xml") && getSettingsAttrBool("settings.xml", "saveQueue"))

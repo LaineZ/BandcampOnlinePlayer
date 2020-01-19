@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\AudioSystem.cs" />
     <Compile Include="Core\Backends\AudioPlayerJack.cs" />
     <Compile Include="Core\Backends\AudioPlayerMF.cs" />
     <Compile Include="Core\Config.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Core\TransperentLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Core\WaveProviderToWaveStream.cs" />
     <Compile Include="Core\WaveStreamExtentsionsJack.cs" />
     <Compile Include="Core\WaveStreamExtentsions.cs" />
     <Compile Include="Core\WaveStreamExtentsionsMp3.cs" />

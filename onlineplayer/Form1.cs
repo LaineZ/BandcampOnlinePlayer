@@ -143,7 +143,7 @@ namespace onlineplayer
                 label5.Text = "Stopped";
             }
 
-            if (Math.Abs(player.GetTotalTimeSeconds() - player.GetCurrentTimeTotalSeconds()) < 0.1)
+            if (Math.Abs(player.GetTotalTimeSeconds() - player.GetCurrentTimeTotalSeconds()) < 0.1 && queueTracks.Count > 1)
             {
                 if (!toolShuffle.Checked)
                 {

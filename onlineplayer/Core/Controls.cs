@@ -195,7 +195,7 @@ namespace onlineplayer
             {
                 labelTrackName.Text = queueTracks[offset].Title;
                 labelTrackInfo.Text = queueTracks[offset].Album.Artist + "\n" + queueTracks[offset].Album.Title + "\n" + queueTracks[offset].Album.ReleaseDate + "\nTrack number " + offset;
-                ActiveForm.Text = queueTracks[offset].Album.Artist + " - " + queueTracks[offset].Album.Title + " :: BandcampOnlinePlayer";
+                //ActiveForm.Text = queueTracks[offset].Album.Artist + " - " + queueTracks[offset].Album.Title + " :: BandcampOnlinePlayer";
             }
             catch (ArgumentOutOfRangeException)
             {

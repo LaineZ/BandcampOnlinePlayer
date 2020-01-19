@@ -34,6 +34,7 @@
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkReopen = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -66,15 +67,17 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.waveViewer1 = new NAudio.Gui.WaveViewer();
+            this.labelInfo = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.potReduct = new NAudio.Gui.Pot();
+            this.label4 = new System.Windows.Forms.Label();
+            this.potThres = new NAudio.Gui.Pot();
             this.checkComp = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.AssignControll = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.potThres = new NAudio.Gui.Pot();
-            this.label4 = new System.Windows.Forms.Label();
-            this.potReduct = new NAudio.Gui.Pot();
-            this.label12 = new System.Windows.Forms.Label();
-            this.labelInfo = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -90,7 +93,8 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.toolStripButton3,
-            this.toolStripButton2});
+            this.toolStripButton2,
+            this.toolStripButton4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(399, 25);
@@ -124,6 +128,17 @@
             this.toolStripButton2.Size = new System.Drawing.Size(144, 22);
             this.toolStripButton2.Text = "Remove blocked artist";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Enabled = false;
+            this.toolStripButton4.Image = global::onlineplayer.Properties.Resources.baseline_play_arrow_black_18dp;
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "Play DSP Example";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // tabPage1
             // 
@@ -462,6 +477,8 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.label13);
+            this.tabPage6.Controls.Add(this.waveViewer1);
             this.tabPage6.Controls.Add(this.labelInfo);
             this.tabPage6.Controls.Add(this.label12);
             this.tabPage6.Controls.Add(this.potReduct);
@@ -475,6 +492,65 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "DSP Effects";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // waveViewer1
+            // 
+            this.waveViewer1.Location = new System.Drawing.Point(6, 178);
+            this.waveViewer1.Name = "waveViewer1";
+            this.waveViewer1.SamplesPerPixel = 8;
+            this.waveViewer1.Size = new System.Drawing.Size(377, 78);
+            this.waveViewer1.StartPosition = ((long)(0));
+            this.waveViewer1.TabIndex = 8;
+            this.waveViewer1.WaveStream = null;
+            // 
+            // labelInfo
+            // 
+            this.labelInfo.AutoSize = true;
+            this.labelInfo.Location = new System.Drawing.Point(6, 26);
+            this.labelInfo.Name = "labelInfo";
+            this.labelInfo.Size = new System.Drawing.Size(0, 13);
+            this.labelInfo.TabIndex = 7;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(171, 42);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(56, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Reduction";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // potReduct
+            // 
+            this.potReduct.Enabled = false;
+            this.potReduct.Location = new System.Drawing.Point(183, 7);
+            this.potReduct.Maximum = 12D;
+            this.potReduct.Minimum = -24D;
+            this.potReduct.Name = "potReduct";
+            this.potReduct.Size = new System.Drawing.Size(32, 32);
+            this.potReduct.TabIndex = 5;
+            this.potReduct.Value = -10D;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(111, 41);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Threshold";
+            // 
+            // potThres
+            // 
+            this.potThres.Enabled = false;
+            this.potThres.Location = new System.Drawing.Point(123, 6);
+            this.potThres.Maximum = 20D;
+            this.potThres.Minimum = -50D;
+            this.potThres.Name = "potThres";
+            this.potThres.Size = new System.Drawing.Size(32, 32);
+            this.potThres.TabIndex = 3;
+            this.potThres.Value = 0D;
             // 
             // checkComp
             // 
@@ -490,7 +566,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 250;
+            this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Action
@@ -505,54 +581,15 @@
             this.AssignControll.Text = "Assiggn control";
             this.AssignControll.Width = 193;
             // 
-            // potThres
+            // label13
             // 
-            this.potThres.Enabled = false;
-            this.potThres.Location = new System.Drawing.Point(93, 6);
-            this.potThres.Maximum = 100D;
-            this.potThres.Minimum = -100D;
-            this.potThres.Name = "potThres";
-            this.potThres.Size = new System.Drawing.Size(32, 32);
-            this.potThres.TabIndex = 3;
-            this.potThres.Value = 1D;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(81, 41);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Threshold";
-            // 
-            // potReduct
-            // 
-            this.potReduct.Enabled = false;
-            this.potReduct.Location = new System.Drawing.Point(144, 6);
-            this.potReduct.Maximum = 100D;
-            this.potReduct.Minimum = 1D;
-            this.potReduct.Name = "potReduct";
-            this.potReduct.Size = new System.Drawing.Size(32, 32);
-            this.potReduct.TabIndex = 5;
-            this.potReduct.Value = 1D;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(141, 41);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(56, 13);
-            this.label12.TabIndex = 6;
-            this.label12.Text = "Reduction";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelInfo
-            // 
-            this.labelInfo.AutoSize = true;
-            this.labelInfo.Location = new System.Drawing.Point(6, 26);
-            this.labelInfo.Name = "labelInfo";
-            this.labelInfo.Size = new System.Drawing.Size(0, 13);
-            this.labelInfo.TabIndex = 7;
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(3, 162);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(203, 13);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "DSP Final processing visualzation:";
             // 
             // FormSettings
             // 
@@ -635,5 +672,8 @@
         private System.Windows.Forms.Label label4;
         private NAudio.Gui.Pot potThres;
         private System.Windows.Forms.Label labelInfo;
+        private NAudio.Gui.WaveViewer waveViewer1;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.Label label13;
     }
 }

@@ -44,6 +44,7 @@ namespace onlineplayer
             }
             if (audioFile == null)
             {
+                // TODO: Uncomment
                 try
                 {
                     audioFile = new MediaFoundationReader(url);
@@ -52,12 +53,17 @@ namespace onlineplayer
                         SimpleCompressorEffect compressorEffect = new SimpleCompressorEffect(audioFile.ToSampleProvider());
                         compressorEffect.Threshold = Core.Config.compThresh;
                         compressorEffect.Ratio = Core.Config.compReduction;
+                        compressorEffect.Attack = 50;
+                        compressorEffect.Release = 1000;
+
+                        compressorEffect.Enabled = true;
                         outputDevice.Init(compressorEffect.ToWaveProvider());
-                        WaveFileWriter.CreateWaveFile("compressON.wav", compressorEffect.ToWaveProvider16());
+                        //Console.WriteLine("creating comp wav");
+                        //WaveFileWriter.CreateWaveFile("compressON.wav", compressorEffect.ToWaveProvider16());
+                        //Console.WriteLine("done");
                     }
                     else
                     {
-                        WaveFileWriter.CreateWaveFile("compressOFF.wav", audioFile);
                         outputDevice.Init(audioFile);
                     }
                     outputDevice.Play();
