@@ -96,6 +96,8 @@
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.openTrackPage = new System.Windows.Forms.ToolStripButton();
+            this.buttonFullLoad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -190,6 +192,7 @@
             this.toolPlay,
             this.toolNext,
             this.toolStream,
+            this.openTrackPage,
             this.toolStripSeparator1,
             this.toolBlock,
             this.toolShuffle,
@@ -531,6 +534,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonFullLoad);
             this.tabPage1.Controls.Add(this.toolSort);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.comboFormat);
@@ -585,12 +589,10 @@
             // 
             // buttonLoad
             // 
-            this.buttonLoad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonLoad.Enabled = false;
             this.buttonLoad.Location = new System.Drawing.Point(219, 85);
             this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(422, 33);
+            this.buttonLoad.Size = new System.Drawing.Size(205, 33);
             this.buttonLoad.TabIndex = 3;
             this.buttonLoad.Text = "Load";
             this.buttonLoad.UseVisualStyleBackColor = true;
@@ -765,6 +767,28 @@
             this.openInBrowserToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem1.Text = "Open in browser";
             // 
+            // openTrackPage
+            // 
+            this.openTrackPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openTrackPage.Enabled = false;
+            this.openTrackPage.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
+            this.openTrackPage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openTrackPage.Name = "openTrackPage";
+            this.openTrackPage.Size = new System.Drawing.Size(23, 22);
+            this.openTrackPage.Text = "Open current track page in browser";
+            this.openTrackPage.Click += new System.EventHandler(this.openTrackPage_Click);
+            // 
+            // buttonFullLoad
+            // 
+            this.buttonFullLoad.Enabled = false;
+            this.buttonFullLoad.Location = new System.Drawing.Point(427, 85);
+            this.buttonFullLoad.Name = "buttonFullLoad";
+            this.buttonFullLoad.Size = new System.Drawing.Size(218, 33);
+            this.buttonFullLoad.TabIndex = 7;
+            this.buttonFullLoad.Text = "Load (with full metadata update, longer)";
+            this.buttonFullLoad.UseVisualStyleBackColor = true;
+            this.buttonFullLoad.Click += new System.EventHandler(this.buttonFullLoad_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -872,6 +896,8 @@
         private System.Windows.Forms.ToolStripMenuItem sortingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ascendToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem descendToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton openTrackPage;
+        private System.Windows.Forms.Button buttonFullLoad;
     }
 }
 

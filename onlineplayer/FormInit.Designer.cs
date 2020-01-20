@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.commitText = new onlineplayer.TransparentLabel();
             this.labelVersion = new onlineplayer.TransparentLabel();
@@ -93,6 +92,7 @@
             this.label1.TabStop = false;
             this.label1.Text = "Loading...";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // FormInit
             // 
@@ -127,6 +127,5 @@
         private onlineplayer.TransparentLabel labelVersion;
         private TransparentLabel commitText;
         private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Timer timer3;
     }
 }

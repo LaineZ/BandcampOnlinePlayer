@@ -133,7 +133,7 @@ namespace onlineplayer
                 XmlElement xRoot = doc.DocumentElement;
                 XmlNode attr;
 
-                label1.Text = "Restoring play queue... (this may take a while)";
+                label1.Text = "Restoring play queue... (this may take a while, click here if you don't want wait)";
 
                 List<Models.QueueRestoreData> resetoreData = new List<Models.QueueRestoreData>();
 
@@ -209,6 +209,12 @@ namespace onlineplayer
                     {
                         processedData = true;
                     }
+                    // if user skip
+                    if (processedData == true)
+                    {
+                        state.Break();
+                        restoreQueue.Clear();
+                    }
                 });
             }
             else
@@ -241,6 +247,15 @@ namespace onlineplayer
                 mainForm.FormClosed += MainForm_FormClosed;
                 timer1.Start();
                 timer2.Stop();
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            // yes i know this is not cool way
+            if (label1.Text == "Restoring play queue... (this may take a while, click here if you don't want wait)")
+            {
+                processedData = true;
             }
         }
     }

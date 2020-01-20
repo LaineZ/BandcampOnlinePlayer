@@ -68,7 +68,14 @@ namespace onlineplayer
             {
                 if (!toolShuffle.Checked)
                 {
-                    offset++;
+                    if (offset < queueTracks.Count - 1)
+                    {
+                        offset++;
+                    }
+                    else
+                    {
+                        offset = 0;
+                    }
                 }
                 else
                 {
@@ -217,6 +224,7 @@ namespace onlineplayer
                 pictureArtwork.LoadAsync("https://f4.bcbits.com/img/a" + queueTracks[offset].Album.ArtworkId + "_2.jpg");
                 labelStatus.Text = "Done!";
                 queueList.Items[offset].Selected = true;
+                
                 UpdateInfo();
             }
             else

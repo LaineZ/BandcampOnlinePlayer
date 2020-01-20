@@ -67,8 +67,6 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.label13 = new System.Windows.Forms.Label();
-            this.waveViewer1 = new NAudio.Gui.WaveViewer();
             this.labelInfo = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.potReduct = new NAudio.Gui.Pot();
@@ -477,8 +475,6 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.label13);
-            this.tabPage6.Controls.Add(this.waveViewer1);
             this.tabPage6.Controls.Add(this.labelInfo);
             this.tabPage6.Controls.Add(this.label12);
             this.tabPage6.Controls.Add(this.potReduct);
@@ -492,26 +488,6 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "DSP Effects";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(3, 162);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(203, 13);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "DSP Final processing visualzation:";
-            // 
-            // waveViewer1
-            // 
-            this.waveViewer1.Location = new System.Drawing.Point(6, 178);
-            this.waveViewer1.Name = "waveViewer1";
-            this.waveViewer1.SamplesPerPixel = 8;
-            this.waveViewer1.Size = new System.Drawing.Size(377, 78);
-            this.waveViewer1.StartPosition = ((long)(0));
-            this.waveViewer1.TabIndex = 8;
-            this.waveViewer1.WaveStream = null;
             // 
             // labelInfo
             // 
@@ -603,6 +579,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSettings";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
@@ -671,8 +649,6 @@
         private System.Windows.Forms.Label label4;
         private NAudio.Gui.Pot potThres;
         private System.Windows.Forms.Label labelInfo;
-        private NAudio.Gui.WaveViewer waveViewer1;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.Label label13;
     }
 }

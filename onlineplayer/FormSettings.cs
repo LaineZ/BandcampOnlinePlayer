@@ -191,10 +191,6 @@ namespace onlineplayer
                 compressorEffect.Release = 1000;
 
                 compressorEffect.Enabled = true;
-
-                waveProcessed = new Core.WaveProviderToWaveStream(compressorEffect.ToWaveProvider());
-
-                waveViewer1.WaveStream = waveProcessed;
             }
         }
 

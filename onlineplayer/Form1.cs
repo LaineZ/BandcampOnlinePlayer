@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using static onlineplayer.Utils;
 using static onlineplayer.Json;
 using System.Xml;
+using System.Threading.Tasks;
 
 namespace onlineplayer
 {
@@ -131,6 +132,7 @@ namespace onlineplayer
                 toolPlay.Enabled = true;
                 toolNext.Enabled = true;
                 toolPrev.Enabled = true;
+                openTrackPage.Enabled = true;
                 trackSeek.Value = (int)player.GetCurrentTimeTotalSeconds();
                 TimeSpan time = TimeSpan.FromSeconds(player.GetCurrentTimeTotalSeconds());
                 label3.Text = time.ToString(@"hh\:mm\:ss");
@@ -145,16 +147,7 @@ namespace onlineplayer
 
             if (Math.Abs(player.GetTotalTimeSeconds() - player.GetCurrentTimeTotalSeconds()) < 0.1 && queueTracks.Count > 1)
             {
-                if (!toolShuffle.Checked)
-                {
-                    offset++;
-                }
-                else
-                {
-                    Random rand = new Random();
-                    offset = rand.Next(0, queueTracks.Count - 1);
-                }
-                PlayOffset();
+                PlayNext();
             }
         }
 
@@ -566,6 +559,7 @@ namespace onlineplayer
         private void textTags_TextChanged(object sender, EventArgs e)
         {
             buttonLoad.Enabled = textTags.Text.Length > 0;
+            buttonFullLoad.Enabled = textTags.Text.Length > 0;
         }
 
         private void openAlbumWebpageInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -603,6 +597,29 @@ namespace onlineplayer
         private void descendToolStripMenuItem_Click(object sender, EventArgs e)
         {
             listAlbums.Sorting = SortOrder.Descending;
+        }
+
+        private void openTrackPage_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(queueTracks[offset].ArtistUrl + queueTracks[offset].Url);
+        }
+
+        private async void buttonFullLoad_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                string[] files = Directory.GetFiles(@"artwork_cache\", "*.json");
+
+                foreach (string file in files)
+                {
+                    File.Delete(file);
+                }
+            });
+
+            tabControl1.SelectedIndex = 1;
+            UpdateAlbums();
+            buttonLoad.Enabled = false;
+            buttonFullLoad.Enabled = false;
         }
     }
 }
