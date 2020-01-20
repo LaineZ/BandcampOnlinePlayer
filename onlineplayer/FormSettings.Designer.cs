@@ -67,6 +67,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label13 = new System.Windows.Forms.Label();
             this.waveViewer1 = new NAudio.Gui.WaveViewer();
             this.labelInfo = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -77,7 +78,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.AssignControll = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label13 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -493,6 +493,16 @@
             this.tabPage6.Text = "DSP Effects";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(3, 162);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(203, 13);
+            this.label13.TabIndex = 9;
+            this.label13.Text = "DSP Final processing visualzation:";
+            // 
             // waveViewer1
             // 
             this.waveViewer1.Location = new System.Drawing.Point(6, 178);
@@ -581,16 +591,6 @@
             this.AssignControll.Text = "Assiggn control";
             this.AssignControll.Width = 193;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(3, 162);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(203, 13);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "DSP Final processing visualzation:";
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -600,7 +600,6 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSettings";
