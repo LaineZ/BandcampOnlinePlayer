@@ -47,6 +47,7 @@
             this.toolPlay = new System.Windows.Forms.ToolStripButton();
             this.toolNext = new System.Windows.Forms.ToolStripButton();
             this.toolStream = new System.Windows.Forms.ToolStripButton();
+            this.openTrackPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolBlock = new System.Windows.Forms.ToolStripButton();
             this.toolShuffle = new System.Windows.Forms.ToolStripButton();
@@ -76,6 +77,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonFullLoad = new System.Windows.Forms.Button();
             this.toolSort = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboFormat = new System.Windows.Forms.ComboBox();
@@ -96,8 +98,6 @@
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.openTrackPage = new System.Windows.Forms.ToolStripButton();
-            this.buttonFullLoad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -301,6 +301,17 @@
             this.toolStream.Text = "Play as stream mode";
             this.toolStream.ToolTipText = "Play as stream mode - automatically builds a playlist";
             this.toolStream.Click += new System.EventHandler(this.toolStripButton5_Click_1);
+            // 
+            // openTrackPage
+            // 
+            this.openTrackPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.openTrackPage.Enabled = false;
+            this.openTrackPage.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
+            this.openTrackPage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.openTrackPage.Name = "openTrackPage";
+            this.openTrackPage.Size = new System.Drawing.Size(23, 22);
+            this.openTrackPage.Text = "Open current track page in browser";
+            this.openTrackPage.Click += new System.EventHandler(this.openTrackPage_Click);
             // 
             // toolStripSeparator1
             // 
@@ -550,6 +561,17 @@
             this.tabPage1.Text = "Tags";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // buttonFullLoad
+            // 
+            this.buttonFullLoad.Enabled = false;
+            this.buttonFullLoad.Location = new System.Drawing.Point(427, 85);
+            this.buttonFullLoad.Name = "buttonFullLoad";
+            this.buttonFullLoad.Size = new System.Drawing.Size(218, 33);
+            this.buttonFullLoad.TabIndex = 7;
+            this.buttonFullLoad.Text = "Load (with full metadata update, longer)";
+            this.buttonFullLoad.UseVisualStyleBackColor = true;
+            this.buttonFullLoad.Click += new System.EventHandler(this.buttonFullLoad_Click);
+            // 
             // toolSort
             // 
             this.toolSort.AutoSize = true;
@@ -651,8 +673,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 280F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.listAlbums, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.queueList, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listAlbums, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -766,28 +788,6 @@
             this.openInBrowserToolStripMenuItem1.Name = "openInBrowserToolStripMenuItem1";
             this.openInBrowserToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem1.Text = "Open in browser";
-            // 
-            // openTrackPage
-            // 
-            this.openTrackPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openTrackPage.Enabled = false;
-            this.openTrackPage.Image = global::onlineplayer.Properties.Resources.ic_search_18pt;
-            this.openTrackPage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openTrackPage.Name = "openTrackPage";
-            this.openTrackPage.Size = new System.Drawing.Size(23, 22);
-            this.openTrackPage.Text = "Open current track page in browser";
-            this.openTrackPage.Click += new System.EventHandler(this.openTrackPage_Click);
-            // 
-            // buttonFullLoad
-            // 
-            this.buttonFullLoad.Enabled = false;
-            this.buttonFullLoad.Location = new System.Drawing.Point(427, 85);
-            this.buttonFullLoad.Name = "buttonFullLoad";
-            this.buttonFullLoad.Size = new System.Drawing.Size(218, 33);
-            this.buttonFullLoad.TabIndex = 7;
-            this.buttonFullLoad.Text = "Load (with full metadata update, longer)";
-            this.buttonFullLoad.UseVisualStyleBackColor = true;
-            this.buttonFullLoad.Click += new System.EventHandler(this.buttonFullLoad_Click);
             // 
             // Form1
             // 

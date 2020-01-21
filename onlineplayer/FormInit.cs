@@ -209,12 +209,6 @@ namespace onlineplayer
                     {
                         processedData = true;
                     }
-                    // if user skip
-                    if (processedData == true)
-                    {
-                        state.Break();
-                        restoreQueue.Clear();
-                    }
                 });
             }
             else

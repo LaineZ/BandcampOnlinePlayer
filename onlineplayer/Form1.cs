@@ -521,6 +521,7 @@ namespace onlineplayer
         {
             if (listGlobalSearch.FocusedItem.SubItems[2].Text == "Album" || listGlobalSearch.FocusedItem.SubItems[2].Text == "Track")
             {
+                labelStatus.Text = "Loading album/track metadata: " + searchResults[listGlobalSearch.FocusedItem.Index].url;
                 String response = await httpTools.MakeRequestAsync(searchResults[listGlobalSearch.FocusedItem.Index].url);
                 Album album = httpTools.GetAlbum(response);
 
@@ -533,6 +534,7 @@ namespace onlineplayer
                 }
 
                 UpdateQueueImages();
+                tabControl1.SelectedIndex = 1;
             }
             else
             {
