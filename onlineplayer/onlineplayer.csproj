@@ -120,7 +120,6 @@
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\HttpTools.cs" />
-    <Compile Include="Core\MidiActionsBindings.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\FileType.cs" />
     <Compile Include="Models\Json.cs" />
@@ -135,7 +134,7 @@
     <Compile Include="Models\MidiActions.cs" />
     <Compile Include="Models\TrackFile.cs" />
     <Compile Include="Core\OSUtils.cs" />
-    <Compile Include="Playlist.cs" />
+    <Compile Include="Core\Playlist.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Utils.cs" />

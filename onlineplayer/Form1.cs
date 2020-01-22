@@ -617,7 +617,7 @@ namespace onlineplayer
         {
             if (Clipboard.GetText().Contains("https://bandcamp.com") && Clipboard.GetText().Contains("/track") || Clipboard.GetText().Contains("/album"))
             {
-                AddToQueueList(Clipboard.GetText(), Clipboard.GetText());
+                AddToQueueList(Clipboard.GetText(), "https://" + Clipboard.GetText().Split('/')[2]);
                 UpdateQueueImages();
             }
             else
