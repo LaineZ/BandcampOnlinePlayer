@@ -87,8 +87,8 @@
             this.listTags = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.listAlbums = new System.Windows.Forms.ListView();
             this.queueList = new System.Windows.Forms.ListView();
+            this.listAlbums = new System.Windows.Forms.ListView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listGlobalSearch = new System.Windows.Forms.ListView();
             this.Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -98,6 +98,7 @@
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addToQueueToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInBrowserToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.addClipboard = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.trackSeek)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackVolume)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -187,6 +188,7 @@
             this.toolStripSeparator3,
             this.toolSavePlaylist,
             this.openPlaylist,
+            this.addClipboard,
             this.toolStripSeparator4,
             this.toolPrev,
             this.toolPlay,
@@ -683,20 +685,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(651, 416);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
-            // listAlbums
-            // 
-            this.listAlbums.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listAlbums.HideSelection = false;
-            this.listAlbums.Location = new System.Drawing.Point(3, 3);
-            this.listAlbums.MultiSelect = false;
-            this.listAlbums.Name = "listAlbums";
-            this.listAlbums.Size = new System.Drawing.Size(365, 410);
-            this.listAlbums.TabIndex = 5;
-            this.listAlbums.UseCompatibleStateImageBehavior = false;
-            this.listAlbums.View = System.Windows.Forms.View.Tile;
-            // 
             // queueList
             // 
             this.queueList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -711,6 +699,20 @@
             this.queueList.UseCompatibleStateImageBehavior = false;
             this.queueList.View = System.Windows.Forms.View.Tile;
             this.queueList.DoubleClick += new System.EventHandler(this.queueList_DoubleClick);
+            // 
+            // listAlbums
+            // 
+            this.listAlbums.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listAlbums.HideSelection = false;
+            this.listAlbums.Location = new System.Drawing.Point(3, 3);
+            this.listAlbums.MultiSelect = false;
+            this.listAlbums.Name = "listAlbums";
+            this.listAlbums.Size = new System.Drawing.Size(365, 410);
+            this.listAlbums.TabIndex = 5;
+            this.listAlbums.UseCompatibleStateImageBehavior = false;
+            this.listAlbums.View = System.Windows.Forms.View.Tile;
             // 
             // tabPage3
             // 
@@ -788,6 +790,16 @@
             this.openInBrowserToolStripMenuItem1.Name = "openInBrowserToolStripMenuItem1";
             this.openInBrowserToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
             this.openInBrowserToolStripMenuItem1.Text = "Open in browser";
+            // 
+            // addClipboard
+            // 
+            this.addClipboard.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.addClipboard.Image = global::onlineplayer.Properties.Resources.ic_add_18pt;
+            this.addClipboard.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.addClipboard.Name = "addClipboard";
+            this.addClipboard.Size = new System.Drawing.Size(23, 22);
+            this.addClipboard.Text = "Add album from clipboard";
+            this.addClipboard.Click += new System.EventHandler(this.addClipboard_Click);
             // 
             // Form1
             // 
@@ -898,6 +910,7 @@
         private System.Windows.Forms.ToolStripMenuItem descendToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton openTrackPage;
         private System.Windows.Forms.Button buttonFullLoad;
+        private System.Windows.Forms.ToolStripButton addClipboard;
     }
 }
 

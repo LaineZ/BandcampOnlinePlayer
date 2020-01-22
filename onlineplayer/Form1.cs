@@ -199,18 +199,7 @@ namespace onlineplayer
         private async void addAlbumTracksInQueueifAvailbleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Item selectedAlbum = itemsList.Find(item => item.artist.Equals(listAlbums.FocusedItem.SubItems[1].Text) && item.title.Equals(listAlbums.FocusedItem.SubItems[0].Text));
-            labelStatus.Text = "Loading tracks metadata... " + selectedAlbum.tralbum_url;
-            String response = await httpTools.MakeRequestAsync(selectedAlbum.tralbum_url);
-            Album album = httpTools.GetAlbum(response);
-
-            foreach (Track trk in album.Tracks)
-            {
-                ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
-                queueList.Items.Add(lst);
-                trk.ArtistUrl = selectedAlbum.band_url;
-                queueTracks.Add(trk);
-            }
-
+            AddToQueueList(selectedAlbum.tralbum_url, selectedAlbum.band_url);
             UpdateQueueImages();
         }
 
@@ -622,6 +611,19 @@ namespace onlineplayer
             UpdateAlbums();
             buttonLoad.Enabled = false;
             buttonFullLoad.Enabled = false;
+        }
+
+        private void addClipboard_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.GetText().Contains("https://bandcamp.com") && Clipboard.GetText().Contains("/track") || Clipboard.GetText().Contains("/album"))
+            {
+                AddToQueueList(Clipboard.GetText(), Clipboard.GetText());
+                UpdateQueueImages();
+            }
+            else
+            {
+                MessageBox.Show("Clipboard contains invalid data: " + Clipboard.GetText(), "Opening failed...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

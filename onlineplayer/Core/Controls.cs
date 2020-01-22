@@ -291,5 +291,22 @@ namespace onlineplayer
             }
             labelStatus.Text = "Done!";
         }
+
+        private async void AddToQueueList(string url, string bandUrl)
+        {
+            labelStatus.Text = "Loading tracks metadata... " + url;
+            String response = await httpTools.MakeRequestAsync(url);
+            Album album = httpTools.GetAlbum(response);
+
+            foreach (Track trk in album.Tracks)
+            {
+                ListViewItem lst = new ListViewItem(new string[] { trk.Title, trk.Album.Artist, trk.Album.Title });
+                queueList.Items.Add(lst);
+                trk.ArtistUrl = bandUrl;
+                queueTracks.Add(trk);
+            }
+
+            UpdateQueueImages();
+        }
     }
 }
