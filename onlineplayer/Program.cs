@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 
+
 namespace onlineplayer
 {
+
     static class Program
     {
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -13,7 +16,9 @@ namespace onlineplayer
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Application.Run(new FormInit());
+
         }
     }
 }

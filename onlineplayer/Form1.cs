@@ -9,12 +9,14 @@ using static onlineplayer.Utils;
 using static onlineplayer.Json;
 using System.Xml;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace onlineplayer
 {
 
     public partial class Form1 : Form
     {
+
         List<Item> itemsList = new List<Item>();
         List<Track> queueTracks = new List<Track>();
         List<Models.JSON.JsonSearch.Result> searchResults = new List<Models.JSON.JsonSearch.Result>();
@@ -26,10 +28,11 @@ namespace onlineplayer
 
 
         Core.IAudioPlayer player;
-
         public Form1(List<string> tags, List<Track> restoreQueue, Core.IAudioPlayer plr)
         {
             InitializeComponent();
+
+
             player = plr;
             //player.Init();
 
@@ -148,6 +151,12 @@ namespace onlineplayer
             if (Math.Abs(player.GetTotalTimeSeconds() - player.GetCurrentTimeTotalSeconds()) < 0.1 && queueTracks.Count > 1)
             {
                 PlayNext();
+            }
+
+            if (queueTracks.Count <= 0)
+            {
+                toolNext.Enabled = false;
+                toolPrev.Enabled = false;
             }
         }
 
