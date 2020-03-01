@@ -112,7 +112,7 @@ namespace Updater
 
         private async void FormUpd_Load(object sender, EventArgs e)
         {
-            string version = await MakeRequestAsync("https://raw.githubusercontent.com/LaineZ/BandcampOnlinePlayer/master/lastestversion.txt");
+            string version = await MakeRequestAsync("https://raw.githubusercontent.com/LaineZ/BandcampOnlinePlayer/master/latestversion.txt");
             Download("https://github.com/LaineZ/BandcampOnlinePlayer/releases/download/" + version.TrimEnd() + "/Player-Win.zip");
         }
     }
