@@ -23,7 +23,7 @@ A simple client for bandcamp.com that's allows listing albums from main tag page
 Clone repository and open .sln file in Visual Studio with .NET Workload
 
 ## Building (Linux)
-In this moment linux version is very buggy
+In this moment linux version is very buggy and does not supported in future if you want use BandcampOnlinePlayer on Linux please use [bc_rs project](https://github.com/LaineZ/bc_rs)
 
 
 1. Install Mono and MonoDevelop and open .sln file in MonoDevelop
