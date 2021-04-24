@@ -8,9 +8,20 @@ namespace BandcampOnlinePlayer
 {
     class MainWindow : Form
     {
-        Scrollable ScrollLayout = new Scrollable() { MinimumSize = new Size(800, 600) };
+        Scrollable ScrollLayout = new Scrollable();
         StackLayout TracksList = new StackLayout();
-        TableLayout MainLayout = new TableLayout() { Style = "padded-table" };
+        StackLayout MainLayout = new StackLayout();
+
+        Button BtnPlay = new Button() { Text = "Play", Width = 30 };
+        Button BtnNext = new Button() { Text = "Next", Width = 30 };
+
+        Button BtnPrev = new Button() { Text = "Prev", Width = 30 };
+
+        Slider SlPlayback = new Slider();
+
+        Slider SlVolume = new Slider() { MaxValue = 100 };
+
+        RichTextArea TrackInfo = new RichTextArea() { Wrap = false, ReadOnly = true, Height = 10 };
 
         public MainWindow()
         {
@@ -19,10 +30,11 @@ namespace BandcampOnlinePlayer
 
             for (int i = 0; i < 100; i++)
             {
-                TracksList.Items.Add(new StackLayoutItem(new Label() { Text = "Item: " + i }));
+                TracksList.Items.Add(new StackLayoutItem(new Label() { Text = "Item: " + i }) { Expand = true });
             }
 
-            MainLayout.Rows.Add(new TableRow(ScrollLayout) { ScaleHeight = true });
+            MainLayout.Items.Add(new StackLayoutItem(ScrollLayout, HorizontalAlignment.Center, true));
+            MainLayout.Items.Add(new StackLayoutItem(TrackInfo));
             Content = MainLayout;
         }
     }

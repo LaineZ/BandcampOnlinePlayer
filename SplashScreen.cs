@@ -15,8 +15,12 @@ namespace BandcampOnlinePlayer
         {
             Opacity = 0;
             ClientSize = new Size(640, 360);
-            Location = new Point((int)(Screen.WorkingArea.Width - ClientSize.Width) / 2, (int)(Screen.WorkingArea.Height - ClientSize.Height) / 2);
-            WindowStyle = WindowStyle.None;
+            if (Screen != null)
+            {
+                Location = new Point((int)(Screen.WorkingArea.Width - ClientSize.Width) / 2, (int)(Screen.WorkingArea.Height - ClientSize.Height) / 2);
+            }
+            Resizable = false;
+            WindowStyle = WindowStyle.Utility;
             
             Fadeout.Elapsed += Fadeout_Elapsed;
             Fadeout.Start();

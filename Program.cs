@@ -7,6 +7,6 @@ public class Program
 	[STAThread]
 	static void Main()
 	{
-		new Application().Run(new SplashScreen());
+		new Application().Run(new MainWindow());
 	}
 }

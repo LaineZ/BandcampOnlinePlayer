@@ -14,7 +14,6 @@
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Condition="$([MSBuild]::IsOsPlatform('Windows'))" Command="mkdir &quot;$(TargetDir)\Assets&quot;&#xD;&#xA;xcopy /d /e /y &quot;$(SolutionDir)Assets\*&quot; &quot;$(TargetDir)\Assets&quot;" />
-    <Exec Condition="$([MSBuild]::IsOsPlatform('Linux'))" Command="mkdir &quot;$(TargetDir)\Assets&quot;&#xD;&#xA;cp -r &quot;$(SolutionDir)Assets\*&quot; &quot;$(TargetDir)\Assets&quot;" />
   </Target>
 
 </Project>
