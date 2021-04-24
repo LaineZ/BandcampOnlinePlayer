@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Eto.Forms" Version="2.5.10" />
+    <PackageReference Include="Eto.Platform.Gtk" Condition="$([MSBuild]::IsOsPlatform('Linux'))" Version="2.5.10" />
+    <PackageReference Include="Eto.Platform.Windows" Condition="$([MSBuild]::IsOsPlatform('Windows'))" Version="2.5.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Condition="$([MSBuild]::IsOsPlatform('Windows'))" Command="mkdir &quot;$(TargetDir)\Assets&quot;&#xD;&#xA;xcopy /d /e /y &quot;$(SolutionDir)Assets\*&quot; &quot;$(TargetDir)\Assets&quot;" />
+    <Exec Condition="$([MSBuild]::IsOsPlatform('Linux'))" Command="mkdir &quot;$(TargetDir)\Assets&quot;&#xD;&#xA;cp -r &quot;$(SolutionDir)Assets\*&quot; &quot;$(TargetDir)\Assets&quot;" />
+  </Target>
+
+</Project>
