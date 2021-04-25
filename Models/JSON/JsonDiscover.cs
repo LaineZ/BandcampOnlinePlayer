@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace onlineplayer
 {
-    public static class Json
+    public static class JsonDiscover
     {
         public class DiscoverSpec
         {
