@@ -1,3 +1,5 @@
+# [THIS PROJECT WAS MOVED](https://github.com/LaineZ/bc_rs)
+
 # Bandcamp Online Player
 [Download (Win)](https://github.com/LaineZ/BandcampOnlinePlayer/releases/download/alpha-0.5/Player-Win.zip)
 [Download (Linux)](https://github.com/LaineZ/bc_rs)
